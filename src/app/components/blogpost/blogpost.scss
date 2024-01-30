@@ -20,6 +20,8 @@
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .image-upload-container {
@@ -34,6 +36,19 @@
       p {
         color: #6b7280;
       } 
+    }
+    .upload-label {
+       margin-top: 0.5rem; 
+      color: #6b7280;
+      cursor: pointer;
+      text-decoration: underline;
+      &:hover {
+        color: #374151;
+      }
+    }
+    .sr-only {
+      position: absolute;
+      visibility: hidden;
     }
 
     .submit-button {
