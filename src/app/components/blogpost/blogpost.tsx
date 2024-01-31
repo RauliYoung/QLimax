@@ -3,7 +3,7 @@ import React from "react";
 import { Label } from "@/app/components/ui/blogpost-label/label";
 import { Input } from "@/app/components/ui/blogpost-input/input";
 import { Textarea } from "@/app/components/ui/blogpost-textarea/textarea";
-import { Button } from "@/app/components/ui/button/button";
+import { Button } from "@/app/components/ui/common/button/button";
 import PlusIcon from "../../../../public/icons/plusicon";
 import "./blogpost.scss";
 
