@@ -1,14 +1,13 @@
-"use client";
-import React from "react";
-import { Label } from "@/app/components/ui/blogpost-label/label";
-import { Input } from "@/app/components/ui/blogpost-input/input";
-import { Textarea } from "@/app/components/ui/blogpost-textarea/textarea";
-import { Button } from "@/app/components/ui/common/button/button";
-import PlusIcon from "../../../../public/icons/plusicon";
-import "./blogpost.scss";
+'use client';
+import React from 'react';
+import {Label} from '@/app/components/ui/blogpost-label/label';
+import {Input} from '@/app/components/ui/blogpost-input/input';
+import {Textarea} from '@/app/components/ui/blogpost-textarea/textarea';
+import {Button} from '@/app/components/ui/common/button/button';
+import PlusIcon from '@/app/components/ui/icons/plusicon';
+import './blogpost.scss';
 
-const handleFileChange = (event: any) => {
-}
+const handleFileChange = (event: any) => {};
 
 export function BlogPostComponent() {
   return (
@@ -29,14 +28,17 @@ export function BlogPostComponent() {
           <div className="image-upload">
             <PlusIcon className="plus-icon" />
             <p>Drag & drop or click to upload images</p>
-            <Input id="image" type="file" className="sr-only"
-            onChange={handleFileChange}/>
+            <Input
+              id="image"
+              type="file"
+              className="sr-only"
+              onChange={handleFileChange}
+            />
             <Label htmlFor="image" className="upload-label">
               Choose a file
             </Label>
           </div>
         </div>
-
         <Button
           className="submit-button"
           type="submit"
