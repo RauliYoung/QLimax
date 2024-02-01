@@ -59,6 +59,10 @@ const styles = {
       fontSize: '24px',
       color: 'rgba(148, 163, 184, 1)',
     },
+    Textbox: {
+      fontSize: '24px',
+      color: 'rgba(148, 163, 184, 1)',
+    },
   },
 };
 export const customTheme = extendTheme({ styles, sizes, breakpoints });
