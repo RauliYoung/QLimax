@@ -1,12 +1,22 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import type { Metadata } from 'next';
+import { Expletus_Sans, Overpass_Mono } from 'next/font/google';
+import { Providers } from './providers';
+import './globals.css';
+//Can be used as variables in globals.css --> check
+const Overpass = Overpass_Mono({
+  subsets: ['latin'],
+  variable: '--font-overpass-mono',
+  display: 'swap',
+});
+const expletus = Expletus_Sans({
+  subsets: ['latin'],
+  variable: '--font-expletus-sans',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: "QLimax",
-  description: "QLIMAX 3000",
+  title: 'Qlimax',
+  description: 'For better blogging',
 };
 
 export default function RootLayout({
@@ -14,9 +24,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return ( 
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+  return (
+    <html lang='en'>
+      <body className={`${Overpass.variable} ${expletus.variable}`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

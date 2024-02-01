@@ -6,7 +6,6 @@ import {Textarea} from '@/app/components/ui/blogpost-textarea/textarea';
 import {Button} from '@/app/components/ui/common/button/button';
 import PlusIcon from '@/app/components/ui/icons/plusicon';
 import './blogpost.scss';
-import Switch from '@/app/components/ui/theme-toggle/toggle';
 
 const handleFileChange = (event: any) => {};
 
@@ -14,7 +13,6 @@ export function BlogPostComponent() {
   return (
     <div className="component-container">
       <div className="header">
-        <Switch id="theme-toggle" />
         <h2>Create a blog post</h2>
       </div>
       <div className="form-container">
