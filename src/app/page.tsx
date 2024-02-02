@@ -54,7 +54,7 @@ export default function Home() {
                   <Heading as='h2' fontSize={'28px'}>
                     {post.title}
                   </Heading>
-                  <Text as='p' fontSize='15px'>
+                <Text as='p' fontSize='15px'>
                     {post.header}
                   </Text>
                   <Text as='p' fontSize='15px'>

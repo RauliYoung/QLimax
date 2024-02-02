@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from 'react';
 import './toggle.scss';
 import SunIcon from '@/app/components/ui/icons/sunicon';
