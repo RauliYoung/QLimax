@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useEffect} from 'react';
 import ReactQuill from 'react-quill';
 import {useColorMode} from '@chakra-ui/react';
-
 import 'react-quill/dist/quill.snow.css';
 import './editor.scss';
 
