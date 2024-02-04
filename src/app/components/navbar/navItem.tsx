@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { Link, Text } from '@chakra-ui/react';
 
-interface NavItemProps {
+interface NavLinkItemProps {
   children: React.ReactNode;
   isLast?: boolean;
   to?: string;
   rest?: any;
 }
 
-export const NavItem: FC<NavItemProps> = ({
+export const NavLinkItem: FC<NavLinkItemProps> = ({
   children,
   isLast,
   to = '/',
