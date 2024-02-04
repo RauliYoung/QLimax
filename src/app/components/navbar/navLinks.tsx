@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import {Box, Stack} from '@chakra-ui/react';
 import {NavItem} from './navItem';
+import Toggle from '../ui/theme-toggle/toggle';
 
 export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
   return (
