@@ -3,11 +3,10 @@
   width: 50%;
   overflow: hidden;
   border-radius: 4px;
-  background-color: white;
   margin: 0 auto;
 }
 
-.editor .ql-editor {
+.editor.light .ql-editor {
   background-color: white;
   font-size: 18px;
   color: black;
@@ -16,18 +15,31 @@
   padding: 0;
 }
 
+
+.editor.dark .ql-editor {
+  background-color: #333;
+  font-size: 18px;
+  color: white;
+  line-height: 1.58;
+  margin: 0;
+  padding: 0;
+}
+
 .editor .ql-toolbar {
   display: flex;
   justify-content: center;
-  border: none;
+}
+
+.editor.light .ql-toolbar {
   background-color: white;
+}
+
+.editor.dark .ql-toolbar {
+  background-color: #333;
 }
 
 .editor .ql-toolbar .ql-formats {
   margin: 0;
   padding: 0;
+  border: none;
 }
-
-
-
-
