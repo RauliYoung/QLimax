@@ -1,0 +1,27 @@
+.editorContainer {
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+
+  .editor {
+    .ql-editor {
+      height: 30vh;
+      min-height: 29vh;
+      border-radius: 5px;
+    }
+  }
+}
+
+.editor.light .ql-editor {
+  background-color: white;
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+.editor.dark .ql-editor {
+  background-color: #333;
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+

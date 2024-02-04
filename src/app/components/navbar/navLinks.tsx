@@ -1,12 +1,12 @@
-import { FC } from 'react';
-import { Box, Stack } from '@chakra-ui/react';
-import { NavItem } from './navItem';
+import {FC} from 'react';
+import {Box, Stack} from '@chakra-ui/react';
+import {NavItem} from './navItem';
 
-export const NavLinks: FC<{ isOpen: boolean }> = ({ isOpen }) => {
+export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
   return (
     <Box
-      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-      flexBasis={{ base: '100%', md: 'auto' }}
+      display={{base: isOpen ? 'block' : 'none', md: 'block'}}
+      flexBasis={{base: '100%', md: 'auto'}}
     >
       <Stack
         spacing={8}
@@ -20,4 +20,4 @@ export const NavLinks: FC<{ isOpen: boolean }> = ({ isOpen }) => {
       </Stack>
     </Box>
   );
-}
+};

@@ -1,10 +1,8 @@
 'use client';
-import React, { FC, useState } from 'react';
-import { NavToggle} from './navToggle';
-import { NavLinks } from './navLinks';
-import { NavBarContainer } from './navContainer';
-
-
+import React, {FC, useState} from 'react';
+import {NavToggle} from './navToggle';
+import {NavLinks} from './navLinks';
+import {NavBarContainer} from './navContainer';
 
 const NavBar: FC = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +16,5 @@ const NavBar: FC = (props) => {
     </NavBarContainer>
   );
 };
-
 
 export default NavBar;
