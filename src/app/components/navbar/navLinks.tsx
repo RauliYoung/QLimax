@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Box, Stack} from '@chakra-ui/react';
-import {NavItem} from './navItem';
+import {NavLinkItem} from './navItem';
 
 export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
   return (
@@ -16,7 +16,7 @@ export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
         pt={[4, 4, 0, 0]}
       >
         {/* add more links here */}
-        <NavItem to="/">Blog</NavItem>
+        <NavLinkItem to="/">Blog</NavLinkItem>
       </Stack>
     </Box>
   );
