@@ -15,7 +15,6 @@ export const NavBarContainer: FC<{ children: React.ReactNode }> = ({
       w="100%"
       mb={8}
       p={8}
-      color={['white', 'white', 'primary.700', 'primary.700']}
       bg="primary.500"
       {...props}
     >
