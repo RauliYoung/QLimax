@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import React, {FC} from 'react';
+import {Box, Flex} from '@chakra-ui/react';
 
-export const NavBarContainer: FC<{ children: React.ReactNode }> = ({
+export const NavBarContainer: FC<{children: React.ReactNode}> = ({
   children,
   ...props
 }) => {
@@ -17,8 +17,7 @@ export const NavBarContainer: FC<{ children: React.ReactNode }> = ({
       {...props}
     >
       {children}
-      <Box display={{ base: 'none', md: 'block' }}>
-      </Box>
+      <Box display={{base: 'none', md: 'block'}}></Box>
     </Flex>
   );
 };
