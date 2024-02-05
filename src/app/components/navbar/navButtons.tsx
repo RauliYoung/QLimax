@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Flex, Stack } from '@chakra-ui/react';
 import Toggle from '../ui/theme-toggle/toggle';
-import { DrawerToggle } from './drawerToggle';
+import { DrawerToggle } from './drawer/drawerToggle';
 
 export const NavButtons: FC<{ isOpen: boolean }> = ({ isOpen }) => {
   return (
