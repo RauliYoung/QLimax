@@ -1,48 +1,20 @@
-// TODO: reformat as import * as Chakra from '@chakra-ui/react';
-import {
-  Drawer,
-  DrawerBody,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  Button,
-  MenuButton,
-  Menu,
-  MenuItem,
-  MenuList,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-} from '@chakra-ui/react';
+import * as Chakra from '@chakra-ui/react';
 import { BsFillBookmarkFill, BsFillPersonFill } from 'react-icons/bs';
 import React from 'react';
-import { IconButton } from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
-import {
-  EditIcon,
-  PlusSquareIcon,
-  SettingsIcon,
-  ArrowForwardIcon,
-} from '@chakra-ui/icons';
 import './drawerToggle.scss';
+import * as ChakraUi from "@chakra-ui/icons";
 
 export function DrawerToggle() {
   const {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen,
     onClose: onDrawerClose,
-  } = useDisclosure();
+  } = Chakra.useDisclosure();
   const {
     isOpen: isModalOpen,
     onOpen: onModalOpen,
     onClose: onModalClose,
-  } = useDisclosure();
+  } = Chakra.useDisclosure();
 
   const accountname = 'foobar';
 
@@ -54,75 +26,76 @@ export function DrawerToggle() {
 
   return (
     <>
-      <IconButton
+      <Chakra.IconButton
         aria-label="open sidebar"
         variant="solid"
         className="drawer-toggle"
-        icon={<PlusSquareIcon />}
+        icon={<ChakraUi.PlusSquareIcon />}
         onClick={onDrawerOpen}
       />
 
-      <Drawer isOpen={isDrawerOpen} placement="right" onClose={onDrawerClose}>
-        <DrawerOverlay className="drawer-overlay" />
-        <DrawerContent className="drawer-content">
-          <DrawerCloseButton className="drawer-close-button" />
-          <DrawerHeader className="drawer-header">
+      <Chakra.Drawer isOpen={isDrawerOpen} placement="right" onClose={onDrawerClose}>
+        <Chakra.DrawerOverlay className="drawer-overlay" />
+        <Chakra.DrawerContent className="drawer-content">
+          <Chakra.DrawerCloseButton className="drawer-close-button" />
+          <Chakra.DrawerHeader className="drawer-header">
             Hello ! {accountname}
-          </DrawerHeader>
-          <DrawerBody className="drawer-body">
-            <Menu>
-              <MenuButton as={Button} leftIcon={<EditIcon />}>
+          </Chakra.DrawerHeader>
+          <Chakra.DrawerBody className="drawer-body">
+            <Chakra.Menu>
+              <Chakra.MenuButton as={Chakra.Button} leftIcon={<ChakraUi.EditIcon />}>
                 Blogs
-              </MenuButton>
-              <MenuList>
-                <MenuItem>fizz</MenuItem>
-                <MenuItem>buzz</MenuItem>
-                <MenuItem>fizzbuzz</MenuItem>
-              </MenuList>
-            </Menu>
-            <Menu>
-              <MenuButton as={Button} leftIcon={<BsFillPersonFill />}>
+              </Chakra.MenuButton>
+              <Chakra.MenuList>
+                <Chakra.MenuItem>fizz</Chakra.MenuItem>
+                <Chakra.MenuItem>buzz</Chakra.MenuItem>
+                <Chakra.MenuItem>fizzbuzz</Chakra.MenuItem>
+              </Chakra.MenuList>
+            </Chakra.Menu>
+            <Chakra.Menu>
+              <Chakra.MenuButton as={Chakra.Button} leftIcon={<BsFillPersonFill />}>
                 Profile
-              </MenuButton>
-              <MenuList>
-                <MenuItem icon={<SettingsIcon />}>Settings</MenuItem>
-                <MenuItem icon={<ArrowForwardIcon />} onClick={onModalOpen}>
+              </Chakra.MenuButton>
+              <Chakra.MenuList>
+                <Chakra.MenuItem icon={<ChakraUi.SettingsIcon />}>Settings</Chakra.MenuItem>
+                <Chakra.MenuItem icon={<ChakraUi.ArrowForwardIcon />} onClick={onModalOpen}>
                   Logout
-                </MenuItem>
-              </MenuList>
-            </Menu>
+                </Chakra.MenuItem>
+              </Chakra.MenuList>
+            </Chakra.Menu>
 
-            <Button
+            <Chakra.Button
               leftIcon={<BsFillBookmarkFill />}
               className="drawer-button"
               variant="outline"
             >
               Bookmarks
-            </Button>
-          </DrawerBody>
+            </Chakra.Button>
+          </Chakra.DrawerBody>
 
-          <DrawerFooter className="drawer-footer"></DrawerFooter>
-        </DrawerContent>
-      </Drawer>
-      <Modal
+          <Chakra.DrawerFooter className="drawer-footer"></Chakra.DrawerFooter>
+        </Chakra.DrawerContent>
+      </Chakra.Drawer>
+      <Chakra.Modal
         closeOnOverlayClick={false}
         isOpen={isModalOpen}
         onClose={onModalClose}
       >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Are you sure you want to log out</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}></ModalBody>
+        <Chakra.ModalOverlay />
+        <Chakra.ModalContent>
+          <Chakra.ModalHeader>Are you sure you want to log out</Chakra.ModalHeader>
+          <Chakra.ModalCloseButton />
+          <Chakra.ModalBody pb={6}></Chakra.ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme="red" mr={3} onClick={handleLogout}>
+          <Chakra.ModalFooter>
+            <Chakra.Button colorScheme="red" mr={3} onClick={handleLogout}>
               Logout
-            </Button>
-            <Button onClick={onModalClose}>Cancel</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+            </Chakra.Button>
+            <Chakra.Button onClick={onModalClose}>Cancel</Chakra.Button>
+          </Chakra.ModalFooter>
+        </Chakra.ModalContent>
+      </Chakra.Modal>
     </>
   );
 }
+
