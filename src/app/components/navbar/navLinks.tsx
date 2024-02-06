@@ -12,7 +12,7 @@ export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
         spacing={8}
         align="center"
         justify={['center', 'space-between', 'flex-end', 'flex-end']}
-        direction={['column', 'row', 'row', 'row']}
+        direction={['column', 'column', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
         {/* add more links here */}
