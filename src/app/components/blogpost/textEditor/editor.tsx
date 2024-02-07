@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
-import { useColorMode, Button } from '@chakra-ui/react';
+import React, {useState, useRef, useEffect} from 'react';
+import ReactQuill, {Quill} from 'react-quill';
+import {useColorMode, Button} from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
+import EditorToolbar, {modules, formats} from './editorToolbar';
 
 type Match = {
   offset: number;
@@ -16,7 +17,7 @@ interface SpellCheckResponse {
 export default function Editor() {
   const [code, setCode] = useState<string>('');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const { colorMode } = useColorMode();
+  const {colorMode} = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
   const quillRef = useRef<ReactQuill>(null);
 
@@ -34,19 +35,14 @@ export default function Editor() {
     const quill = quillRef.current?.getEditor();
     if (quill) {
       const plainText = quill.getText();
-      console.log('Checking spelling...');
-      console.log(plainText);
-
       fetch('/api/spellCheck', {
         method: 'POST',
-        body: JSON.stringify({ text: plainText, language: 'en-US' }),
-        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({text: plainText, language: 'en-US'}),
+        headers: {'Content-Type': 'application/json'},
       })
         .then((res) => res.json())
         .then((data: SpellCheckResponse) => {
-          console.log(data);
           if (data.matches.length === 0) {
-            console.log('No spelling errors');
             quill.formatText(0, plainText.length, 'underline', false);
           } else {
             setMatches(data.matches);
@@ -68,43 +64,33 @@ export default function Editor() {
     setTheme(colorMode === 'dark' ? 'dark' : 'light');
   }, [colorMode]);
 
+  useEffect(() => {
+    if (quillRef.current) {
+      const quill = quillRef.current.getEditor();
+      const toolbar = quill.getModule('toolbar');
+      toolbar.addHandler('spellcheck', checkSpelling);
+      const button = document.querySelector('.ql-spellcheck');
+      if (button) {
+        button.addEventListener('click', () => {
+          checkSpelling();
+        });
+      }
+    }
+  }, []);
+
   return (
     <div className="editorContainer">
+      <EditorToolbar />
       <ReactQuill
         ref={quillRef}
         className={`editor ${theme}`}
         theme="bubble"
-        modules={{
-          toolbar: [
-            ['bold', 'italic', 'underline'],
-            ['blockquote', 'code-block'],
-            [{ header: 1 }, { header: 2 }],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link', 'image'],
-            ['clean'],
-            [{ color: [] }, { background: [] }, { align: [] }],
-          ],
-        }}
-        formats={[
-          'header',
-          'bold',
-          'italic',
-          'underline',
-          'strike',
-          'blockquote',
-          'code-block',
-          'list',
-          'bullet',
-          'link',
-          'image',
-          'clean',
-        ]}
+        modules={modules}
+        formats={formats}
         value={code}
         placeholder="Write something amazing..."
         onChange={handleProcedureContentChange}
       />
-      <Button onClick={checkSpelling}>Check Spelling</Button>
     </div>
   );
 }
-

@@ -1,12 +1,13 @@
 .editorContainer {
-  width: 50%;
+  width: 80%;
+  height: 100%;
   margin: 0 auto;
   padding: 20px;
 
   .editor {
     .ql-editor {
-      height: 30vh;
-      min-height: 29vh;
+      height: 100%;
+      min-height: 50vh;
       border-radius: 5px;
     }
   }
@@ -15,13 +16,28 @@
 .editor.light .ql-editor {
   background-color: white;
   font-size: 18px;
-  line-height: 1.58;
+  line-height: 1.2;
+  padding-left: 40px;
+  padding-top: 20px;
 }
 
 .editor.dark .ql-editor {
   background-color: #333;
   font-size: 18px;
   line-height: 1.58;
+}
+
+
+
+.ql-editor.ql-blank::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  text-align: center;
+  pointer-events: none;
 }
 
 
