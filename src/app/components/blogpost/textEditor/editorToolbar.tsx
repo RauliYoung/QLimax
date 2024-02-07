@@ -3,6 +3,7 @@ import { Quill } from 'react-quill';
 import { UndoIcon } from '@/app/components/ui/icons/undoicon';
 import { RedoIcon } from '../../ui/icons/redoicon';
 import { AiIcon } from '../../ui/icons/aiicon';
+import './editorToolbar.scss';
 
 function undoChange() {
   this.quill.history.undo();
@@ -54,10 +55,9 @@ export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
       <select className="ql-size" defaultValue="medium">
-        <option value="extra-small">Size 1</option>
-        <option value="small">Size 2</option>
-        <option value="medium">Size 3</option>
-        <option value="large">Size 4</option>
+        <option value="small">Size 1</option>
+        <option value="medium">Size 2</option>
+        <option value="large">Size 3</option>
       </select>
       <select className="ql-header" defaultValue="3">
         <option value="1">Heading</option>
