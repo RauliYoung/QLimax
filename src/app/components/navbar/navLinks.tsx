@@ -3,6 +3,7 @@ import {Box, Stack} from '@chakra-ui/react';
 import {NavLinkItem} from './navItem';
 
 export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
+
   return (
     <Box
       display={{base: isOpen ? 'block' : 'none', md: 'block'}}

@@ -8,7 +8,7 @@ import {
   CardHeader,
 } from '@chakra-ui/react';
 import testData from '../../testData/testPosts.json';
-import Editor from './components/blogpost/textEditor/editor';
+import {BlogPostComponent} from './components/blogpost/blogpost';
 
 interface Post {
   title: string;
@@ -18,7 +18,8 @@ interface Post {
 export default function Home() {
   return (
     <>
-    <Editor />
+
+    <BlogPostComponent />
     </>
    
   );

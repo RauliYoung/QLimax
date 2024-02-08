@@ -5,8 +5,12 @@ import {NavLinks} from './navLinks';
 import {NavBarContainer} from './navContainer';
 import { NavButtons } from './navButtons';
 
+
+
 const NavBar: FC = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  // TODO: update to useContext hook
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -14,7 +18,7 @@ const NavBar: FC = (props) => {
     <NavBarContainer {...props}>
       <NavToggle toggle={toggle} isOpen={isOpen} />
       <NavLinks isOpen={isOpen} />
-      <NavButtons isOpen={isOpen} />
+      <NavButtons isOpen={isOpen} isLoggedIn={isLoggedIn} />
     </NavBarContainer>
   );
 };

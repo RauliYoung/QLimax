@@ -47,7 +47,6 @@ export const formats = [
   'indent',
   'link',
   'image',
-  'color',
   'code-block',
 ];
 
@@ -85,8 +84,6 @@ export const QuillToolbar = () => (
     </span>
     <span className="ql-formats">
       <select className="ql-align" />
-      <select className="ql-color" />
-      <select className="ql-background" />
     </span>
     <span className="ql-formats">
       <button className="ql-link" />
