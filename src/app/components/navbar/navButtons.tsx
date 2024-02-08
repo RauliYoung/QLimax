@@ -1,9 +1,14 @@
 import {FC} from 'react';
-import {Flex, Stack} from '@chakra-ui/react';
+import {Button, Flex, Stack} from '@chakra-ui/react';
 import Toggle from '../ui/theme-toggle/toggle';
 import {Drawer} from './drawer/drawer';
 
-export const NavButtons: FC<{isOpen: boolean}> = ({isOpen}) => {
+interface NavButtonsProps {
+  isOpen: boolean;
+  isLoggedIn: boolean;
+}
+
+export const NavButtons: FC<NavButtonsProps> = ({isOpen, isLoggedIn}) => {
   return (
     <Flex
       display={{base: isOpen ? 'block' : 'none', md: 'flex'}}
@@ -19,8 +24,17 @@ export const NavButtons: FC<{isOpen: boolean}> = ({isOpen}) => {
         direction={['column', 'column', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <Drawer />
+        {isLoggedIn &&<Drawer/>}
         <Toggle id="theme-toggle" />
+        {!isLoggedIn && (
+          <Button
+            variant="solid"
+            size="sm"
+            rounded="md"
+          >
+            Get started
+          </Button>
+        )}
       </Stack>
     </Flex>
   );
