@@ -1,9 +1,8 @@
 import * as Chakra from '@chakra-ui/react';
-import { BsCursorText, BsFillBookmarkFill, BsFillPersonFill,BsHeart, BsSearch } from 'react-icons/bs';
+import { BsBookFill, BsCursorText, BsFillBookmarkFill, BsFillPersonFill,BsHeartFill, BsPenFill, BsSearch } from 'react-icons/bs';
 import React from 'react';
 import './drawerToggle.scss';
 import * as ChakraUi from "@chakra-ui/icons";
-import { BiSolidSearch } from 'react-icons/bi';
 
 export function DrawerToggle() {
   const {
@@ -44,7 +43,7 @@ export function DrawerToggle() {
           </Chakra.DrawerHeader>
           <Chakra.DrawerBody className="drawer-body">
             <Chakra.Menu>
-              <Chakra.MenuButton as={Chakra.Button} leftIcon={<ChakraUi.EditIcon />}>
+              <Chakra.MenuButton as={Chakra.Button} leftIcon={<BsBookFill />}>
                 Blogs
               </Chakra.MenuButton>
               <Chakra.MenuList>
@@ -70,7 +69,13 @@ export function DrawerToggle() {
             >
               Bookmarks
             </Chakra.Button>
-
+            <Chakra.Button
+              leftIcon={<BsHeartFill />}
+              className="drawer-button"
+              variant="outline"
+            >
+            Favourites
+            </Chakra.Button>
           </Chakra.DrawerBody>
 
           <Chakra.DrawerFooter className="drawer-footer"></Chakra.DrawerFooter>
