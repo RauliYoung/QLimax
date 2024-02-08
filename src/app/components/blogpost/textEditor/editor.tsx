@@ -1,9 +1,9 @@
-import React, {useState, useRef, useEffect} from 'react';
-import ReactQuill, {Quill} from 'react-quill';
-import {useColorMode, Button} from '@chakra-ui/react';
+import React, { useState, useRef, useEffect } from 'react';
+import ReactQuill from 'react-quill';
+import { useColorMode } from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
-import EditorToolbar, {modules, formats} from './editorToolbar';
+import EditorToolbar, { modules, formats } from './editorToolbar';
 
 type Match = {
   offset: number;
@@ -17,7 +17,7 @@ interface SpellCheckResponse {
 export default function Editor() {
   const [code, setCode] = useState<string>('');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
   const quillRef = useRef<ReactQuill>(null);
 
@@ -37,8 +37,8 @@ export default function Editor() {
       const plainText = quill.getText();
       fetch('/api/spellCheck', {
         method: 'POST',
-        body: JSON.stringify({text: plainText, language: 'en-US'}),
-        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ text: plainText, language: 'en-US' }),
+        headers: { 'Content-Type': 'application/json' },
       })
         .then((res) => res.json())
         .then((data: SpellCheckResponse) => {
