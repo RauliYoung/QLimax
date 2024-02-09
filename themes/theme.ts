@@ -43,7 +43,7 @@ const breakpoints = {
 const styles = {
   global: {
     'html, body': {
-      background: `url(${bgImage.src})`,
+      // background: `url(${bgImage.src})`,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
       backgroundSize: 'cover',

@@ -1,13 +1,18 @@
 'use client';
 import React from 'react';
 import './blogpost.scss';
-
-const handleFileChange = (event: any) => {};
+import Editor from './textEditor/editor';
+import Menubar from './menubar/menubar';
 
 export function BlogPostComponent() {
   return (
-  <div className="blogpost">
-  </div>
+    <>
+      <div className="menubar">
+        <Menubar />
+      </div>
+      <div className="editor">
+        <Editor />
+      </div>
+    </>
   );
 }
-

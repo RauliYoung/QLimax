@@ -1,5 +1,5 @@
 import * as Chakra from '@chakra-ui/react';
-import { BsFillBookmarkFill, BsFillPersonFill } from 'react-icons/bs';
+import { BsBookFill, BsCursorText, BsFillBookmarkFill, BsFillPersonFill,BsHeartFill, BsPenFill, BsSearch } from 'react-icons/bs';
 import React from 'react';
 import './drawer.scss';
 import * as ChakraUi from "@chakra-ui/icons";
@@ -43,13 +43,12 @@ export function Drawer() {
           </Chakra.DrawerHeader>
           <Chakra.DrawerBody className="drawer-body">
             <Chakra.Menu>
-              <Chakra.MenuButton as={Chakra.Button} leftIcon={<ChakraUi.EditIcon />}>
+              <Chakra.MenuButton as={Chakra.Button} leftIcon={<BsBookFill />}>
                 Blogs
               </Chakra.MenuButton>
               <Chakra.MenuList>
-                <Chakra.MenuItem>fizz</Chakra.MenuItem>
-                <Chakra.MenuItem>buzz</Chakra.MenuItem>
-                <Chakra.MenuItem>fizzbuzz</Chakra.MenuItem>
+                <Chakra.MenuItem icon={<BsCursorText/>}>Write</Chakra.MenuItem>
+                <Chakra.MenuItem icon={<BsSearch/>}>Search</Chakra.MenuItem>
               </Chakra.MenuList>
             </Chakra.Menu>
             <Chakra.Menu>
@@ -63,13 +62,19 @@ export function Drawer() {
                 </Chakra.MenuItem>
               </Chakra.MenuList>
             </Chakra.Menu>
-
             <Chakra.Button
               leftIcon={<BsFillBookmarkFill />}
               className="drawer-button"
               variant="outline"
             >
               Bookmarks
+            </Chakra.Button>
+            <Chakra.Button
+              leftIcon={<BsHeartFill />}
+              className="drawer-button"
+              variant="outline"
+            >
+            Favourites
             </Chakra.Button>
           </Chakra.DrawerBody>
 
