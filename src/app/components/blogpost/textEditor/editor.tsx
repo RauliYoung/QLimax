@@ -4,7 +4,7 @@ import {useColorMode, Button} from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
 import EditorToolbar, {modules, formats} from './editorToolbar';
-import {ActionsMenu} from './actionsmenu';
+import {ActionsMenu} from './actionsmenu/actionsmenu';
 
 type Match = {
   offset: number;

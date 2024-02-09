@@ -1,8 +1,8 @@
 import React from 'react';
-import { Quill } from 'react-quill';
-import { UndoIcon } from '@/app/components/ui/icons/undoicon';
-import { RedoIcon } from '../../ui/icons/redoicon';
-import { AiIcon } from '../../ui/icons/aiicon';
+import {Quill} from 'react-quill';
+import {UndoIcon} from '@/app/components/ui/icons/undoicon';
+import {RedoIcon} from '../../ui/icons/redoicon';
+import {AiIcon} from '../../ui/icons/aiicon';
 import './editorToolbar.scss';
 
 function undoChange() {
@@ -68,7 +68,6 @@ export const QuillToolbar = () => (
       <button className="ql-bold" />
       <button className="ql-italic" />
       <button className="ql-underline" />
-      <button className="ql-strike" />
     </span>
     <span className="ql-formats">
       <button className="ql-list" value="ordered" />
@@ -77,10 +76,7 @@ export const QuillToolbar = () => (
       <button className="ql-indent" value="+1" />
     </span>
     <span className="ql-formats">
-      <button className="ql-script" value="super" />
-      <button className="ql-script" value="sub" />
       <button className="ql-blockquote" />
-      <button className="ql-direction" />
     </span>
     <span className="ql-formats">
       <select className="ql-align" />

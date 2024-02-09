@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 
+
 const EditableControls: React.FC = () => {
   const {
     isEditing,
@@ -20,8 +21,8 @@ const EditableControls: React.FC = () => {
 
   return isEditing ? (
     <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
-      <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} />
-      <IconButton icon={<CloseIcon boxSize={3} />} {...getCancelButtonProps()} />
+      <IconButton icon={<CheckIcon />} {...getSubmitButtonProps()} aria-label="Submit" />
+      <IconButton icon={<CloseIcon boxSize={3} />} {...getCancelButtonProps()} aria-label="Cancel" />
     </ButtonGroup>
   ) : null;
 };

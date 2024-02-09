@@ -1,6 +1,7 @@
 import React from 'react';
 import './menubar.scss';
 import {EditableTitle} from './title';
+
 const Menubar = () => {
   return (
     <>
