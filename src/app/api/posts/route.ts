@@ -6,5 +6,5 @@ export async function GET(request: Request) {
 
   await new Promise((resolve) => setTimeout(resolve, wait));
 
-  return NextResponse.json(`waited ${wait}ms`);
+  return NextResponse.json(`waited ${wait}ms in shitland`);
 }
