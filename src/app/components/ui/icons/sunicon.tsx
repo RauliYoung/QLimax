@@ -29,6 +29,12 @@ const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => {
 
 export default SunIcon;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 750069c (Development (#3))
+=======
+
+=======
+>>>>>>> origin/development
+>>>>>>> db890bdbcf485d92c4189197418e6c716a97a7c0
