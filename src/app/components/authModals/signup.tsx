@@ -3,7 +3,7 @@ import { Box, Button, FormControl, FormLabel, Input, VStack, Text, Modal } from 
 import customTheme from '../../../../themes/theme';
 
 interface SignUpProps {
-  onSignUp: (data: { email: string; password: string; confirmPassword: string }) => void;
+  onSignUp: (data: { email: string; password: string; }) => void;
 }
 
 const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
@@ -23,7 +23,8 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
       alert("Passwords don't match");
       return;
     }
-    onSignUp(formData);
+    const { confirmPassword, ...dataToSend } = formData;
+    onSignUp(dataToSend);
   };
 
   return (
