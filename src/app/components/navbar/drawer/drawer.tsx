@@ -1,8 +1,16 @@
 import * as Chakra from '@chakra-ui/react';
-import { BsBookFill, BsCursorText, BsFillBookmarkFill, BsFillPersonFill,BsHeartFill, BsPenFill, BsSearch } from 'react-icons/bs';
+import {
+  BsBookFill,
+  BsCursorText,
+  BsFillBookmarkFill,
+  BsFillPersonFill,
+  BsHeartFill,
+  BsSearch,
+} from 'react-icons/bs';
 import React from 'react';
 import './drawer.scss';
-import * as ChakraUi from "@chakra-ui/icons";
+import * as ChakraUi from '@chakra-ui/icons';
+import {UserContext} from '@/app/contexts/usercontext';
 
 export function Drawer() {
   const {
@@ -15,13 +23,12 @@ export function Drawer() {
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = Chakra.useDisclosure();
-
-  const accountname = 'foobar';
-
-  // TODO: implement logout 
+  const {setUser} = React.useContext(UserContext);
 
   const handleLogout = () => {
-    console.log('logout');
+    localStorage.removeItem('QLimaxToken');
+    setUser(null);
+    onModalClose();
   };
 
   return (
@@ -34,30 +41,40 @@ export function Drawer() {
         onClick={onDrawerOpen}
       />
 
-      <Chakra.Drawer isOpen={isDrawerOpen} placement="right" onClose={onDrawerClose}>
+      <Chakra.Drawer
+        isOpen={isDrawerOpen}
+        placement="right"
+        onClose={onDrawerClose}
+      >
         <Chakra.DrawerOverlay className="drawer-overlay" />
         <Chakra.DrawerContent className="drawer-content">
           <Chakra.DrawerCloseButton className="drawer-close-button" />
-          <Chakra.DrawerHeader className="drawer-header">
-            Hello ! {accountname}
-          </Chakra.DrawerHeader>
+          <Chakra.DrawerHeader className="drawer-header"></Chakra.DrawerHeader>
           <Chakra.DrawerBody className="drawer-body">
             <Chakra.Menu>
               <Chakra.MenuButton as={Chakra.Button} leftIcon={<BsBookFill />}>
                 Blogs
               </Chakra.MenuButton>
               <Chakra.MenuList>
-                <Chakra.MenuItem icon={<BsCursorText/>}>Write</Chakra.MenuItem>
-                <Chakra.MenuItem icon={<BsSearch/>}>Search</Chakra.MenuItem>
+                <Chakra.MenuItem icon={<BsCursorText />}>Write</Chakra.MenuItem>
+                <Chakra.MenuItem icon={<BsSearch />}>Search</Chakra.MenuItem>
               </Chakra.MenuList>
             </Chakra.Menu>
             <Chakra.Menu>
-              <Chakra.MenuButton as={Chakra.Button} leftIcon={<BsFillPersonFill />}>
+              <Chakra.MenuButton
+                as={Chakra.Button}
+                leftIcon={<BsFillPersonFill />}
+              >
                 Profile
               </Chakra.MenuButton>
               <Chakra.MenuList>
-                <Chakra.MenuItem icon={<ChakraUi.SettingsIcon />}>Settings</Chakra.MenuItem>
-                <Chakra.MenuItem icon={<ChakraUi.ArrowForwardIcon />} onClick={onModalOpen}>
+                <Chakra.MenuItem icon={<ChakraUi.SettingsIcon />}>
+                  Settings
+                </Chakra.MenuItem>
+                <Chakra.MenuItem
+                  icon={<ChakraUi.ArrowForwardIcon />}
+                  onClick={onModalOpen}
+                >
                   Logout
                 </Chakra.MenuItem>
               </Chakra.MenuList>
@@ -74,7 +91,7 @@ export function Drawer() {
               className="drawer-button"
               variant="outline"
             >
-            Favourites
+              Favourites
             </Chakra.Button>
           </Chakra.DrawerBody>
 
@@ -88,7 +105,9 @@ export function Drawer() {
       >
         <Chakra.ModalOverlay />
         <Chakra.ModalContent>
-          <Chakra.ModalHeader>Are you sure you want to log out</Chakra.ModalHeader>
+          <Chakra.ModalHeader>
+            Are you sure you want to log out
+          </Chakra.ModalHeader>
           <Chakra.ModalCloseButton />
           <Chakra.ModalBody pb={6}></Chakra.ModalBody>
 

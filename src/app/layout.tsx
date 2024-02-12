@@ -1,6 +1,6 @@
-import type { Metadata } from 'next';
-import { Expletus_Sans, Overpass_Mono } from 'next/font/google';
-import { Providers } from './providers';
+import type {Metadata} from 'next';
+import {Expletus_Sans, Overpass_Mono} from 'next/font/google';
+import {Providers} from './providers';
 import './styles/globals.scss';
 import NavBar from './components/navbar/navbar';
 
@@ -26,12 +26,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body className={`${Overpass.variable} ${expletus.variable}`}>
-        <Providers>
-          <NavBar />
-          {children}
-        </Providers>
+          <Providers>
+            <NavBar />
+            {children}
+          </Providers>
       </body>
     </html>
   );

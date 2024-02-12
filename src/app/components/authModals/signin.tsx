@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack,
-  Text,
-} from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, Text } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 
-const SignUp: React.FC = () => {
+interface SignInProps {
+  onSignUp: () => void;
+  onSignIn: (data: { email: string; password: string }) => void;
+}
+
+const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    confirmPassword: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSignIn(formData);
   };
 
   return (
@@ -44,9 +45,9 @@ const SignUp: React.FC = () => {
           color="black"
           marginBottom="20px"
         >
-          Sign Up
+          Sign In
         </Text>
-        <form>
+        <form onSubmit={handleSubmit}>
           <VStack spacing="20px">
             <FormControl>
               <FormLabel textAlign="center">Email</FormLabel>
@@ -57,7 +58,7 @@ const SignUp: React.FC = () => {
                 onChange={handleChange}
                 required
                 borderColor="black"
-                _hover={{borderColor: 'black'}}
+                _hover={{ borderColor: 'black' }}
               />
             </FormControl>
             <FormControl>
@@ -69,34 +70,25 @@ const SignUp: React.FC = () => {
                 onChange={handleChange}
                 required
                 borderColor="black"
-                _hover={{borderColor: 'black'}}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel textAlign="center">Confirm password</FormLabel>
-              <Input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                borderColor="black"
-                _hover={{borderColor: 'black'}}
+                _hover={{ borderColor: 'black' }}
               />
             </FormControl>
             <Button
-              bg={'#475569'}
+              bg="#475569"
               color="white"
-              _hover={{bg: '#677589'}}
-              onClick={() => {
-                if (formData.password !== formData.confirmPassword) {
-                  alert("Passwords don't match");
-                  return;
-                }
-                console.log('Form submitted:', formData);
-              }}
+              _hover={{ bg: '#677589' }}
+              type="submit"
             >
-              Sign Up
+              Sign In
+            </Button>
+            <Button
+              bg="#475569"
+              size="xs"
+              color="white"
+              _hover={{ bg: '#677589' }}
+              onClick={onSignUp}
+            >
+              Create Account
             </Button>
           </VStack>
         </form>
@@ -105,4 +97,5 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
+
