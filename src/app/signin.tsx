@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import customTheme from '../../themes/theme';
 
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,6 +24,12 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords doesn't match");
+      return;
+    }
+    // logiikka lomakkeen lähettämiselle
+    console.log('Form submitted:', formData);
   };
 
   return (
@@ -49,7 +55,7 @@ const SignUp: React.FC = () => {
           color="black"
           marginBottom="20px"
         >
-          Sign Up
+          Sign In
         </Text>
         <form onSubmit={handleSubmit}>
           <VStack spacing="20px">
@@ -77,18 +83,6 @@ const SignUp: React.FC = () => {
                 _hover={{borderColor: 'black'}}
               />
             </FormControl>
-            <FormControl>
-              <FormLabel textAlign="center">Confirm password</FormLabel>
-              <Input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                borderColor="black"
-                _hover={{borderColor: 'black'}}
-              />
-            </FormControl>
             <Button
               bg="#475569"
               color="white"
@@ -102,7 +96,7 @@ const SignUp: React.FC = () => {
                 console.log('Form submitted:', formData);
               }}
             >
-              Sign Up
+              Sign In
             </Button>
           </VStack>
         </form>
@@ -111,4 +105,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
