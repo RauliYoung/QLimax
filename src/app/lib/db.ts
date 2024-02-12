@@ -4,7 +4,7 @@ dotenv.config();
 
 const mongoConnect = async () => {
   try {
-    const connection = await mongoose.connect(process.env.DATABASE_URL as string);
+    const connection = await mongoose.connect(process.env.DATABASE_URI as string);
     console.log('Welcome to shithole');
     return connection;
   } catch (error) {

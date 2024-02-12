@@ -1,10 +1,14 @@
+import mongoConnect from '@/app/lib/db';
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const wait = Number(searchParams.get('wait'));
+  await mongoConnect();
+  // console.log(request)
+  
+  // const { searchParams } = new URL(request.url);  
+  // const wait = Number(searchParams.get('wait'));
 
-  await new Promise((resolve) => setTimeout(resolve, wait));
+  // await new Promise((resolve) => setTimeout(resolve, wait));
 
-  return NextResponse.json(`waited ${wait}ms in shitland`);
+  return NextResponse.json("Hello world, is an old message");
 }

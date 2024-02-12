@@ -9,7 +9,7 @@ import {
   Grid,
 } from '@chakra-ui/react';
 import testData from '../../testData/testPosts.json';
-import mongoConnect from '../../api/db';
+import mongoConnect from './lib/db';
 interface Post {
   title: string;
   header: string;
