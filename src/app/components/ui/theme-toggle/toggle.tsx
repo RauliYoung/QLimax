@@ -1,38 +1,24 @@
-<<<<<<< HEAD
-=======
-"use client";
->>>>>>> origin/development
-import React, { useState, useEffect } from 'react';
+'use client';
+import React, {useState, useEffect} from 'react';
 import './toggle.scss';
 import SunIcon from '@/app/components/ui/icons/sunicon';
 import MoonIcon from '@/app/components/ui/icons/moonicon';
-<<<<<<< HEAD
-
-type SwitchProps = {
-=======
-import { useColorMode } from '@chakra-ui/react';
+import {useColorMode} from '@chakra-ui/react';
 
 type ToggleProps = {
->>>>>>> origin/development
   id: string;
   defaultChecked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 };
 
-<<<<<<< HEAD
-const Switch: React.FC<SwitchProps> = ({ id, defaultChecked = false, onChange, className }) => {
-  const [isChecked, setIsChecked] = useState(defaultChecked);
-
-  useEffect(() => {
-    setIsChecked(defaultChecked);
-  }, [defaultChecked]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
-=======
-const Toggle: React.FC<ToggleProps> = ({ id, defaultChecked = false, onChange, className }) => {
-  const { colorMode , toggleColorMode } = useColorMode();
+const Toggle: React.FC<ToggleProps> = ({
+  id,
+  defaultChecked = false,
+  onChange,
+  className,
+}) => {
+  const {colorMode, toggleColorMode} = useColorMode();
   const [isChecked, setIsChecked] = useState(defaultChecked);
 
   useEffect(() => {
@@ -42,8 +28,7 @@ const Toggle: React.FC<ToggleProps> = ({ id, defaultChecked = false, onChange, c
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
     toggleColorMode();
->>>>>>> origin/development
-    if(onChange) {
+    if (onChange) {
       onChange(event);
     }
   };
@@ -64,9 +49,4 @@ const Toggle: React.FC<ToggleProps> = ({ id, defaultChecked = false, onChange, c
   );
 };
 
-<<<<<<< HEAD
-export default Switch;
-=======
 export default Toggle;
->>>>>>> origin/development
-
