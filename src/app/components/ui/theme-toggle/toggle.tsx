@@ -1,29 +1,33 @@
+'use client';
 import React, {useState, useEffect} from 'react';
 import './toggle.scss';
 import SunIcon from '@/app/components/ui/icons/sunicon';
 import MoonIcon from '@/app/components/ui/icons/moonicon';
+import {useColorMode} from '@chakra-ui/react';
 
-type SwitchProps = {
+type ToggleProps = {
   id: string;
   defaultChecked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
 };
 
-const Switch: React.FC<SwitchProps> = ({
+const Toggle: React.FC<ToggleProps> = ({
   id,
   defaultChecked = false,
   onChange,
   className,
 }) => {
+  const {colorMode, toggleColorMode} = useColorMode();
   const [isChecked, setIsChecked] = useState(defaultChecked);
 
   useEffect(() => {
-    setIsChecked(defaultChecked);
-  }, [defaultChecked]);
+    setIsChecked(colorMode === 'dark');
+  }, [colorMode]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
+    toggleColorMode();
     if (onChange) {
       onChange(event);
     }
@@ -45,4 +49,4 @@ const Switch: React.FC<SwitchProps> = ({
   );
 };
 
-export default Switch;
+export default Toggle;
