@@ -2,13 +2,14 @@ import mongoConnect from "@/app/lib/db"
 import { NextRequest, NextResponse } from "next/server";
 
 
-const POST = async (request: NextRequest) => {
-  try {
-    await mongoConnect
-    const reqBody = await request.json();
-    const textToCheck = reqBody.text;
-  } catch (error) {
-    console.error('Error:', error);
-    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
-  }
+export async function GET(request: Request) {
+  await mongoConnect();
+  // console.log(request)
+  
+  // const { searchParams } = new URL(request.url);  
+  // const wait = Number(searchParams.get('wait'));
+
+  // await new Promise((resolve) => setTimeout(resolve, wait));
+
+  return NextResponse.json("Hello world, is an old message");
 }
