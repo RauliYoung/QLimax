@@ -7,11 +7,10 @@ import {
   Input,
   VStack,
   Text,
-  theme,
 } from '@chakra-ui/react';
-import customTheme from '../../themes/theme';
+import customTheme from '../../../../themes/theme';
 
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,10 +19,6 @@ const SignUp: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
   };
 
   return (
@@ -49,9 +44,9 @@ const SignUp: React.FC = () => {
           color="black"
           marginBottom="20px"
         >
-          Sign Up
+          Sign In
         </Text>
-        <form onSubmit={handleSubmit}>
+        <form>
           <VStack spacing="20px">
             <FormControl>
               <FormLabel textAlign="center">Email</FormLabel>
@@ -77,32 +72,15 @@ const SignUp: React.FC = () => {
                 _hover={{borderColor: 'black'}}
               />
             </FormControl>
-            <FormControl>
-              <FormLabel textAlign="center">Confirm password</FormLabel>
-              <Input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                borderColor="black"
-                _hover={{borderColor: 'black'}}
-              />
-            </FormControl>
             <Button
               bg="#475569"
               color="white"
               _hover={{bg: '#677589'}}
               onClick={() => {
-                if (formData.password !== formData.confirmPassword) {
-                  alert("Passwords don't match");
-                  return;
-                }
-                // Tässä voit kutsua API:a tai suorittaa muut toimet rekisteröitymisen kanssa
-                console.log('Form submitted:', formData);
+                console.log('logging in');
               }}
             >
-              Sign Up
+              Sign In
             </Button>
           </VStack>
         </form>
@@ -111,4 +89,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

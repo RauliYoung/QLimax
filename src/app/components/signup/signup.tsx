@@ -7,11 +7,10 @@ import {
   Input,
   VStack,
   Text,
-  theme,
 } from '@chakra-ui/react';
-import customTheme from '../../themes/theme';
+import customTheme from '../../../../themes/theme';
 
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,16 +19,6 @@ const SignIn: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords doesn't match");
-      return;
-    }
-    // logiikka lomakkeen lähettämiselle
-    console.log('Form submitted:', formData);
   };
 
   return (
@@ -55,9 +44,9 @@ const SignIn: React.FC = () => {
           color="black"
           marginBottom="20px"
         >
-          Sign In
+          Sign Up
         </Text>
-        <form onSubmit={handleSubmit}>
+        <form>
           <VStack spacing="20px">
             <FormControl>
               <FormLabel textAlign="center">Email</FormLabel>
@@ -83,8 +72,20 @@ const SignIn: React.FC = () => {
                 _hover={{borderColor: 'black'}}
               />
             </FormControl>
+            <FormControl>
+              <FormLabel textAlign="center">Confirm password</FormLabel>
+              <Input
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+                borderColor="black"
+                _hover={{borderColor: 'black'}}
+              />
+            </FormControl>
             <Button
-              bg="#475569"
+              bg={'#475569'}
               color="white"
               _hover={{bg: '#677589'}}
               onClick={() => {
@@ -92,11 +93,10 @@ const SignIn: React.FC = () => {
                   alert("Passwords don't match");
                   return;
                 }
-                // Tässä voit kutsua API:a tai suorittaa muut toimet rekisteröitymisen kanssa
                 console.log('Form submitted:', formData);
               }}
             >
-              Sign In
+              Sign Up
             </Button>
           </VStack>
         </form>
@@ -105,4 +105,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
