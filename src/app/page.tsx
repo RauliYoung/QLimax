@@ -11,6 +11,7 @@ import testData from '../../testData/testPosts.json';
 import SignUp from './components/signup/signup';
 import SignIn from './components/signin/signin';
 import {BlogPostComponent} from './components/blogpost/blogpost';
+import Auth from './components/authModals/auth';
 
 interface Post {
   title: string;
@@ -20,7 +21,7 @@ interface Post {
 export default function Home() {
   return (
     // <SignIn />
-    <SignUp />
+    <Auth />
     // <SignIn />
     // <Flex as='main' direction='column'>
     //   <Flex
