@@ -8,11 +8,7 @@ import {
   CardHeader,
 } from '@chakra-ui/react';
 import testData from '../../testData/testPosts.json';
-<<<<<<< HEAD
-import {BlogPostComponent} from './components/blogpost/blogpost';
-=======
 import SignUp from './signup';
->>>>>>> 9f9a7da (Sign up page)
 
 interface Post {
   title: string;
@@ -21,13 +17,6 @@ interface Post {
 }
 export default function Home() {
   return (
-<<<<<<< HEAD
-    <>
-
-    <BlogPostComponent />
-    </>
-   
-=======
     <SignUp />
 
     // <Flex as='main' direction='column'>
@@ -80,6 +69,5 @@ export default function Home() {
     //     </Flex>
     //   </Flex>
     // </Flex>
->>>>>>> 9f9a7da (Sign up page)
   );
 }
