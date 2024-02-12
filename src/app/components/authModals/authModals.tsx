@@ -33,6 +33,7 @@ export default function AuthModals() {
     if (response.ok) {
       const {token} = await response.json();
       setUser({token})
+      localStorage.setItem('QLimaxToken', token);
       router.push('/'); 
     } else {
       const {error} = await response.json();
