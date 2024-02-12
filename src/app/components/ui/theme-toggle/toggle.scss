@@ -18,7 +18,11 @@
     }
 
     &.moon-icon {
+<<<<<<< HEAD
       right: 5px;
+=======
+      right: 4px;
+>>>>>>> 750069c (Development (#3))
       color: #374151;
       display: none;
     }
@@ -38,25 +42,43 @@
     right: 0;
     bottom: 0;
     background-color: #ffffff;
+<<<<<<< HEAD
     transition: 0.4s !important;
     border-radius: 34px;
     border: 1px solid #ccc;
+=======
+    transition: 0.4s;
+    border-radius: 34px;
+    border: 1px solid #ffffff;
+>>>>>>> 750069c (Development (#3))
 
     &:before {
       position: absolute;
       content: '';
+<<<<<<< HEAD
       height: 25px;
+=======
+      height: 26px;
+>>>>>>> 750069c (Development (#3))
       width: 26px;
       left: 4px;
       bottom: 3px;
       background-color: #ffffff;
+<<<<<<< HEAD
       transition: 0.4s;
+=======
+      transition: 0.2s;
+>>>>>>> 750069c (Development (#3))
       border-radius: 50%;
     }
   }
 
   input:checked+.slider {
+<<<<<<< HEAD
     background-color: #222938;
+=======
+    background-color: black;
+>>>>>>> 750069c (Development (#3))
     border: 1px solid #374151;
   }
 
