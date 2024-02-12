@@ -1,9 +1,9 @@
 /* theme.ts */
-import { theme as chakraTheme } from '@chakra-ui/react';
-import { extendTheme } from '@chakra-ui/react';
-import { url } from 'inspector';
+import {theme as chakraTheme} from '@chakra-ui/react';
+import {extendTheme} from '@chakra-ui/react';
+import {url} from 'inspector';
 import bgImage from '../public/GroupBg.svg';
-//sizes should be tested
+
 const sizes = {
   sizes: {
     max: 'max-content',
@@ -61,6 +61,6 @@ const styles = {
     },
   },
 };
-export const customTheme = extendTheme({ styles, sizes, breakpoints });
+export const customTheme = extendTheme({styles, sizes, breakpoints});
 
 export default customTheme;

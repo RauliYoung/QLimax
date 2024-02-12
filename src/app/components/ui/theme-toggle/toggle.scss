@@ -18,7 +18,18 @@
     }
 
     &.moon-icon {
+<<<<<<< HEAD
+<<<<<<< HEAD
       right: 5px;
+=======
+      right: 4px;
+>>>>>>> 750069c (Development (#3))
+=======
+      right: 4px;
+=======
+      right: 5px;
+>>>>>>> origin/development
+>>>>>>> db890bdbcf485d92c4189197418e6c716a97a7c0
       color: #374151;
       display: none;
     }
@@ -38,25 +49,75 @@
     right: 0;
     bottom: 0;
     background-color: #ffffff;
+<<<<<<< HEAD
+<<<<<<< HEAD
     transition: 0.4s !important;
     border-radius: 34px;
     border: 1px solid #ccc;
+=======
+    transition: 0.4s;
+    border-radius: 34px;
+    border: 1px solid #ffffff;
+>>>>>>> 750069c (Development (#3))
+=======
+    transition: 0.4s;
+    border-radius: 34px;
+    border: 1px solid #ffffff;
+=======
+    transition: 0.4s !important;
+    border-radius: 34px;
+    border: 1px solid #ccc;
+>>>>>>> origin/development
+>>>>>>> db890bdbcf485d92c4189197418e6c716a97a7c0
 
     &:before {
       position: absolute;
       content: '';
+<<<<<<< HEAD
+<<<<<<< HEAD
       height: 25px;
+=======
+      height: 26px;
+>>>>>>> 750069c (Development (#3))
+=======
+      height: 26px;
+=======
+      height: 25px;
+>>>>>>> origin/development
+>>>>>>> db890bdbcf485d92c4189197418e6c716a97a7c0
       width: 26px;
       left: 4px;
       bottom: 3px;
       background-color: #ffffff;
+<<<<<<< HEAD
+<<<<<<< HEAD
       transition: 0.4s;
+=======
+      transition: 0.2s;
+>>>>>>> 750069c (Development (#3))
+=======
+      transition: 0.2s;
+=======
+      transition: 0.4s;
+>>>>>>> origin/development
+>>>>>>> db890bdbcf485d92c4189197418e6c716a97a7c0
       border-radius: 50%;
     }
   }
 
   input:checked+.slider {
+<<<<<<< HEAD
+<<<<<<< HEAD
     background-color: #222938;
+=======
+    background-color: black;
+>>>>>>> 750069c (Development (#3))
+=======
+    background-color: black;
+=======
+    background-color: #222938;
+>>>>>>> origin/development
+>>>>>>> db890bdbcf485d92c4189197418e6c716a97a7c0
     border: 1px solid #374151;
   }
 
