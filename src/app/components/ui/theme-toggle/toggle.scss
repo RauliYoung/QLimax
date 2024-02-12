@@ -18,7 +18,11 @@
     }
 
     &.moon-icon {
+<<<<<<< HEAD
       right: 4px;
+=======
+      right: 5px;
+>>>>>>> origin/development
       color: #374151;
       display: none;
     }
@@ -38,25 +42,43 @@
     right: 0;
     bottom: 0;
     background-color: #ffffff;
+<<<<<<< HEAD
     transition: 0.4s;
     border-radius: 34px;
     border: 1px solid #ffffff;
+=======
+    transition: 0.4s !important;
+    border-radius: 34px;
+    border: 1px solid #ccc;
+>>>>>>> origin/development
 
     &:before {
       position: absolute;
       content: '';
+<<<<<<< HEAD
       height: 26px;
+=======
+      height: 25px;
+>>>>>>> origin/development
       width: 26px;
       left: 4px;
       bottom: 3px;
       background-color: #ffffff;
+<<<<<<< HEAD
       transition: 0.2s;
+=======
+      transition: 0.4s;
+>>>>>>> origin/development
       border-radius: 50%;
     }
   }
 
   input:checked+.slider {
+<<<<<<< HEAD
     background-color: black;
+=======
+    background-color: #222938;
+>>>>>>> origin/development
     border: 1px solid #374151;
   }
 

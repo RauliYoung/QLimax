@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+<<<<<<< HEAD
 import {Label} from '@/app/components/ui/blogpost-label/label';
 import {Input} from '@/app/components/ui/blogpost-input/input';
 import {Textarea} from '@/app/components/ui/blogpost-textarea/textarea';
@@ -49,5 +50,21 @@ export function BlogPostComponent() {
         </Button>
       </div>
     </div>
+=======
+import './blogpost.scss';
+import Editor from './textEditor/editor';
+import Menubar from './menubar/menubar';
+
+export function BlogPostComponent() {
+  return (
+    <>
+      <div className="menubar">
+        <Menubar />
+      </div>
+      <div className="editor">
+        <Editor />
+      </div>
+    </>
+>>>>>>> origin/development
   );
 }

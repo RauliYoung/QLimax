@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { Expletus_Sans, Overpass_Mono } from 'next/font/google';
 import { Providers } from './providers';
 import './globals.css';
-//Can be used as variables in globals.css --> check
+import NavBar from './components/navbar/navbar';
+
 const Overpass = Overpass_Mono({
   subsets: ['latin'],
   variable: '--font-overpass-mono',
@@ -27,7 +28,10 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${Overpass.variable} ${expletus.variable}`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <NavBar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
