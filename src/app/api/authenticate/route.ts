@@ -1,13 +1,14 @@
-import {NextRequest, NextResponse} from 'next/server';
+import { NextRequest } from 'next/server';
 import mongoConnect from '@/app/lib/db';
 import User from '@/app/models/userModel';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import createResponseObject from '@/app/lib/createResposeObject';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const generateToken = (user: any) => {
-  return jwt.sign({id: user._id, email: user.email}, JWT_SECRET, {
+  return jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, {
     expiresIn: '4d',
   });
 };
@@ -17,44 +18,29 @@ export async function POST(req: NextRequest) {
 
   try {
     const data = await req.json();
-    const user = await User.findOne({email: data.email}).exec();
+    const user = await User.findOne({ email: data.email }).exec();
 
     if (!user) {
-      return new NextResponse(JSON.stringify({error: 'user not found'}), {
+      return createResponseObject({
         status: 404,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        body: { error: 'user not found' },
       });
     }
 
     const isValid = await bcrypt.compare(data.password, user.password);
     if (!isValid) {
-      return new NextResponse(JSON.stringify({error: 'Invalid credentialss'}), {
+      return createResponseObject({
         status: 401,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        body: { error: 'Invalid credentials' },
       });
     }
     const token = generateToken(user);
 
-    return new NextResponse(JSON.stringify({token}), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    return createResponseObject({ status: 200, body: { token } });
   } catch (error) {
-    console.error('Authentication error:', error);
-    return new NextResponse(
-      JSON.stringify({error: 'Error in authentication'}),
-      {
-        status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    return createResponseObject({
+      status: 500,
+      body: { error: 'Error in authentication' },
+    });
   }
 }
