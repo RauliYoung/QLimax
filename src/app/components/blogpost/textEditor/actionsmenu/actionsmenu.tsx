@@ -23,7 +23,7 @@ export const ActionsMenu = () => {
   }
 
   const handleSaveAsDraft = () => {
-    console.log('Save as draft');
+   console.log('Save as draft'); 
   }
 
  return (

@@ -11,8 +11,11 @@ import React from 'react';
 import './drawer.scss';
 import * as ChakraUi from '@chakra-ui/icons';
 import {UserContext} from '@/app/contexts/usercontext';
+import {useRouter} from 'next/navigation';
 
 export function Drawer() {
+  const router = useRouter();
+
   const {
     isOpen: isDrawerOpen,
     onOpen: onDrawerOpen,
@@ -29,6 +32,7 @@ export function Drawer() {
     localStorage.removeItem('QLimaxToken');
     setUser(null);
     onModalClose();
+    router.push('/');
   };
 
   return (
@@ -56,8 +60,19 @@ export function Drawer() {
                 Blogs
               </Chakra.MenuButton>
               <Chakra.MenuList>
-                <Chakra.MenuItem icon={<BsCursorText />}>Write</Chakra.MenuItem>
-                <Chakra.MenuItem icon={<BsSearch />}>Search</Chakra.MenuItem>
+                <Chakra.MenuItem
+                  as={Chakra.Button}
+                  onClick={() => {
+                    router.push('/blogpost');
+                    onDrawerClose();
+                  }}
+                  icon={<BsCursorText />}
+                >
+                  Write
+                </Chakra.MenuItem>
+                <Chakra.MenuItem as={Chakra.Button} onClick={() => router.push('/search')} icon={<BsSearch />}>
+                  Search
+                </Chakra.MenuItem>
               </Chakra.MenuList>
             </Chakra.Menu>
             <Chakra.Menu>

@@ -4,7 +4,8 @@ import SignIn from './signin';
 import SignUp from './signup';
 import {UserContext} from '@/app/contexts/usercontext';
 import {useContext} from 'react';
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
+import {useToast} from '@chakra-ui/react';
 
 interface UserData {
   email: string;
@@ -15,6 +16,7 @@ export default function AuthModals() {
   const [showSignIn, setShowSignIn] = useState(true);
   const [showSignUp, setShowSignUp] = useState(false);
   const {setUser} = useContext(UserContext);
+  const toast = useToast();
   const router = useRouter();
 
   const toggleForms = () => {
@@ -32,9 +34,20 @@ export default function AuthModals() {
     });
     if (response.ok) {
       const {token} = await response.json();
-      setUser({token})
+      setUser({token});
+      toast({
+        title: 'Welcome',
+        description: 'You are now logged in',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'bottom-left',
+      });
       localStorage.setItem('QLimaxToken', token);
-      router.push('/'); 
+      setTimeout(() => {
+        // TODO: redirect somewhere
+        router.push('/');
+      }, 3000);
     } else {
       const {error} = await response.json();
       console.error(error);
@@ -52,6 +65,18 @@ export default function AuthModals() {
 
     if (response.ok) {
       handleSignIn(data);
+      toast({
+        title: 'Hello newcomer!',
+        description: 'You are now signed up and logged in',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'bottom-left',
+      });
+      setTimeout(() => {
+        // TODO: redirect somewhere
+        router.push('/');
+      }, 3000);
     } else {
       const errorData = await response.json();
       console.error(errorData.message);
