@@ -1,16 +1,12 @@
-import React, {useState} from 'react';
-import {Flex} from '@chakra-ui/react';
+import React, {useState, useContext} from 'react';
+import {Flex, useToast} from '@chakra-ui/react';
 import SignIn from './signin';
 import SignUp from './signup';
 import {UserContext} from '@/app/contexts/usercontext';
-import {useContext} from 'react';
 import {useRouter} from 'next/navigation';
-import {useToast} from '@chakra-ui/react';
-
-interface UserData {
-  email: string;
-  password: string;
-}
+import {useMutation} from '@apollo/client';
+import {CREATE_USER} from '../../lib/constants';
+import {SIGN_IN} from '../../lib/constants';
 
 export default function AuthModals() {
   const [showSignIn, setShowSignIn] = useState(true);
@@ -19,68 +15,67 @@ export default function AuthModals() {
   const toast = useToast();
   const router = useRouter();
 
+  const [createUser] = useMutation(CREATE_USER);
+  const [signIn] = useMutation(SIGN_IN);
+
+  const handleSignIn = async (userData) => {
+    try {
+      const {data} = await signIn({
+        variables: {
+          email: userData.email,
+          password: userData.password,
+        },
+      });
+
+      if (data.signIn) {
+        setUser({token: data.signIn});
+        localStorage.setItem('QLimaxToken', data.signIn);
+        router.push('/');
+      }
+    } catch (e) {
+      toast({
+        title: 'Error signing in',
+        description: 'Unable to sign in. Please try again.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  }
+
+  const handleSignUp = async (userData) => {
+    try {
+      const {data} = await createUser({
+        variables: {
+          input: userData,
+        },
+      });
+
+      if (data.createUser) {
+        toast({
+          title: 'Account created successfully',
+          description: 'You are now signed up.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+        });
+
+        router.push('/');
+        handleSignIn(userData);
+      }
+    } catch (e) {
+      toast({
+        title: 'Error creating account',
+        description: 'Unable to create account. Please try again.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
   const toggleForms = () => {
     setShowSignIn(!showSignIn);
     setShowSignUp(!showSignUp);
-  };
-
-  const handleSignIn = async (data: UserData) => {
-    const response = await fetch('/api/authenticate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (response.ok) {
-      const {token} = await response.json();
-      setUser({token});
-      toast({
-        title: 'Welcome',
-        description: 'You are now logged in',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'bottom-left',
-      });
-      localStorage.setItem('QLimaxToken', token);
-      setTimeout(() => {
-        // TODO: redirect somewhere
-        router.push('/');
-      }, 3000);
-    } else {
-      const {error} = await response.json();
-      console.error(error);
-    }
-  };
-
-  const handleSignUp = async (data: UserData) => {
-    const response = await fetch('/api/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      handleSignIn(data);
-      toast({
-        title: 'Hello newcomer!',
-        description: 'You are now signed up and logged in',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'bottom-left',
-      });
-      setTimeout(() => {
-        // TODO: redirect somewhere
-        router.push('/');
-      }, 3000);
-    } else {
-      const errorData = await response.json();
-      console.error(errorData.message);
-    }
   };
 
   return (

@@ -1,8 +1,10 @@
-import type {Metadata} from 'next';
+"use client";
 import {Expletus_Sans, Overpass_Mono} from 'next/font/google';
 import {Providers} from './providers';
 import './styles/globals.scss';
 import NavBar from './components/navbar/navbar';
+import client from './apolloClient';
+import {ApolloProvider} from '@apollo/client';
 
 const Overpass = Overpass_Mono({
   subsets: ['latin'],
@@ -15,10 +17,6 @@ const expletus = Expletus_Sans({
   display: 'swap',
 });
 
-export const metadata: Metadata = {
-  title: 'Qlimax',
-  description: 'For better blogging',
-};
 
 export default function RootLayout({
   children,
@@ -28,10 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${Overpass.variable} ${expletus.variable}`}>
-          <Providers>
-            <NavBar />
+        <Providers>
+          <NavBar />
+            <ApolloProvider client={client}>
             {children}
-          </Providers>
+            </ApolloProvider>
+        </Providers>
       </body>
     </html>
   );
