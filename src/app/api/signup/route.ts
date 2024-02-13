@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 import mongoConnect from '@/app/lib/db';
 import User from '@/app/models/userModel';
 import bcrypt from 'bcrypt';
+import createResponseObject from '@/app/lib/createResposeObject';
 
 export async function POST(req: NextRequest) {
   await mongoConnect();
@@ -12,22 +13,16 @@ export async function POST(req: NextRequest) {
     const user = new User({...data, password: hashedPassword});
     await user.save();
 
-    return new NextResponse(
-      JSON.stringify({ message: 'User saved successfully' }),
-      {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    return createResponseObject({
+      status: 200,
+      body: { message: 'User saved successfully' }
+    });
   } catch (error) {
     console.error('Error:', error);
-    return new NextResponse(JSON.stringify({ error: 'Error in saving' }), {
+    return createResponseObject({
       status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: { error: 'Error in saving' }
     });
   }
 }
+
