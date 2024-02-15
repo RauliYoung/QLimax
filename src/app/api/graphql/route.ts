@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
 import Users from "./datasources";
-import UserModel from "./models";
+import UserModel from "@/app/models/userModel";
 
 mongoConnect();
 

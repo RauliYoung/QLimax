@@ -7,8 +7,13 @@ import {
   ModalBody,
   Button,
   Input,
+  Stack,
+  Tag,
+  TagCloseButton,
+  TagLabel,
 } from '@chakra-ui/react';
 import { useState } from 'react';
+import { randomColor } from './randomColors';
 
 type TagModalProps = {
   isOpen: boolean;
@@ -16,13 +21,15 @@ type TagModalProps = {
 };
 
 export const TagModal = ({ isOpen, onClose }: TagModalProps) => {
-  const [tag, setTag] = useState(''); 
+  const [tag, setTag] = useState('');
+  const [tags, setTags] = useState<{tag: string, color: string}[]>([]);
 
   const handleAddTag = () => {
-    console.log('Add Tag');
-    console.log(`Tag Added: ${tag}`); 
     setTag(''); 
-    onClose(); 
+    setTags([...tags, {tag, color: randomColor()}]);
+  }
+  const handleRemoveTag = (tagRevove: string) => {
+    setTags(tags.filter((tag) => tag.tag !== tagRevove));
   }
 
   return (
@@ -32,6 +39,14 @@ export const TagModal = ({ isOpen, onClose }: TagModalProps) => {
         <ModalHeader>Add a Tag</ModalHeader>
         <ModalBody>
           <Input placeholder="Type your tag" value={tag} onChange={(e) => setTag(e.target.value)} />
+          <Stack spacing={4}  mt={4} direction="row" flexWrap="wrap" width="100">
+            {tags.map((tag, index) => (
+              <Tag key={index} size="lg" borderRadius="full" variant="solid" bg={tag.color} color="black">
+                <TagLabel>{tag.tag}</TagLabel>
+                <TagCloseButton onClick={() => handleRemoveTag(tag.tag)} />
+              </Tag>
+            ))}
+          </Stack>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="red" mr={3} onClick={onClose}>

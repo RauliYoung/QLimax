@@ -18,7 +18,12 @@ export default function AuthModals() {
   const [createUser] = useMutation(CREATE_USER);
   const [signIn] = useMutation(SIGN_IN);
 
-  const handleSignIn = async (userData) => {
+  interface UserData {
+    email: string;
+    password: string;
+  }
+
+  const handleSignIn = async (userData:UserData) => {
     try {
       const {data} = await signIn({
         variables: {
@@ -30,6 +35,14 @@ export default function AuthModals() {
       if (data.signIn) {
         setUser({token: data.signIn});
         localStorage.setItem('QLimaxToken', data.signIn);
+        toast({
+          title: 'Signed in successfully',
+          description: 'You are now signed in.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position:"bottom-left"
+        });
         router.push('/');
       }
     } catch (e) {
@@ -39,11 +52,12 @@ export default function AuthModals() {
         status: 'error',
         duration: 5000,
         isClosable: true,
+        position:"bottom-left"
       });
     }
   }
 
-  const handleSignUp = async (userData) => {
+  const handleSignUp = async (userData:UserData) => {
     try {
       const {data} = await createUser({
         variables: {
@@ -54,10 +68,11 @@ export default function AuthModals() {
       if (data.createUser) {
         toast({
           title: 'Account created successfully',
-          description: 'You are now signed up.',
+          description: 'Welcome to QLIMAX!',
           status: 'success',
           duration: 5000,
           isClosable: true,
+          position:"bottom-left"
         });
 
         router.push('/');
@@ -70,6 +85,7 @@ export default function AuthModals() {
         status: 'error',
         duration: 5000,
         isClosable: true,
+        position:"bottom-left"
       });
     }
   };

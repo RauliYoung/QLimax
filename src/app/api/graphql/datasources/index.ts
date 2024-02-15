@@ -1,8 +1,8 @@
-import UserModel from '../models';
 import {MongoDataSource} from 'apollo-datasource-mongodb';
-import {ObjectId} from 'mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import {ObjectId} from 'mongodb';
+import UserModel from "@/app/models/userModel";
 
 interface UserDocument {
   _id: ObjectId;
@@ -58,7 +58,7 @@ export default class Users extends MongoDataSource<UserDocument> {
       }
 
       const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {
-        expiresIn: '1h',
+        expiresIn: '4h',
       });
 
       return token;
