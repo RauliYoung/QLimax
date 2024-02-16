@@ -4,12 +4,9 @@ import testData from '../../testData/testPosts.json';
 import Auth from './components/authModals/authModals';
 import {useContext} from 'react';
 import {UserContext} from './contexts/usercontext';
+import BlogPostPreview from './components/blogpost/blogPostPreview';
+import {Post} from '../../types';
 
-interface Post {
-  title: string;
-  header: string;
-  body: string;
-}
 export default function Home() {
   const {user} = useContext(UserContext);
   return (
@@ -37,27 +34,9 @@ export default function Home() {
               gap="1rem"
               m="auto"
             >
-              {testData
-                .map((post: Post) => ({
-                  title: post.title,
-                  header: post.header,
-                  body: post.body,
-                }))
-                .map((post: Post) => (
-                  <Card w="330px" h="400px">
-                    <CardBody overflow="auto">
-                      <Heading as="h2" fontSize={'28px'}>
-                        {post.title}
-                      </Heading>
-                      <Text as="p" fontSize="15px">
-                        {post.header}
-                      </Text>
-                      <Text as="p" fontSize="15px">
-                        {post.body}
-                      </Text>
-                    </CardBody>
-                  </Card>
-                ))}
+              {testData.map((post: Post) => (
+                <BlogPostPreview post={post} />
+              ))}
             </Grid>
           </Flex>
         </Flex>
