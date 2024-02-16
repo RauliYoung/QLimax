@@ -18,7 +18,7 @@ const BlogPostPage = () => {
   const [isSubmitting]= useState(false);
 
   return (
-    <Container maxW="container.md" py={8}>
+    <Container py={8}>
       <VStack spacing={8} alignItems="flex-start">
         <Heading>BLOGPOST</Heading>
         <Text>
