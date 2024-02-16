@@ -1,6 +1,7 @@
 import {FC} from 'react';
-import {Box, Stack} from '@chakra-ui/react';
+import {Box, Stack, Image} from '@chakra-ui/react';
 import {NavLinkItem} from './navItem';
+import logo from '../../../../public/qlimax2.svg';
 
 export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
   return (
@@ -15,8 +16,7 @@ export const NavLinks: FC<{isOpen: boolean}> = ({isOpen}) => {
         direction={['column', 'column', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        {/* add more links here */}
-        <NavLinkItem to="/">Blogs</NavLinkItem>
+        <Image src={logo.src} width="300px" h="auto" objectFit="contain" />
       </Stack>
     </Box>
   );
