@@ -1,5 +1,5 @@
 'use client';
-import {Flex, Heading, Text, Card, CardBody} from '@chakra-ui/react';
+import {Flex, Heading, Grid, Text, Card, CardBody} from '@chakra-ui/react';
 import testData from '../../testData/testPosts.json';
 import Auth from './components/authModals/authModals';
 import {useContext} from 'react';
@@ -11,7 +11,7 @@ interface Post {
   body: string;
 }
 export default function Home() {
-  const {setUser, user} = useContext(UserContext);
+  const {user} = useContext(UserContext);
   return (
     <>
       {!user ? (
@@ -25,21 +25,15 @@ export default function Home() {
             justifyContent="center"
             alignItems="center"
           >
-            <Heading as="h1">Hello world, is an old message</Heading>
-            <Text as="p">
-              This is a paragraph, and it is the child of a flex container with
-              direction column
-            </Text>
-            <Text as="p">
-              Whereas disregard and contempt for human rights have resulted
-            </Text>
+            <Heading as="h1" fontSize="64px">
+              Our top blogs
+            </Heading>
           </Flex>
           <Flex maxW="100%" justifyContent="center">
-            <Flex
+            <Grid
               as="section"
-              wrap="wrap"
+              gridTemplateColumns="repeat(3, 1fr)"
               justifyContent="center"
-              maxW="798px"
               gap="1rem"
               m="auto"
             >
@@ -50,7 +44,7 @@ export default function Home() {
                   body: post.body,
                 }))
                 .map((post: Post) => (
-                  <Card w="250px" h="300px">
+                  <Card w="330px" h="400px">
                     <CardBody overflow="auto">
                       <Heading as="h2" fontSize={'28px'}>
                         {post.title}
@@ -64,7 +58,7 @@ export default function Home() {
                     </CardBody>
                   </Card>
                 ))}
-            </Flex>
+            </Grid>
           </Flex>
         </Flex>
       )}
