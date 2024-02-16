@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Flex, useToast} from '@chakra-ui/react';
+import {Flex, Modal, useToast} from '@chakra-ui/react';
 import SignIn from './signin';
 import SignUp from './signup';
 import {UserContext} from '@/app/contexts/usercontext';
@@ -17,6 +17,10 @@ export default function AuthModals() {
 
   const [createUser] = useMutation(CREATE_USER);
   const [signIn] = useMutation(SIGN_IN);
+  const onClose = () => {
+    setShowSignIn(false);
+    setShowSignUp(false);
+  }
 
   interface UserData {
     email: string;
@@ -44,6 +48,7 @@ export default function AuthModals() {
           position:"bottom-left"
         });
         router.push('/');
+        onClose();
       }
     } catch (e) {
       toast({
@@ -95,9 +100,11 @@ export default function AuthModals() {
   };
 
   return (
+    <Modal isOpen={true} onClose={() => {}}>
     <Flex direction="column" justifyContent="center" alignItems="center">
       {showSignIn && <SignIn onSignUp={toggleForms} onSignIn={handleSignIn} />}
       {showSignUp && <SignUp onSignUp={handleSignUp} />}
     </Flex>
+    </Modal>
   );
 }
