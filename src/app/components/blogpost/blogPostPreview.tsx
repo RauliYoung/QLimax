@@ -7,7 +7,7 @@ interface BlogPostPreviewProps {
 
 const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({post}) => {
   return (
-    <Card w="330px" h="400px">
+    <Card w="330px" h="400px" bg="rgba(241, 125, 177, 0.8)">
       <CardBody overflow="auto">
         <Heading as="h2" fontSize={'28px'}>
           {post.title}

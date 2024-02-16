@@ -3,6 +3,6 @@ export interface Post {
   header: string;
   body: string;
   preview: string;
-  rating: string;
+  rating: number;
   timeToRead: string;
 }

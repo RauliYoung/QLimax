@@ -1,8 +1,9 @@
 /* theme.ts */
-import {theme as chakraTheme} from '@chakra-ui/react';
+import {StyleFunctionProps, theme as chakraTheme} from '@chakra-ui/react';
 import {extendTheme} from '@chakra-ui/react';
 import {url} from 'inspector';
 import bgImage from '../public/GroupBg.svg';
+import { mode } from '@chakra-ui/theme-tools';
 
 const sizes = {
   sizes: {
@@ -41,26 +42,18 @@ const breakpoints = {
 };
 
 const styles = {
-  global: {
-    'html, body': {
-      // background: `url(${bgImage.src})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      minHeight: '100vh',
+  global: (props: StyleFunctionProps) => ({
+    body: {
+      // sets a custom bg color for dark mode only
+      bg: mode(
+        // light mode value retrieved from theme
+        "#27AAE1",
+        // your custom value for dark mode
+        '#252C32',
+      )(props),
     },
-    h1: {
-      fontSize: '72px ',
-      color: 'rgba(148, 163, 184, 1)',
-      lineHeight: '1.2',
-      letterSpacing: '0',
-    },
-    p: {
-      fontSize: '24px',
-      color: 'rgba(148, 163, 184, 1)',
-    },
-  },
-};
+  }),
+}
 export const customTheme = extendTheme({styles, sizes, breakpoints});
 
 export default customTheme;
