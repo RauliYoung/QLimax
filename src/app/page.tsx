@@ -19,7 +19,7 @@ interface Post {
 export default function Home() {
   return (
     // <SignIn />
-    <Auth />
+    <BlogPostComponent />
     // <SignIn />
     // <Flex as='main' direction='column'>
     //   <Flex

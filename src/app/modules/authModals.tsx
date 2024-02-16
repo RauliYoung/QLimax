@@ -1,12 +1,12 @@
 import React, {useState, useContext} from 'react';
 import {Flex, useToast} from '@chakra-ui/react';
-import SignIn from './signin';
-import SignUp from './signup';
 import {UserContext} from '@/app/contexts/usercontext';
 import {useRouter} from 'next/navigation';
 import {useMutation} from '@apollo/client';
-import {CREATE_USER} from '../../lib/constants';
-import {SIGN_IN} from '../../lib/constants';
+import {SIGN_IN} from '../lib/constants';
+import SignIn from '../components/authModals/signin';
+import SignUp from '../components/authModals/signup';
+import { CREATE_USER } from '../lib/constants';
 
 export default function AuthModals() {
   const [showSignIn, setShowSignIn] = useState(true);

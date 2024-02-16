@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface UserContextProps {
-  user: null | { token: string };
+  user: null | { token: string }
   setUser: React.Dispatch<React.SetStateAction<{ token: string } | null>>;
 }
 
