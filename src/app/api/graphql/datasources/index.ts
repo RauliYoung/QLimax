@@ -1,8 +1,8 @@
-import {MongoDataSource} from 'apollo-datasource-mongodb';
+import { MongoDataSource } from 'apollo-datasource-mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {ObjectId} from 'mongodb';
-import UserModel from "@/app/models/userModel";
+import { ObjectId } from 'mongodb';
+import UserModel from '@/app/models/userModel';
 
 interface UserDocument {
   _id: ObjectId;
