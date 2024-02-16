@@ -14,7 +14,7 @@ export default function Home() {
       {!user ? (
         <Auth />
       ) : (
-        <Flex as="main" direction="column">
+        <Flex as="main" direction="column" pb="1rem">
           <Flex
             as="section"
             direction="column"
