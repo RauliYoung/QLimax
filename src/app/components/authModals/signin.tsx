@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, VStack, Text } from '@chakra-ui/react';
+import React, {useState} from 'react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  VStack,
+  Text,
+} from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 
 interface SignInProps {
   onSignUp: () => void;
-  onSignIn: (data: { email: string; password: string }) => void;
+  onSignIn: (data: {email: string; password: string}) => void;
 }
 
-const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
+const SignIn: React.FC<SignInProps> = ({onSignUp, onSignIn}) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({...formData, [e.target.name]: e.target.value});
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -27,7 +35,6 @@ const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      minHeight="100vh"
       background={`url(${customTheme.bgImage})`}
       backgroundRepeat="no-repeat"
       backgroundPosition="center"
@@ -58,7 +65,7 @@ const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
                 onChange={handleChange}
                 required
                 borderColor="black"
-                _hover={{ borderColor: 'black' }}
+                _hover={{borderColor: 'black'}}
               />
             </FormControl>
             <FormControl>
@@ -70,13 +77,13 @@ const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
                 onChange={handleChange}
                 required
                 borderColor="black"
-                _hover={{ borderColor: 'black' }}
+                _hover={{borderColor: 'black'}}
               />
             </FormControl>
             <Button
               bg="#475569"
               color="white"
-              _hover={{ bg: '#677589' }}
+              _hover={{bg: '#677589'}}
               type="submit"
             >
               Sign In
@@ -85,7 +92,7 @@ const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
               bg="#475569"
               size="xs"
               color="white"
-              _hover={{ bg: '#677589' }}
+              _hover={{bg: '#677589'}}
               onClick={onSignUp}
             >
               Create Account
@@ -98,4 +105,3 @@ const SignIn: React.FC<SignInProps> = ({ onSignUp, onSignIn }) => {
 };
 
 export default SignIn;
-

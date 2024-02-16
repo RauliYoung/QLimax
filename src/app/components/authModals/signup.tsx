@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, VStack, Text, Modal } from '@chakra-ui/react';
+import React, {useState} from 'react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  VStack,
+  Text,
+  Modal,
+} from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 
 interface SignUpProps {
-  onSignUp: (data: { email: string; password: string; }) => void;
+  onSignUp: (data: {email: string; password: string}) => void;
 }
 
-const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
+const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -14,7 +23,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({...formData, [e.target.name]: e.target.value});
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,7 +32,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
       alert("Passwords don't match");
       return;
     }
-    const { confirmPassword, ...dataToSend } = formData;
+    const {confirmPassword, ...dataToSend} = formData;
     onSignUp(dataToSend);
   };
 
@@ -33,7 +42,6 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        minHeight="100vh"
         background={`url(${customTheme.bgImage})`}
         backgroundRepeat="no-repeat"
         backgroundPosition="center"
@@ -64,7 +72,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
                   onChange={handleChange}
                   required
                   borderColor="black"
-                  _hover={{ borderColor: 'black' }}
+                  _hover={{borderColor: 'black'}}
                 />
               </FormControl>
               <FormControl>
@@ -76,7 +84,7 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
                   onChange={handleChange}
                   required
                   borderColor="black"
-                  _hover={{ borderColor: 'black' }}
+                  _hover={{borderColor: 'black'}}
                 />
               </FormControl>
               <FormControl>
@@ -88,13 +96,13 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
                   onChange={handleChange}
                   required
                   borderColor="black"
-                  _hover={{ borderColor: 'black' }}
+                  _hover={{borderColor: 'black'}}
                 />
               </FormControl>
               <Button
                 bg="#475569"
                 color="white"
-                _hover={{ bg: '#677589' }}
+                _hover={{bg: '#677589'}}
                 type="submit"
               >
                 Sign Up
@@ -108,4 +116,3 @@ const SignUp: React.FC<SignUpProps> = ({ onSignUp }) => {
 };
 
 export default SignUp;
-
