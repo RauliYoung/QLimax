@@ -41,6 +41,7 @@ const SearchPage: React.FC = () => {
           <Box display="flex">
             <Input
               placeholder="Search..."
+              aria-label="Search input"
               value={searchTerm}
               onChange={handleSearch}
               size="lg"

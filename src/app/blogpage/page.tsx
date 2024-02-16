@@ -1,5 +1,5 @@
-'use client';
-import React from 'react';
+"use client";
+import React, {useState} from 'react';
 import {
   Box,
   Container,
@@ -14,21 +14,40 @@ import {
   Tag,
   Stack,
 } from '@chakra-ui/react';
-import {useState} from 'react';
 import {BsHeartFill} from 'react-icons/bs';
 
-const BlogPostPage = () => {
-  const date = new Date().toLocaleDateString('fi-FI');
-  const [isSubmitting] = useState(false);
-  const [comment, setComment] = useState('');
+type Comment = {
+  id: number;
+  user: string;
+  text: string;
+};
 
-  const handleSubmit = () => {
-    // send comment to server
-    console.log('comment submitted',comment);
-  }
+const BlogPostPage: React.FC = () => {
+  const date = new Date().toLocaleDateString('fi-FI');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  // comment functions just for funsies and to show to ilkka
+  // TODO: replace with actual comment functionality and backend connection
+
+  const handleCommentSubmit = () => {
+    setIsSubmitting(true);
+    const newComment: Comment = {
+      id: comments.length + 1,
+      user: 'Username',
+      text: comment,
+    };
+    setTimeout (() => {
+    setComments([...comments, newComment]);
+    setIsSubmitting(false);
+    setComment('');
+    }
+    , 1000);
+  };
 
   return (
-    <Container py={10} >
+    <Container py={10}>
       <VStack spacing={8} alignItems="flex-start">
         <Heading>BLOGPOST</Heading>
         <Flex alignItems="center" justifyContent="space-between">
@@ -58,29 +77,31 @@ const BlogPostPage = () => {
           <IconButton aria-label="like" icon={<BsHeartFill />} />
         </Flex>
         <Box w="full">
-          <Textarea placeholder="Write a comment..." mb={4} onChange={(e) => setComment(e.target.value)} />
+          <Textarea
+            placeholder="Write a comment..."
+            mb={4}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
           <Button
             colorScheme="blue"
             isLoading={isSubmitting}
             loadingText="Submitting"
             spinnerPlacement="start"
-            onClick={handleSubmit}
+            onClick={handleCommentSubmit}
+            aria-label="submit comment"
           >
             Submit
           </Button>
         </Box>
         <VStack spacing={4} alignItems="flex-start" w="full">
-          <Text fontWeight="bold">Noemy.Blick</Text>
-          <Text>
-            comments Lorem ipsum dolor sit amet, qui minim labore adipisicing
-            minim sint cillum sint consectetur cupidatat.
-          </Text>
-          <Divider />
-          <Text fontWeight="bold">Vito_Altenwerth28</Text>
-          <Text>
-            Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint
-            cillum sint consectetur cupidatat.
-          </Text>
+          {comments.map((comment) => (
+            <Box key={comment.id}>
+              <Text fontWeight="bold">{comment.user}</Text>
+              <Text>{comment.text}</Text>
+              <Divider />
+            </Box>
+          ))}
         </VStack>
       </VStack>
     </Container>
