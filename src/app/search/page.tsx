@@ -37,10 +37,10 @@ const SearchPage: React.FC = () => {
     <Container py={10} maxW="container.md">
       <Box p={4}>
         <Stack spacing={4}>
-          <Heading alignSelf="center">Search Posts</Heading>
+          <Heading alignSelf="center">Search the Qlimax</Heading>
           <Box display="flex">
             <Input
-              placeholder="Search..."
+              placeholder="Search for qlimax"
               aria-label="Search input"
               value={searchTerm}
               onChange={handleSearch}
@@ -57,10 +57,10 @@ const SearchPage: React.FC = () => {
             <Divider orientation="vertical" />
           </Center>
           {results.map((result, index) => (
-            <Box key={index}>
-              <Heading size="md">{result.title}</Heading>
-              <Text>{result.header}</Text>
-              <Text>{result.body}</Text>
+            <Box key={index} bg="plum"  p={4} borderRadius="md">
+              <Heading color="black" size="md">{result.title}</Heading>
+              <Text color="black">{result.header}</Text>
+              <Text color="black">{result.body}</Text>
             </Box>
           ))}
         </Stack>
