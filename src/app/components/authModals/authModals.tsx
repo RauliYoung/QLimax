@@ -20,14 +20,14 @@ export default function AuthModals() {
   const onClose = () => {
     setShowSignIn(false);
     setShowSignUp(false);
-  }
+  };
 
   interface UserData {
     email: string;
     password: string;
   }
 
-  const handleSignIn = async (userData:UserData) => {
+  const handleSignIn = async (userData: UserData) => {
     try {
       const {data} = await signIn({
         variables: {
@@ -45,7 +45,7 @@ export default function AuthModals() {
           status: 'success',
           duration: 5000,
           isClosable: true,
-          position:"bottom-left"
+          position: 'bottom-left',
         });
         router.push('/');
         onClose();
@@ -57,12 +57,12 @@ export default function AuthModals() {
         status: 'error',
         duration: 5000,
         isClosable: true,
-        position:"bottom-left"
+        position: 'bottom-left',
       });
     }
-  }
+  };
 
-  const handleSignUp = async (userData:UserData) => {
+  const handleSignUp = async (userData: UserData) => {
     try {
       const {data} = await createUser({
         variables: {
@@ -77,7 +77,7 @@ export default function AuthModals() {
           status: 'success',
           duration: 5000,
           isClosable: true,
-          position:"bottom-left"
+          position: 'bottom-left',
         });
 
         router.push('/');
@@ -90,7 +90,7 @@ export default function AuthModals() {
         status: 'error',
         duration: 5000,
         isClosable: true,
-        position:"bottom-left"
+        position: 'bottom-left',
       });
     }
   };
@@ -101,10 +101,12 @@ export default function AuthModals() {
 
   return (
     <Modal isOpen={true} onClose={() => {}}>
-    <Flex direction="column" justifyContent="center" alignItems="center">
-      {showSignIn && <SignIn onSignUp={toggleForms} onSignIn={handleSignIn} />}
-      {showSignUp && <SignUp onSignUp={handleSignUp} />}
-    </Flex>
+      <Flex direction="column" justifyContent="center" alignItems="center">
+        {showSignIn && (
+          <SignIn onSignUp={toggleForms} onSignIn={handleSignIn} />
+        )}
+        {showSignUp && <SignUp onSignUp={handleSignUp} />}
+      </Flex>
     </Modal>
   );
 }
