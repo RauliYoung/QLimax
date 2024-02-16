@@ -20,17 +20,23 @@ import {BsHeartFill} from 'react-icons/bs';
 const BlogPostPage = () => {
   const date = new Date().toLocaleDateString('fi-FI');
   const [isSubmitting] = useState(false);
+  const [comment, setComment] = useState('');
+
+  const handleSubmit = () => {
+    // send comment to server
+    console.log('comment submitted',comment);
+  }
 
   return (
-    <Container py={8}>
+    <Container py={10} >
       <VStack spacing={8} alignItems="flex-start">
         <Heading>BLOGPOST</Heading>
         <Flex alignItems="center" justifyContent="space-between">
           <h1>Blog Post Title</h1>
-          <Stack alignItems="flex-end" justifyContent="space-between">
+          <Stack alignItems="flex-end">
             <Tag colorScheme="blue">sometag</Tag>
             <Tag colorScheme="blue">someothertag</Tag>
-            </Stack>
+          </Stack>
         </Flex>
         <p>Posted on: {date}</p>
         <p>Author: Fahey Schmidt</p>
@@ -52,12 +58,13 @@ const BlogPostPage = () => {
           <IconButton aria-label="like" icon={<BsHeartFill />} />
         </Flex>
         <Box w="full">
-          <Textarea placeholder="Write a comment..." mb={4} />
+          <Textarea placeholder="Write a comment..." mb={4} onChange={(e) => setComment(e.target.value)} />
           <Button
             colorScheme="blue"
             isLoading={isSubmitting}
             loadingText="Submitting"
             spinnerPlacement="start"
+            onClick={handleSubmit}
           >
             Submit
           </Button>
