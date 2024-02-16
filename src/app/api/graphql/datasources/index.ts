@@ -56,8 +56,9 @@ export default class Users extends MongoDataSource<UserDocument> {
       if (!isPasswordValid) {
         throw new Error('Invalid credentials');
       }
+      const jwtSecret = process.env.JWT_SECRET;
 
-      const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {
+      const token = jwt.sign({userId: user._id}, jwtSecret, {
         expiresIn: '4h',
       });
 
