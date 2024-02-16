@@ -11,9 +11,11 @@ import {
   Textarea,
   IconButton,
   Flex,
+  Tag,
+  Stack,
 } from '@chakra-ui/react';
 import {useState} from 'react';
-import {BsHandThumbsUp, BsHeartFill} from 'react-icons/bs';
+import {BsHeartFill} from 'react-icons/bs';
 
 const BlogPostPage = () => {
   const date = new Date().toLocaleDateString('fi-FI');
@@ -23,10 +25,16 @@ const BlogPostPage = () => {
     <Container py={8}>
       <VStack spacing={8} alignItems="flex-start">
         <Heading>BLOGPOST</Heading>
+        <Flex alignItems="center" justifyContent="space-between">
           <h1>Blog Post Title</h1>
-          <p>Posted on: {date}</p>
-          <p>Author: Fahey Schmidt</p>
-          <Divider />
+          <Stack alignItems="flex-end" justifyContent="space-between">
+            <Tag colorScheme="blue">sometag</Tag>
+            <Tag colorScheme="blue">someothertag</Tag>
+            </Stack>
+        </Flex>
+        <p>Posted on: {date}</p>
+        <p>Author: Fahey Schmidt</p>
+        <Divider />
         <Text>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -40,7 +48,7 @@ const BlogPostPage = () => {
         </Text>
         <Divider />
         <Flex alignItems="center" justifyContent="space-between" w="full">
-        <Heading size="md">Comments</Heading>
+          <Heading size="md">Comments</Heading>
           <IconButton aria-label="like" icon={<BsHeartFill />} />
         </Flex>
         <Box w="full">
