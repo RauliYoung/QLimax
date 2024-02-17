@@ -18,11 +18,10 @@ export default function Home() {
           <Flex
             as="section"
             direction="column"
-            p="1rem"
             justifyContent="center"
             alignItems="center"
           >
-            <Heading as="h1" fontSize="64px">
+            <Heading as="h1" fontSize="64px" pb="1rem">
               Our top blogs
             </Heading>
           </Flex>
