@@ -1,5 +1,4 @@
-"use client";
-import React, {useState} from 'react';
+// import React, {useState} from 'react';
 import {
   Box,
   Container,
@@ -14,7 +13,27 @@ import {
   Tag,
   Stack,
 } from '@chakra-ui/react';
+import {fetchData} from '@/app/lib/fetchTestData';
+
 import {BsHeartFill} from 'react-icons/bs';
+
+import {Post} from '../../../../types';
+
+export async function generateStaticParams() {
+  const posts = fetchData();
+
+  return posts.map((post) => ({
+    slug: post.id,
+  }));
+}
+
+// Multiple versions of this page will be statically generated
+// using the `params` returned by `generateStaticParams`
+
+// export default function Page({ params }) {
+//   const { slug } = params
+//   // ...
+// }
 
 type Comment = {
   id: number;
@@ -24,27 +43,26 @@ type Comment = {
 
 const BlogPostPage: React.FC = () => {
   const date = new Date().toLocaleDateString('fi-FI');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [comment, setComment] = useState('');
-  const [comments, setComments] = useState<Comment[]>([]);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [comment, setComment] = useState('');
+  // const [comments, setComments] = useState<Comment[]>([]);
 
   // comment functions just for funsies and to show to ilkka
   // TODO: replace with actual comment functionality and backend connection
 
-  const handleCommentSubmit = () => {
-    setIsSubmitting(true);
-    const newComment: Comment = {
-      id: comments.length + 1,
-      user: 'Username',
-      text: comment,
-    };
-    setTimeout (() => {
-    setComments([...comments, newComment]);
-    setIsSubmitting(false);
-    setComment('');
-    }
-    , 1000);
-  };
+  // const handleCommentSubmit = () => {
+  //   setIsSubmitting(true);
+  //   const newComment: Comment = {
+  //     id: comments.length + 1,
+  //     user: 'Username',
+  //     text: comment,
+  //   };
+  //   setTimeout(() => {
+  //     setComments([...comments, newComment]);
+  //     setIsSubmitting(false);
+  //     setComment('');
+  //   }, 1000);
+  // };
 
   return (
     <Container py={10}>
@@ -76,7 +94,7 @@ const BlogPostPage: React.FC = () => {
           <Heading size="md">Comments</Heading>
           <IconButton aria-label="like" icon={<BsHeartFill />} />
         </Flex>
-        <Box w="full">
+        {/* <Box w="full">
           <Textarea
             placeholder="Write a comment..."
             mb={4}
@@ -93,8 +111,8 @@ const BlogPostPage: React.FC = () => {
           >
             Submit
           </Button>
-        </Box>
-        <VStack spacing={4} alignItems="flex-start" w="full">
+        </Box> */}
+        {/* <VStack spacing={4} alignItems="flex-start" w="full">
           {comments.map((comment) => (
             <Box key={comment.id}>
               <Text fontWeight="bold">{comment.user}</Text>
@@ -102,7 +120,7 @@ const BlogPostPage: React.FC = () => {
               <Divider />
             </Box>
           ))}
-        </VStack>
+        </VStack> */}
       </VStack>
     </Container>
   );
