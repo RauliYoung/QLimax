@@ -1,33 +1,48 @@
-.ql-picker-item {
-  font-size: 10px;
-  padding: 5px 12px;
-  cursor: pointer;
-}
-
-.ql-picker-item:hover {
-  color: white;
-}
-.ql-picker-label {
-  color: white;
-}
 .ql-toolbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  height: 100%;
-  width: 50vw;
-  background-color: #333;
-  border-radius: 5px;
-  padding: 5%;
-  font-size: 1rem;
-  width: 100%;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  background-color: #000;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
-.ql-toolbar.light {
-  background-color: #fff;
+
+.ql-toolbar button {
+  border: none;
+  background: none;
+  color: #fff;
 }
-.ql-toolbar.dark {
+
+.ql-toolbar button:hover {
+  color: #fff;
   background-color: #333;
 }
 
+.ql-toolbar .ql-picker-label {
+  color: #fff;
+}
+
+.ql-toolbar .ql-picker-label:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.ql-toolbar .ql-picker-options {
+  padding: 10px;
+  background-color: #000;
+  border: none;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ql-toolbar .ql-picker-item:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .ql-toolbar {
+    display: none;
+  }
+}
