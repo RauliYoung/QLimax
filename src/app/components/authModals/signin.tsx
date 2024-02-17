@@ -7,6 +7,7 @@ import {
   Input,
   VStack,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 
@@ -30,18 +31,14 @@ const SignIn: React.FC<SignInProps> = ({onSignUp, onSignIn}) => {
     onSignIn(formData);
   };
 
+  const bg = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-pink');
+  const inputsBg = useColorModeValue('qlimax.bg-pink', 'qlimax.bg-yellow');
+  const buttonBg = useColorModeValue('qlimax.bg-blue', 'qlimax.bg-blue');
+  const textColor = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-yellow');
   return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      background={`url(${customTheme.bgImage})`}
-      backgroundRepeat="no-repeat"
-      backgroundPosition="center"
-      backgroundSize="cover"
-    >
+    <Box display="flex" justifyContent="center" alignItems="center">
       <Box
-        bg={customTheme.colors.gray[300]}
+        bg={bg}
         border={`1px solid ${customTheme.colors.black}`}
         borderRadius="8px"
         padding="20px"
@@ -65,6 +62,7 @@ const SignIn: React.FC<SignInProps> = ({onSignUp, onSignIn}) => {
                 onChange={handleChange}
                 required
                 borderColor="black"
+                bg={inputsBg}
                 _hover={{borderColor: 'black'}}
               />
             </FormControl>
@@ -77,23 +75,26 @@ const SignIn: React.FC<SignInProps> = ({onSignUp, onSignIn}) => {
                 onChange={handleChange}
                 required
                 borderColor="black"
+                bg={inputsBg}
                 _hover={{borderColor: 'black'}}
               />
             </FormControl>
             <Button
-              bg="#475569"
-              color="white"
+              color={textColor}
               _hover={{bg: '#677589'}}
               type="submit"
+              bg={buttonBg}
+              border="solid 2px black"
             >
               Sign In
             </Button>
             <Button
-              bg="#475569"
+              bg={buttonBg}
               size="xs"
-              color="white"
+              color={textColor}
               _hover={{bg: '#677589'}}
               onClick={onSignUp}
+              border="solid 2px black"
             >
               Create Account
             </Button>

@@ -54,6 +54,15 @@ const styles = {
     },
   }),
 }
-export const customTheme = extendTheme({styles, sizes, breakpoints});
+
+const colors = {
+  qlimax:{
+    "bg-blue": "#27AAE1",
+    "bg-pink": "#F17DB1",
+    "bg-yellow": "#F9ED32",
+    "text-black": "#000000",
+  }
+}
+export const customTheme = extendTheme({styles, sizes, breakpoints,colors});
 
 export default customTheme;

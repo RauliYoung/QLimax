@@ -1,5 +1,5 @@
 'use client';
-import {Flex, Heading, Grid, Text, Card, CardBody} from '@chakra-ui/react';
+import {Flex, Heading, Grid} from '@chakra-ui/react';
 import testData from '../../testData/testPosts.json';
 import Auth from './components/authModals/authModals';
 import {useContext} from 'react';

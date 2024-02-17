@@ -8,6 +8,7 @@ import {
   VStack,
   Text,
   Modal,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 
@@ -36,19 +37,16 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
     onSignUp(dataToSend);
   };
 
+  const bg = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-pink');
+  const inputsBg = useColorModeValue('qlimax.bg-pink', 'qlimax.bg-yellow');
+  const buttonBg = useColorModeValue('qlimax.bg-blue', 'qlimax.bg-blue');
+  const textColor = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-yellow');
+
   return (
     <Modal isOpen={true} onClose={() => {}}>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        background={`url(${customTheme.bgImage})`}
-        backgroundRepeat="no-repeat"
-        backgroundPosition="center"
-        backgroundSize="cover"
-      >
+      <Box display="flex" justifyContent="center" alignItems="center">
         <Box
-          bg={customTheme.colors.gray[300]}
+          bg={bg}
           border={`1px solid ${customTheme.colors.black}`}
           borderRadius="8px"
           padding="20px"
@@ -73,6 +71,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   required
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
+                  bg={inputsBg}
                 />
               </FormControl>
               <FormControl>
@@ -85,6 +84,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   required
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
+                  bg={inputsBg}
                 />
               </FormControl>
               <FormControl>
@@ -97,13 +97,15 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   required
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
+                  bg={inputsBg}
                 />
               </FormControl>
               <Button
-                bg="#475569"
-                color="white"
+                color={textColor}
                 _hover={{bg: '#677589'}}
                 type="submit"
+                bg={buttonBg}
+                border="solid 2px black"
               >
                 Sign Up
               </Button>
