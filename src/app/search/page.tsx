@@ -21,9 +21,12 @@ import parse from 'html-react-parser';
 type BlogPost = {
   title: string;
   content: string;
-  tags: string;
+  tags: {tag: string; color: string}[];
 };
-
+interface TagType {
+  tag: string;
+  color: string;
+}
 
 const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -93,7 +96,7 @@ const SearchPage: React.FC = () => {
                 {parse(result.content.substring(0, 1000))}
               </Text>
               <Box>
-                {result.tags.map((tag, index) => (
+                {result.tags.map((tag: TagType, index: number) => (
                   <Tag key={index} color={tag.color} bg='white'>
                     {tag.tag}
                   </Tag>
