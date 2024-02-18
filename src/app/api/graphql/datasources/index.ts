@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import {ObjectId} from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
+import slugify from 'slugify';
 
 interface UserDocument {
   _id: ObjectId;
@@ -18,6 +19,7 @@ interface PostDocument {
   createdAt: Date;
   updatedAt: Date;
   isPublished: boolean;
+  slug: string;
 }
 
 export class Users extends MongoDataSource<UserDocument> {
@@ -118,7 +120,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     try {
       const updatedPostInput = {
         ...input,
-        isPublished: input.isPublished || false, 
+        isPublished: input.isPublished || false,
       };
       return await PostModel.findByIdAndUpdate(id, updatedPostInput, {
         new: true,

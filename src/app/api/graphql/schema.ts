@@ -54,6 +54,7 @@ const typeDefs = `#graphql
     users: [User]
     posts: [Post]
     post(id: ID!): Post
+    postBySlug(slug: String!): Post
   }
 
   type AuthPayload {
