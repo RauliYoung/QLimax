@@ -28,14 +28,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${Overpass.variable} ${expletus.variable}`}>
         <Providers>
+          <NavBar />
           <Image
             src={logo.src}
             position="absolute"
-            top="50vh"
+            top="15%"
             zIndex={-1}
             transform="rotate(-25deg)"
           />
-          <NavBar />
           <ApolloProvider client={client}>{children}</ApolloProvider>
         </Providers>
       </body>

@@ -6,6 +6,7 @@ import {useContext} from 'react';
 import {UserContext} from './contexts/usercontext';
 import BlogPostPreview from './components/blogpost/blogPostPreview';
 import {Post} from '../../types';
+import Link from 'next/link';
 
 export default function Home() {
   const {user} = useContext(UserContext);
@@ -34,7 +35,9 @@ export default function Home() {
               m="auto"
             >
               {testData.map((post: Post) => (
-                <BlogPostPreview post={post} />
+                <Link href={`/blog/${post.id}`}>
+                  <BlogPostPreview post={post} />
+                </Link>
               ))}
             </Grid>
           </Flex>
