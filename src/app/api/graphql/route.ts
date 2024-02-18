@@ -4,8 +4,9 @@ import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
-import Users from "./datasources";
+import {Users,Posts} from "./datasources";
 import UserModel from "@/app/models/userModel";
+import PostModel from "@/app/models/postModel";
 
 mongoConnect();
 
@@ -20,6 +21,7 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
     res,
     dataSources: {
       users: new Users({ modelOrCollection: UserModel }),
+      posts: new Posts({ modelOrCollection: PostModel }),
     },
   }),
 });

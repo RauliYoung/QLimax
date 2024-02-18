@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import {gql} from '@apollo/client';
 
 export const FETCH_USERS = gql`
   query getUsers {
@@ -31,10 +31,71 @@ export const DELETE_USER = gql`
   mutation DeleteUser($deleteUserId: ID!) {
     deleteUser(id: $deleteUserId)
   }
-`; 
+`;
 export const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
     signIn(email: $email, password: $password)
   }
 `;
+export const FETCH_POSTS = gql`
+  query getPosts {
+    posts {
+      id
+      title
+      content
+      tags {
+        tag
+        color
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 
+export const CREATE_POST = gql`
+  mutation createPost($input: NewPostInput!) {
+    createPost(input: $input) {
+      id
+      title
+      content
+      tags {
+        tag
+        color
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const UPDATE_POST_PUBLISHED_STATUS = gql`
+  mutation UpdatePostPublishedStatus($id: ID!, $isPublished: Boolean!) {
+    updatePost(id: $id, input: {isPublished: $isPublished}) {
+      id
+      isPublished
+    }
+  }
+`;
+
+export const UPDATE_POST = gql`
+  mutation UpdatePost($input: UpdatePostInput!) {
+    updatePost(input: $input) {
+      id
+      title
+      content
+      tags {
+        tag
+        color
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const DELETE_POST = gql`
+  mutation DeletePost($deletePostId: ID!) {
+    deletePost(id: $deletePostId)
+  }
+`;

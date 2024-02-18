@@ -1,16 +1,26 @@
-import { MongoDataSource } from 'apollo-datasource-mongodb';
+import {MongoDataSource} from 'apollo-datasource-mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { ObjectId } from 'mongodb';
+import {ObjectId} from 'mongodb';
 import UserModel from '@/app/models/userModel';
+import PostModel from '@/app/models/postModel';
 
 interface UserDocument {
   _id: ObjectId;
   username: string;
   password: string;
 }
+interface PostDocument {
+  _id: ObjectId;
+  title: string;
+  content: string;
+  tags: {tag: string; color: string}[];
+  createdAt: Date;
+  updatedAt: Date;
+  isPublished: boolean;
+}
 
-export default class Users extends MongoDataSource<UserDocument> {
+export class Users extends MongoDataSource<UserDocument> {
   async getAllUsers() {
     try {
       return await UserModel.find();
@@ -73,6 +83,57 @@ export default class Users extends MongoDataSource<UserDocument> {
       return 'User deleted successfully';
     } catch (error) {
       throw new Error('Failed to delete user');
+    }
+  }
+}
+export class Posts extends MongoDataSource<PostDocument> {
+  async getAllPosts() {
+    try {
+      return await PostModel.find();
+    } catch (error) {
+      throw new Error('Failed to fetch posts');
+    }
+  }
+
+  async getPostById(id: string) {
+    try {
+      return await PostModel.findById(id);
+    } catch (error) {
+      throw new Error('Failed to fetch post');
+    }
+  }
+
+  async createPost({input}: any): Promise<PostDocument> {
+    try {
+      const newPost = {
+        ...input,
+        isPublished: input.isPublished || false,
+      };
+      return await PostModel.create(newPost);
+    } catch (error) {
+      throw new Error('Failed to create post');
+    }
+  }
+  async updatePost({id, input}: any) {
+    try {
+      const updatedPostInput = {
+        ...input,
+        isPublished: input.isPublished || false, 
+      };
+      return await PostModel.findByIdAndUpdate(id, updatedPostInput, {
+        new: true,
+      });
+    } catch (error) {
+      throw new Error('Failed to update post');
+    }
+  }
+
+  async deletePost({id}: {id: string}): Promise<string> {
+    try {
+      await PostModel.findByIdAndDelete(id);
+      return 'Post deleted successfully';
+    } catch (error) {
+      throw new Error('Failed to delete post');
     }
   }
 }

@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
 import EditorToolbar, { modules, formats } from './editorToolbar';
 import { ActionsMenu } from './actionsmenu/actionsmenu';
+import { useEditorContext } from '@/app/contexts/editorContext';
 
 type Match = {
   offset: number;
@@ -16,7 +17,7 @@ interface SpellCheckResponse {
 }
 
 export default function Editor() {
-  const [code, setCode] = useState<string>('');
+  const {code, setCode} = useEditorContext();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const {colorMode} = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
@@ -58,6 +59,7 @@ export default function Editor() {
   }, [matches]);
 
   const handleProcedureContentChange = (content: string) => {
+    console.log('content', content);
     setCode(content);
   };
 

@@ -11,7 +11,30 @@ const resolvers = {
         throw new Error('Failed to fetch users');
       }
     },
+    posts: async (
+      _: any,
+      __: any,
+      context: {dataSources: {posts: {getAllPosts: () => any}}},
+    ) => {
+      try {
+        return await context.dataSources.posts.getAllPosts();
+      } catch (error) {
+        throw new Error('Failed to fetch posts');
+      }
+    },
+    post: async (
+      _: any,
+      {id}: {id: string},
+      context: {dataSources: {posts: {getPostById: (id: string) => any}}},
+    ) => {
+      try {
+        return await context.dataSources.posts.getPostById(id);
+      } catch (error) {
+        throw new Error('Failed to fetch post');
+      }
+    },
   },
+
   Mutation: {
     createUser: async (_: any, {input}: any, context: any) => {
       try {
@@ -42,6 +65,36 @@ const resolvers = {
         return await context.dataSources.users.deleteUser({id});
       } catch (error) {
         throw new Error('Failed to delete user');
+      }
+    },
+    createPost: async (_: any, {input}: any, context: any) => {
+      try {
+        const newPostInput = {
+          ...input,
+          isPublished: input.isPublished || false,
+        };
+        const newPost = await context.dataSources.posts.createPost({input:newPostInput});
+        return newPost;
+      } catch (error) {
+        throw new Error('Failed to create post');
+      }
+    },
+    updatePost: async (_: any, {id, input}: any, context: any) => {
+      try {
+        const updatePostInput = {
+          ...input,
+          isPublished: input.isPublished || false,
+        };
+        return await context.dataSources.posts.updatePost({id, input: updatePostInput});
+      } catch (error) {
+        throw new Error('Failed to update post');
+      }
+    },
+    deletePost: async (_: any, {id}: any, context: any) => {
+      try {
+        return await context.dataSources.posts.deletePost({id});
+      } catch (error) {
+        throw new Error('Failed to delete post');
       }
     },
   },
