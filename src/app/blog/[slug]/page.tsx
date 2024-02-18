@@ -65,7 +65,12 @@ const BlogPostPage: React.FC = () => {
   // };
 
   return (
-    <Container py={10}>
+    <Container
+      py={10}
+      bg="rgba(249, 237, 50, 0.8)"
+      borderRadius={18}
+      border="solid 2px black"
+    >
       <VStack spacing={8} alignItems="flex-start">
         <Heading>BLOGPOST</Heading>
         <Flex alignItems="center" justifyContent="space-between">
@@ -77,7 +82,10 @@ const BlogPostPage: React.FC = () => {
         </Flex>
         <p>Posted on: {date}</p>
         <p>Author: Fahey Schmidt</p>
-        <Divider />
+        <Divider
+          borderColor="qlimax.bg-pink"
+          border="solid 2px qlimax.bg-pink"
+        />
         <Text>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
@@ -89,7 +97,10 @@ const BlogPostPage: React.FC = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
         </Text>
-        <Divider />
+        <Divider
+          borderColor="qlimax.bg-pink"
+          border="solid 2px qlimax.bg-pink"
+        />
         <Flex alignItems="center" justifyContent="space-between" w="full">
           <Heading size="md">Comments</Heading>
           <IconButton aria-label="like" icon={<BsHeartFill />} />
