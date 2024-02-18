@@ -22,6 +22,18 @@ const resolvers = {
         throw new Error('Failed to fetch posts');
       }
     },
+    postBySlug: async (
+      _: any,
+      {slug}: {slug: string},
+      context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}},
+    ) => {
+      try {
+        return await context.dataSources.posts.getPostBySlug(slug);
+      } catch (error) {
+        throw new Error('Failed to fetch post');
+      }
+    },
+
     post: async (
       _: any,
       {id}: {id: string},
@@ -73,7 +85,9 @@ const resolvers = {
           ...input,
           isPublished: input.isPublished || false,
         };
-        const newPost = await context.dataSources.posts.createPost({input:newPostInput});
+        const newPost = await context.dataSources.posts.createPost({
+          input: newPostInput,
+        });
         return newPost;
       } catch (error) {
         throw new Error('Failed to create post');
@@ -85,7 +99,10 @@ const resolvers = {
           ...input,
           isPublished: input.isPublished || false,
         };
-        return await context.dataSources.posts.updatePost({id, input: updatePostInput});
+        return await context.dataSources.posts.updatePost({
+          id,
+          input: updatePostInput,
+        });
       } catch (error) {
         throw new Error('Failed to update post');
       }

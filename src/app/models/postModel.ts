@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import slugify from 'slugify';
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -27,6 +28,23 @@ const postSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  slug: {
+    type: String,
+    unique: true,
+  },
+  timeToRead: {
+    type: Number,
+    default: 0,
+  },
+});
+
+postSchema.pre('save', function(next) {
+  if (this.isModified('title')) {
+    const idString = this._id.toString();
+    const shortId = idString.slice(-2);
+    this.slug = slugify(`${this.title}-QlimaxAtPeak-${shortId}`, {lower: true, strict: true});
+  }
+  next();
 });
 
 const Post = mongoose.models.Post || mongoose.model('Post', postSchema);

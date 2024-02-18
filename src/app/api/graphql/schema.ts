@@ -12,6 +12,8 @@ const typeDefs = `#graphql
     createdAt: String!
     updatedAt: String!
     isPublished: Boolean!
+    slug: String!
+    timeToRead: Int!
   }
 
   type Tag {
@@ -54,6 +56,7 @@ const typeDefs = `#graphql
     users: [User]
     posts: [Post]
     post(id: ID!): Post
+    postBySlug(slug: String!): Post
   }
 
   type AuthPayload {
