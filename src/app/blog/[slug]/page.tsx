@@ -1,4 +1,3 @@
-// import React, {useState} from 'react';
 import {
   Box,
   Container,
@@ -14,6 +13,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import {fetchData} from '@/app/lib/fetchTestData';
+import {CommentSection} from '@/app/components/blog/CommentSection';
 
 import {BsHeartFill} from 'react-icons/bs';
 
@@ -35,44 +35,20 @@ export async function generateStaticParams() {
 //   // ...
 // }
 
-type Comment = {
-  id: number;
-  user: string;
-  text: string;
-};
-
 const BlogPostPage: React.FC = () => {
   const date = new Date().toLocaleDateString('fi-FI');
-  // const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [comment, setComment] = useState('');
-  // const [comments, setComments] = useState<Comment[]>([]);
-
-  // comment functions just for funsies and to show to ilkka
-  // TODO: replace with actual comment functionality and backend connection
-
-  // const handleCommentSubmit = () => {
-  //   setIsSubmitting(true);
-  //   const newComment: Comment = {
-  //     id: comments.length + 1,
-  //     user: 'Username',
-  //     text: comment,
-  //   };
-  //   setTimeout(() => {
-  //     setComments([...comments, newComment]);
-  //     setIsSubmitting(false);
-  //     setComment('');
-  //   }, 1000);
-  // };
+  const comments = [ { id: '1', user: 'user1', text: 'comment1' }, { id: '2', user: 'user2', text: 'comment2' } ];
+  const postId = '1';
 
   return (
-    <Container py={10}>
+    <Container py={10} bg="whitesmoke" maxW="container.lg">
       <VStack spacing={8} alignItems="flex-start">
         <Heading>BLOGPOST</Heading>
         <Flex alignItems="center" justifyContent="space-between">
           <h1>Blog Post Title</h1>
           <Stack alignItems="flex-end">
-            <Tag colorScheme="blue">sometag</Tag>
-            <Tag colorScheme="blue">someothertag</Tag>
+            <Tag>sometag</Tag>
+            <Tag>someothertag</Tag>
           </Stack>
         </Flex>
         <p>Posted on: {date}</p>
@@ -86,7 +62,18 @@ const BlogPostPage: React.FC = () => {
             aliquip ex ea commodo consequat. Duis aute irure dolor in
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
+            dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+            labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation
+            amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud
+            nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim
+            nulla est proident. Nostrud officia pariatur ut officia. Sit irure
+            elit esse ea nulla sunt ex occaecat reprehenderit commodo officia
+            dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident
+            adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+            eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt
+            velit enim. Voluptate laboris sint cupidatat ullamco ut ea
+            consectetur et est culpa et culpa duis.
           </p>
         </Text>
         <Divider />
@@ -94,33 +81,10 @@ const BlogPostPage: React.FC = () => {
           <Heading size="md">Comments</Heading>
           <IconButton aria-label="like" icon={<BsHeartFill />} />
         </Flex>
-        {/* <Box w="full">
-          <Textarea
-            placeholder="Write a comment..."
-            mb={4}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
-          <Button
-            colorScheme="blue"
-            isLoading={isSubmitting}
-            loadingText="Submitting"
-            spinnerPlacement="start"
-            onClick={handleCommentSubmit}
-            aria-label="submit comment"
-          >
-            Submit
-          </Button>
-        </Box> */}
-        {/* <VStack spacing={4} alignItems="flex-start" w="full">
-          {comments.map((comment) => (
-            <Box key={comment.id}>
-              <Text fontWeight="bold">{comment.user}</Text>
-              <Text>{comment.text}</Text>
-              <Divider />
-            </Box>
-          ))}
-        </VStack> */}
+        <Divider />
+        <Box w="container.md" alignSelf="center">
+          <CommentSection comments={comments} postId={postId} />
+        </Box>
       </VStack>
     </Container>
   );
