@@ -9,24 +9,93 @@ import {
 } from '@chakra-ui/react';
 import PlusIcon from '../../../ui/icons/plusicon';
 import {BsSave, BsTag} from 'react-icons/bs';
-import { PublishModal } from './publishModal';
-import { TagModal } from './tagModal';
-
-
+import {PublishModal} from './publishModal';
+import {TagModal} from './tagModal';
+import {useEditorContext} from '@/app/contexts/editorContext';
+import {CREATE_POST} from '@/app/lib/constants';
+import {UPDATE_POST_PUBLISHED_STATUS} from '@/app/lib/constants';
+import {useMutation} from '@apollo/client';
+import {useToast} from '@chakra-ui/react';
 
 export const ActionsMenu = () => {
   const publishModal = useDisclosure();
   const tagModal = useDisclosure();
+  const {code, tags, title} = useEditorContext();
+  const [createPost] = useMutation(CREATE_POST);
+  const toast = useToast();
+  const [updatePublishedStatus] = useMutation(UPDATE_POST_PUBLISHED_STATUS); // maybe use later for updating post status
+  const {postId} = useEditorContext();
 
-  const handleSave = () => {
-    console.log('Save');
-  }
+  const showSaveToast = () => {
+    toast({
+      title: 'Post' + title + ' saved',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right',
+    });
+  };
+  const showPublishToast = () => {
+    toast({
+      title: 'Post ' + title + ' published',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right',
+    });
+  };
+
+  const handleSave = async () => {
+    try {
+      await createPost({
+        variables: {
+          input: {
+            title: title,
+            content: code,
+            tags: tags,
+            isPublished: false,
+          },
+        },
+      });
+      showSaveToast();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSaveAsDraft = () => {
-   console.log('Save as draft'); 
-  }
+    console.log('Save as draft');
+  };
 
- return (
+const handlePublish = async () => {
+  try {
+    if (postId) {
+      await updatePublishedStatus({
+        variables: {
+          id: postId,
+          isPublished: true,
+        },
+      });
+    } else {
+      await createPost({
+        variables: {
+          input: {
+            title: title,
+            content: code,
+            tags: tags,
+            isPublished: true,
+          },
+        },
+      });
+    }
+    publishModal.onClose();
+    showPublishToast();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+  return (
     <>
       <Menu>
         <MenuButton
@@ -40,13 +109,25 @@ export const ActionsMenu = () => {
         />
         <MenuList>
           <MenuItem icon={<AddIcon />}>New</MenuItem>
-          <MenuItem onClick={handleSaveAsDraft} icon={<ExternalLinkIcon />}>Save as draft</MenuItem>
-          <MenuItem icon={<BsSave />} onClick={handleSave}>Save</MenuItem>
-          <MenuItem icon={<BsTag />} onClick={tagModal.onOpen}>Add Tag</MenuItem>
-          <MenuItem icon={<EditIcon />} onClick={publishModal.onOpen}>Publish</MenuItem>
+          <MenuItem onClick={handleSaveAsDraft} icon={<ExternalLinkIcon />}>
+            Save as draft
+          </MenuItem>
+          <MenuItem icon={<BsSave />} onClick={handleSave}>
+            Save
+          </MenuItem>
+          <MenuItem icon={<BsTag />} onClick={tagModal.onOpen}>
+            Add Tag
+          </MenuItem>
+          <MenuItem icon={<EditIcon />} onClick={publishModal.onOpen}>
+            Publish
+          </MenuItem>
         </MenuList>
       </Menu>
-      <PublishModal isOpen={publishModal.isOpen} onClose={publishModal.onClose} />
+      <PublishModal
+        isOpen={publishModal.isOpen}
+        onClose={publishModal.onClose}
+        onPublish={handlePublish}
+      />
       <TagModal isOpen={tagModal.isOpen} onClose={tagModal.onClose} />
     </>
   );

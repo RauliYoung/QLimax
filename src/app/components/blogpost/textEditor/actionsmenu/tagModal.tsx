@@ -14,6 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { randomColor } from './randomColors';
+import { useEditorContext } from '@/app/contexts/editorContext';
 
 type TagModalProps = {
   isOpen: boolean;
@@ -21,8 +22,9 @@ type TagModalProps = {
 };
 
 export const TagModal = ({ isOpen, onClose }: TagModalProps) => {
+
+  const {tags, setTags} = useEditorContext();
   const [tag, setTag] = useState('');
-  const [tags, setTags] = useState<{tag: string, color: string}[]>([]);
 
   const handleAddTag = () => {
     setTag(''); 
