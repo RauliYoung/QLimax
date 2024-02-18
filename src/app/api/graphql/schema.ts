@@ -12,6 +12,8 @@ const typeDefs = `#graphql
     createdAt: String!
     updatedAt: String!
     isPublished: Boolean!
+    slug: String!
+    timeToRead: Int!
   }
 
   type Tag {
