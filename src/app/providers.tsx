@@ -5,7 +5,6 @@ import UserProvider from './providers/userProvider';
 import { EditorProvider } from './contexts/editorContext';
 
 export function Providers({children}: {children: React.ReactNode}) {
-  console.log(theme);
   return (
     <EditorProvider>
     <ChakraProvider theme={theme}>

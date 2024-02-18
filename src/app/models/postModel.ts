@@ -32,6 +32,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  timeToRead: {
+    type: Number,
+    default: 0,
+  },
 });
 
 postSchema.pre('save', function(next) {

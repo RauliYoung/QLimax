@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import {ObjectId} from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
-import slugify from 'slugify';
 
 interface UserDocument {
   _id: ObjectId;
@@ -20,6 +19,7 @@ interface PostDocument {
   updatedAt: Date;
   isPublished: boolean;
   slug: string;
+  timeToRead: number;
 }
 
 export class Users extends MongoDataSource<UserDocument> {
@@ -107,9 +107,12 @@ export class Posts extends MongoDataSource<PostDocument> {
 
   async createPost({input}: any): Promise<PostDocument> {
     try {
+      const words = input.content.split(' ').length;
+      const timeToRead = Math.ceil(words / 200);
       const newPost = {
         ...input,
         isPublished: input.isPublished || false,
+        timeToRead,
       };
       return await PostModel.create(newPost);
     } catch (error) {
@@ -118,9 +121,12 @@ export class Posts extends MongoDataSource<PostDocument> {
   }
   async updatePost({id, input}: any) {
     try {
+      const words = input.content.split(' ').length;
+      const timeToRead = Math.ceil(words / 200);
       const updatedPostInput = {
         ...input,
         isPublished: input.isPublished || false,
+        timeToRead,
       };
       return await PostModel.findByIdAndUpdate(id, updatedPostInput, {
         new: true,
