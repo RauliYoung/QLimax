@@ -44,6 +44,8 @@ export const FETCH_POSTS = gql`
       title
       content
       slug
+      timeToRead
+      isPublished
       tags {
         tag
         color

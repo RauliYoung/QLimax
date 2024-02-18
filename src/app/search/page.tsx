@@ -24,6 +24,7 @@ type BlogPost = {
   content: string;
   tags: {tag: string; color: string}[];
   slug: string;
+  timeToRead: number;
 };
 interface TagType {
   tag: string;
@@ -101,7 +102,7 @@ const SearchPage: React.FC = () => {
               p={4}
               borderRadius="md"
               onClick={() => handleBoxClick(result.slug)}
-              _hover={{cursor: 'pointer', boxShadow: 'lg'}}
+              _hover={{cursor: 'pointer', boxShadow: 'lg', transform: 'scale(1.005)', transition: 'all 0.2s ease-in-out'}}
             >
               <Heading color="black" size="md">
                 {result.title}
