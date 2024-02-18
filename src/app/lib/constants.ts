@@ -43,6 +43,7 @@ export const FETCH_POSTS = gql`
       id
       title
       content
+      slug
       tags {
         tag
         color

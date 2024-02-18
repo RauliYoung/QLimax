@@ -17,11 +17,13 @@ import {SearchIcon} from '@chakra-ui/icons';
 import {FETCH_POSTS} from '@/app/lib/constants';
 import {useQuery} from '@apollo/client';
 import parse from 'html-react-parser';
+import {useRouter} from 'next/navigation';
 
 type BlogPost = {
   title: string;
   content: string;
   tags: {tag: string; color: string}[];
+  slug: string;
 };
 interface TagType {
   tag: string;
@@ -32,6 +34,7 @@ const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<BlogPost[]>([]);
   const {loading, error, data} = useQuery(FETCH_POSTS);
+  const router = useRouter();
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const newSearchTerm = event.target.value;
@@ -44,6 +47,10 @@ const SearchPage: React.FC = () => {
       post.title.toLowerCase().includes(newSearchTerm.toLowerCase()),
     );
     setResults(newResults.slice(0, 5));
+  };
+
+  const handleBoxClick = (slug: string) => {
+    router.push(`/blog/${slug}`);
   };
 
   if (loading)
@@ -88,7 +95,14 @@ const SearchPage: React.FC = () => {
             <Divider orientation="vertical" />
           </Center>
           {results.map((result, index) => (
-            <Box key={index} bg="plum" p={4} borderRadius="md">
+            <Box
+              key={index}
+              bg="plum"
+              p={4}
+              borderRadius="md"
+              onClick={() => handleBoxClick(result.slug)}
+              _hover={{cursor: 'pointer', boxShadow: 'lg'}}
+            >
               <Heading color="black" size="md">
                 {result.title}
               </Heading>
@@ -97,7 +111,7 @@ const SearchPage: React.FC = () => {
               </Text>
               <Box>
                 {result.tags.map((tag: TagType, index: number) => (
-                  <Tag key={index} color={tag.color} bg='white'>
+                  <Tag key={index} color={tag.color} bg="white">
                     {tag.tag}
                   </Tag>
                 ))}
