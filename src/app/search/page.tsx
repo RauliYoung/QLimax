@@ -84,6 +84,8 @@ const SearchPage: React.FC = () => {
               value={searchTerm}
               onChange={handleSearch}
               size="lg"
+              bg="whitesmoke"
+              color="black"
             />
             <IconButton
               colorScheme="blue"
