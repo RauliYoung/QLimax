@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import {useState, useRef, useEffect} from 'react';
 import ReactQuill from 'react-quill';
-import { useColorMode } from '@chakra-ui/react';
+import {useColorMode} from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
-import EditorToolbar, { modules, formats } from './editorToolbar';
-import { ActionsMenu } from './actionsmenu/actionsmenu';
-import { useEditorContext } from '@/app/contexts/editorContext';
+import EditorToolbar, {modules, formats} from './editorToolbar';
+import {ActionsMenu} from './actionsmenu/actionsmenu';
+import {useEditorContext} from '@/app/contexts/editorContext';
 
 type Match = {
   offset: number;
@@ -17,7 +17,7 @@ interface SpellCheckResponse {
 }
 
 export default function Editor() {
-  const {code, setCode} = useEditorContext();
+  const {content, setContent,draft} = useEditorContext();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const {colorMode} = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
@@ -53,14 +53,18 @@ export default function Editor() {
         });
     }
   };
+  useEffect(() => {
+    if (draft) {
+      setContent(draft.content);
+    }
+  }, [draft]);
 
   useEffect(() => {
     highlightErrors(matches);
   }, [matches]);
 
   const handleProcedureContentChange = (content: string) => {
-    console.log('content', content);
-    setCode(content);
+    setContent(content);
   };
 
   useEffect(() => {
@@ -91,7 +95,7 @@ export default function Editor() {
         theme="bubble"
         modules={modules}
         formats={formats}
-        value={code}
+        value={content}
         placeholder="Write something amazing..."
         onChange={handleProcedureContentChange}
       />

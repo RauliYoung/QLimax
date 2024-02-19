@@ -20,11 +20,12 @@ import {useToast} from '@chakra-ui/react';
 export const ActionsMenu = () => {
   const publishModal = useDisclosure();
   const tagModal = useDisclosure();
-  const {code, tags, title} = useEditorContext();
+  const {content, tags, title} = useEditorContext();
   const [createPost] = useMutation(CREATE_POST);
   const toast = useToast();
   const [updatePublishedStatus] = useMutation(UPDATE_POST_PUBLISHED_STATUS); // maybe use later for updating post status
   const {postId} = useEditorContext();
+  const {saveAsDraft} = useEditorContext();
 
   const showSaveToast = () => {
     toast({
@@ -35,6 +36,17 @@ export const ActionsMenu = () => {
       position: 'top-right',
     });
   };
+
+  const showDraftToast = () => {
+    toast({
+      title: 'Post ' + title + ' saved as draft',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'bottom-left',
+    });
+  }
+
   const showPublishToast = () => {
     toast({
       title: 'Post ' + title + ' published',
@@ -45,13 +57,25 @@ export const ActionsMenu = () => {
     });
   };
 
+  const handleSaveAsDraft = () => {
+    saveAsDraft({
+      title: title,
+      content: content,
+      tags: tags,
+      isPublished: false,
+    });
+    console.log('draft saved');
+    console.log('draft', saveAsDraft);
+    showDraftToast();
+  };
+
   const handleSave = async () => {
     try {
       await createPost({
         variables: {
           input: {
             title: title,
-            content: code,
+            content: content,
             tags: tags,
             isPublished: false,
           },
@@ -63,37 +87,33 @@ export const ActionsMenu = () => {
     }
   };
 
-  const handleSaveAsDraft = () => {
-    console.log('Save as draft');
-  };
-
-const handlePublish = async () => {
-  try {
-    if (postId) {
-      await updatePublishedStatus({
-        variables: {
-          id: postId,
-          isPublished: true,
-        },
-      });
-    } else {
-      await createPost({
-        variables: {
-          input: {
-            title: title,
-            content: code,
-            tags: tags,
+  const handlePublish = async () => {
+    try {
+      if (postId) {
+        await updatePublishedStatus({
+          variables: {
+            id: postId,
             isPublished: true,
           },
-        },
-      });
+        });
+      } else {
+        await createPost({
+          variables: {
+            input: {
+              title: title,
+              content: content,
+              tags: tags,
+              isPublished: true,
+            },
+          },
+        });
+      }
+      publishModal.onClose();
+      showPublishToast();
+    } catch (error) {
+      console.log(error);
     }
-    publishModal.onClose();
-    showPublishToast();
-  } catch (error) {
-    console.log(error);
-  }
-};
+  };
 
   return (
     <>

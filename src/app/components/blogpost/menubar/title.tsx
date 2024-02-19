@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Editable,
   EditableInput,
@@ -32,15 +32,23 @@ const EditableControls: React.FC = () => {
   ) : null;
 };
 
+
+
 export const EditableTitle: React.FC = () => {
-  const {title, setTitle} = useEditorContext(); 
+  const {title, setTitle, draft} = useEditorContext(); 
+  useEffect(() => {
+    if (draft) {
+      setTitle(draft.title);
+    }
+  }
+  , [draft]);
 
   return (
     <Editable
-      defaultValue={title}
+      defaultValue={ draft.title? draft.title : "Title"}
       isPreviewFocusable={true}
       selectAllOnFocus={false}
-      onSubmit={setTitle} // update title in context
+      onSubmit={setTitle}
     >
       <Tooltip label="Click to edit" shouldWrapChildren={true}>
         <EditablePreview
