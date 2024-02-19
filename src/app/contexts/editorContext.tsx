@@ -12,6 +12,7 @@ interface EditorContextProps {
   setDraft: React.Dispatch<React.SetStateAction<any>>;
   saveAsDraft: (draft: any) => void;
   draft: any;
+  deleteDraft: () => void;
 }
 
 const EditorContext = createContext<EditorContextProps | undefined>(undefined);
@@ -26,13 +27,17 @@ export const EditorProvider: React.FC = ({children}) => {
       const savedDraft = localStorage.getItem('draft');
       return savedDraft ? JSON.parse(savedDraft) : null;
     }
-  }
-  );
+  });
 
   const saveAsDraft = (post: any) => {
     setDraft(post);
     localStorage.setItem('draft', JSON.stringify(post));
   };
+  const deleteDraft = () => {
+    setDraft(null);
+    localStorage.removeItem('draft');
+  }
+
 
   return (
     <EditorContext.Provider
@@ -48,6 +53,7 @@ export const EditorProvider: React.FC = ({children}) => {
         draft,
         setDraft,
         saveAsDraft,
+        deleteDraft,
       }}
     >
       {children}

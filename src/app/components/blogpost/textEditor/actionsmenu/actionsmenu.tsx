@@ -16,6 +16,7 @@ import {CREATE_POST} from '@/app/lib/constants';
 import {UPDATE_POST_PUBLISHED_STATUS} from '@/app/lib/constants';
 import {useMutation} from '@apollo/client';
 import {useToast} from '@chakra-ui/react';
+import ConfirmReloadModal from './clearEditorModal';
 
 export const ActionsMenu = () => {
   const publishModal = useDisclosure();
@@ -26,6 +27,7 @@ export const ActionsMenu = () => {
   const [updatePublishedStatus] = useMutation(UPDATE_POST_PUBLISHED_STATUS); // maybe use later for updating post status
   const {postId} = useEditorContext();
   const {saveAsDraft} = useEditorContext();
+  const confirmModal = useDisclosure();
 
   const showSaveToast = () => {
     toast({
@@ -45,7 +47,7 @@ export const ActionsMenu = () => {
       isClosable: true,
       position: 'bottom-left',
     });
-  }
+  };
 
   const showPublishToast = () => {
     toast({
@@ -67,6 +69,10 @@ export const ActionsMenu = () => {
     console.log('draft saved');
     console.log('draft', saveAsDraft);
     showDraftToast();
+  };
+
+  const handleDeletedraft = () => {
+    confirmModal.onOpen();
   };
 
   const handleSave = async () => {
@@ -128,7 +134,7 @@ export const ActionsMenu = () => {
           margin="1rem"
         />
         <MenuList>
-          <MenuItem icon={<AddIcon />}>New</MenuItem>
+          <MenuItem  onClick={handleDeletedraft}icon={<AddIcon />}>New</MenuItem>
           <MenuItem onClick={handleSaveAsDraft} icon={<ExternalLinkIcon />}>
             Save as draft
           </MenuItem>
@@ -149,6 +155,10 @@ export const ActionsMenu = () => {
         onPublish={handlePublish}
       />
       <TagModal isOpen={tagModal.isOpen} onClose={tagModal.onClose} />
+      <ConfirmReloadModal
+        isOpen={confirmModal.isOpen}
+        onClose={confirmModal.onClose}
+      />
     </>
   );
 };
