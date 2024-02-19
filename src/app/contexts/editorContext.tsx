@@ -13,11 +13,12 @@ interface EditorContextProps {
   saveAsDraft: (draft: any) => void;
   draft: any;
   deleteDraft: () => void;
+  children?: React.ReactNode;
 }
 
 const EditorContext = createContext<EditorContextProps | undefined>(undefined);
 
-export const EditorProvider: React.FC = ({children}) => {
+export const EditorProvider: React.FC<EditorContextProps> = ({children}) => {
   const [content, setContent] = useState('');
   const [tags, setTags] = useState<{tag: string; color: string}[]>([]);
   const [title, setTitle] = useState('Title');
@@ -36,8 +37,7 @@ export const EditorProvider: React.FC = ({children}) => {
   const deleteDraft = () => {
     setDraft(null);
     localStorage.removeItem('draft');
-  }
-
+  };
 
   return (
     <EditorContext.Provider
