@@ -17,7 +17,7 @@ interface EditorContextProps {
 
 const EditorContext = createContext<EditorContextProps | undefined>(undefined);
 
-export const EditorProvider: React.FC = ({children}) => {
+export const EditorProvider: React.FC <{children: React.ReactNode}> = ({children}) => {
   const [content, setContent] = useState('');
   const [tags, setTags] = useState<{tag: string; color: string}[]>([]);
   const [title, setTitle] = useState('Title');

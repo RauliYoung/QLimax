@@ -34,7 +34,7 @@ interface TagType {
 const SearchPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [results, setResults] = useState<BlogPost[]>([]);
-  const {loading, error, data} = useQuery(FETCH_POSTS);
+  const {loading, data} = useQuery(FETCH_POSTS);
   const router = useRouter();
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
