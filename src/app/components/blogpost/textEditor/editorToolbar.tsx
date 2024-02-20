@@ -5,10 +5,10 @@ import {RedoIcon} from '../../ui/icons/redoicon';
 import {AiIcon} from '../../ui/icons/aiicon';
 import './editorToolbar.scss';
 
-function undoChange() {
+function undoChange(this: any) {
   this.quill.history.undo();
 }
-function redoChange() {
+function redoChange(this: any) {
   this.quill.history.redo();
 }
 

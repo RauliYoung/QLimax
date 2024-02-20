@@ -51,7 +51,7 @@ export class Users extends MongoDataSource<UserDocument> {
         {...input},
         {
           new: true,
-        },
+        }
       );
       return updatedUser;
     } catch (error) {
@@ -60,16 +60,12 @@ export class Users extends MongoDataSource<UserDocument> {
   }
   async signIn({email, password}: {email: string; password: string}) {
     try {
-      const user = await UserModel.findOne({email}).select('+password').exec();
+      const user = await UserModel.findOne({email});
       if (!user) {
-        throw new Error('Invalid credentials');
-      }
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        throw new Error('Invalid credentials');
+        throw new Error('User not found');
       }
 
-      const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {
+      const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET ?? '', {
         expiresIn: '4h',
       });
 

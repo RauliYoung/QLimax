@@ -1,18 +1,23 @@
-import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import mongoConnect from "@/app/lib/db";
-import { ApolloServer } from "@apollo/server";
-import { NextRequest } from "next/server";
-import typeDefs from "./schema";
-import resolvers from "./resolvers";
-import {Users,Posts} from "./datasources";
-import UserModel from "@/app/models/userModel";
-import PostModel from "@/app/models/postModel";
+import {startServerAndCreateNextHandler} from '@as-integrations/next';
+import mongoConnect from '@/app/lib/db';
+import {ApolloServer} from '@apollo/server';
+import {NextRequest} from 'next/server';
+import typeDefs from './schema';
+import resolvers from './resolvers';
+import {Users, Posts} from './datasources';
+import UserModel from '@/app/models/userModel';
+import PostModel from '@/app/models/postModel';
+import {makeExecutableSchema} from 'graphql-tools';
 
 mongoConnect();
 
-const server = new ApolloServer({
-  resolvers,
+const schema = makeExecutableSchema({
   typeDefs,
+  resolvers,
+});
+
+const server = new ApolloServer({
+  schema,
 });
 
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
@@ -20,8 +25,8 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
     req,
     res,
     dataSources: {
-      users: new Users({ modelOrCollection: UserModel }),
-      posts: new Posts({ modelOrCollection: PostModel }),
+      users: new Users({modelOrCollection: UserModel as any}),
+      posts: new Posts({modelOrCollection: PostModel as any}),
     },
   }),
 });
