@@ -22,14 +22,14 @@ export default function Home() {
             justifyContent="center"
             alignItems="center"
           >
-            <Heading as="h1" fontSize="64px" pb="1rem">
+            <Heading as="h1" fontSize={{base: '42px', lg: '64px'}} pb="1rem">
               Our top blogs
             </Heading>
           </Flex>
-          <Flex maxW="100%" justifyContent="center">
+          <Flex maxW="100%" justifyContent="center" m={{base: '2rem'}}>
             <Grid
               as="section"
-              gridTemplateColumns="repeat(3, 1fr)"
+              gridTemplateColumns={{base: '1fr', lg: 'repeat(3, 1fr)'}}
               justifyContent="center"
               gap="1rem"
               m="auto"

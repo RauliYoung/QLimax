@@ -32,10 +32,10 @@ export default function RootLayout({
           <Image
             src={logo.src}
             position="fixed"
-            width="70vw"
+            width={{base: '90%', lg: '70vw'}}
             h="auto"
-            left={200}
-            top="30vh"
+            left={{base: 'center', lg: 200}}
+            top={{base: '500', lg: '30vh'}}
             zIndex={-1}
             transform="rotate(-25deg)"
           />
