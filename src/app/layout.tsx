@@ -31,10 +31,12 @@ export default function RootLayout({
           <NavBar />
           <Image
             src={logo.src}
-            position="absolute"
-            top="15%"
+            position="fixed"
+            alignContent="center"
+            top="26%"
             zIndex={-1}
             transform="rotate(-25deg)"
+            maxW="90%"
           />
           <ApolloProvider client={client}>{children}</ApolloProvider>
         </Providers>

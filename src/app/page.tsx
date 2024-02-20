@@ -7,12 +7,13 @@ import {UserContext} from './contexts/usercontext';
 import BlogPostPreview from './components/blogpost/blogPostPreview';
 import {Post} from '../../types';
 import Link from 'next/link';
+import SettingsModal from './components/authModals/settings';
 
 export default function Home() {
   const {user} = useContext(UserContext);
   return (
     <>
-      {!user ? (
+      {/* {!user ? (
         <Auth />
       ) : (
         <Flex as="main" direction="column" pb="1rem">
@@ -42,7 +43,12 @@ export default function Home() {
             </Grid>
           </Flex>
         </Flex>
-      )}
+      )} */}
+      <SettingsModal
+        onClose={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
     </>
   );
 }
