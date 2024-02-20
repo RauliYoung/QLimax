@@ -1,5 +1,7 @@
-import { BlogPostComponent } from "../components/blogpost/blogpost";
+'use client';
+import {BlogPostComponent} from '../components/blogpost/blogpost';
 
 export default function BlogPost() {
-  return <BlogPostComponent />;
+  return <div>asd</div>;
+  // return <BlogPostComponent />;
 }
