@@ -26,7 +26,7 @@ export default function Home() {
               Our top blogs
             </Heading>
           </Flex>
-          <Flex maxW="100%" justifyContent="center" m={{base: '2rem'}}>
+          <Flex maxW="100%" justifyContent="center">
             <Grid
               as="section"
               gridTemplateColumns={{base: '1fr', lg: 'repeat(3, 1fr)'}}

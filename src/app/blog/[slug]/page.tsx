@@ -12,9 +12,9 @@ import {
   Flex,
   Tag,
   Stack,
+  useColorMode,
 } from '@chakra-ui/react';
 import {fetchData} from '@/app/lib/fetchTestData';
-
 import {BsHeartFill} from 'react-icons/bs';
 
 import {Post} from '../../../../types';
@@ -63,11 +63,15 @@ const BlogPostPage: React.FC = () => {
   //     setComment('');
   //   }, 1000);
   // };
+  //rgba(39, 170, 225, 1)
+  //rgba(241, 125, 177, 0.8)
+  // const buttonBg = useColorModeValue('qlimax.bg-blue', 'qlimax.bg-blue');
+  // const textColor = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-yellow');
 
   return (
     <Container
       py={10}
-      bg="rgba(249, 237, 50, 0.8)"
+      bg="rgba(241, 125, 177, 0.8)"
       borderRadius={18}
       border="solid 2px black"
     >
@@ -76,8 +80,8 @@ const BlogPostPage: React.FC = () => {
         <Flex alignItems="center" justifyContent="space-between">
           <h1>Blog Post Title</h1>
           <Stack alignItems="flex-end">
-            <Tag colorScheme="blue">sometag</Tag>
-            <Tag colorScheme="blue">someothertag</Tag>
+            <Tag bg={'qlimax.bg-blue'}>sometag</Tag>
+            <Tag bg={'qlimax.bg-blue'}>someothertag</Tag>
           </Stack>
         </Flex>
         <p>Posted on: {date}</p>
