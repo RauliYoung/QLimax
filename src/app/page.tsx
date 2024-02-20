@@ -34,8 +34,8 @@ export default function Home() {
               gap="1rem"
               m="auto"
             >
-              {testData.map((post: Post) => (
-                <Link href={`/blog/${post.id}`}>
+              {testData.map((post: Post, index: number) => (
+                <Link key={index} href={`/blog/${post.id}`}>
                   <BlogPostPreview post={post} />
                 </Link>
               ))}
