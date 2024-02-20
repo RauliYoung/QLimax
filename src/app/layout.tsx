@@ -31,8 +31,11 @@ export default function RootLayout({
           <NavBar />
           <Image
             src={logo.src}
-            position="absolute"
-            top="15%"
+            position="fixed"
+            width="70vw"
+            h="auto"
+            left={200}
+            top="30vh"
             zIndex={-1}
             transform="rotate(-25deg)"
           />
