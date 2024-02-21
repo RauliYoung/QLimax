@@ -1,21 +1,27 @@
-'use client';
-import React, {useState, ReactNode, useEffect} from 'react';
-import {UserContext, UserContextType} from '../contexts/usercontext';
+import React, { useState, useEffect, ReactNode, FC } from 'react';
+import { UserContext, UserContextType } from '../contexts/usercontext';
+
+interface User {
+  token: string;
+  id: string;
+}
 
 interface UserProviderProps {
   children: ReactNode;
 }
 
-const UserProvider: React.FC<UserProviderProps> = ({children}) => {
-  const [user, setUser] = useState<UserContextType['user']>(null);
+const UserProvider: FC<UserProviderProps> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('QLimaxToken');
-    const initialUser = storedUser ? JSON.parse(storedUser) : null;
-    setUser(initialUser)
+    if (storedUser) {
+      const initialUser: User = { token: storedUser, id:"" };
+      setUser(initialUser);
+    }
   }, []);
 
-  const value = {user, setUser};
+  const value: UserContextType = { user, setUser };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
