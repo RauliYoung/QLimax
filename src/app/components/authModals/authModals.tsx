@@ -14,6 +14,7 @@ export default function AuthModals() {
   const [showSignUp, setShowSignUp] = useState(false);
 
   const {setUser} = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const toast = useToast();
   const router = useRouter();
 
@@ -30,40 +31,42 @@ export default function AuthModals() {
     password: string;
   }
 
-  const handleSignIn = async (userData: UserData) => {
-    try {
-      const {data} = await signIn({
-        variables: {
-          email: userData.email,
-          password: userData.password,
-        },
-      });
+ const handleSignIn = async (userData) => {
+  try {
+    const { data } = await signIn({
+      variables: {
+        email: userData.email,
+        password: userData.password,
+      },
+    });
 
-      if (data.signIn) {
-        setUser({token: data.signIn, id: data.signIn.id});
-        localStorage.setItem('QLimaxToken', data.signIn);
-        toast({
-          title: 'Signed in successfully',
-          description: 'You are now signed in.',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-          position: 'bottom-left',
-        });
-        router.push('/');
-        onClose();
-      }
-    } catch (e) {
+    if (data.signIn) {
+      const { token, id } = data.signIn; 
+
+      setUser({ token, id });
       toast({
-        title: 'Error signing in',
-        description: 'Unable to sign in. Please try again.',
-        status: 'error',
+        title: 'Signed in successfully',
+        description: 'You are now signed in.',
+        status: 'success',
         duration: 5000,
         isClosable: true,
         position: 'bottom-left',
       });
+
+      router.push('/'); 
+      onClose();
     }
-  };
+  } catch (e) {
+    toast({
+      title: 'Error signing in',
+      description: 'Unable to sign in. Please try again.',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+      position: 'bottom-left',
+    });
+  }
+};
 
   const handleSignUp = async (userData: UserData) => {
     try {
