@@ -34,7 +34,10 @@ export const DELETE_USER = gql`
 `;
 export const SIGN_IN = gql`
   mutation SignIn($email: String!, $password: String!) {
-    signIn(email: $email, password: $password)
+    signIn(email: $email, password: $password) {
+      token
+      id
+    }
   }
 `;
 export const FETCH_POSTS = gql`

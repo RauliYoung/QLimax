@@ -1,3 +1,4 @@
+"use client"; 
 import React from 'react';
 import {Quill} from 'react-quill';
 import {UndoIcon} from '@/app/components/ui/icons/undoicon';
@@ -5,10 +6,10 @@ import {RedoIcon} from '../../ui/icons/redoicon';
 import {AiIcon} from '../../ui/icons/aiicon';
 import './editorToolbar.scss';
 
-function undoChange() {
+function undoChange(this: any) {
   this.quill.history.undo();
 }
-function redoChange() {
+function redoChange(this: any) {
   this.quill.history.redo();
 }
 
@@ -53,11 +54,6 @@ export const formats = [
 export const QuillToolbar = () => (
   <div id="toolbar">
     <span className="ql-formats">
-      <select className="ql-size" defaultValue="medium">
-        <option value="small">Size 1</option>
-        <option value="medium">Size 2</option>
-        <option value="large">Size 3</option>
-      </select>
       <select className="ql-header" defaultValue="3">
         <option value="1">Heading</option>
         <option value="2">Subheading</option>

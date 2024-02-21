@@ -1,7 +1,7 @@
-import {MongoDataSource} from 'apollo-datasource-mongodb';
+import { MongoDataSource } from 'apollo-datasource-mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {ObjectId} from 'mongodb';
+import { ObjectId } from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
 import {ALL} from 'dns';
@@ -15,7 +15,7 @@ interface PostDocument {
   _id: ObjectId;
   title: string;
   content: string;
-  tags: {tag: string; color: string}[];
+  tags: { tag: string; color: string }[];
   createdAt: Date;
   updatedAt: Date;
   isPublished: boolean;
@@ -32,7 +32,7 @@ export class Users extends MongoDataSource<UserDocument> {
     }
   }
 
-  async createUser({input}: any): Promise<UserDocument> {
+  async createUser({ input }: any): Promise<UserDocument> {
     try {
       const hashedPassword = await bcrypt.hash(input.password, 12);
       const newUser = await UserModel.create({
@@ -45,13 +45,17 @@ export class Users extends MongoDataSource<UserDocument> {
     }
   }
 
+<<<<<<< HEAD
   async updateUser({input}: any) {
     console.log(input);
+=======
+  async updateUser({ input }: any) {
+>>>>>>> development
     try {
       // const hashedPassword = await bcrypt.hash(input.password, 12);
       const updatedUser = await UserModel.findByIdAndUpdate(
         input.id,
-        {...input},
+        { ...input },
         {
           new: true,
         }
@@ -62,28 +66,28 @@ export class Users extends MongoDataSource<UserDocument> {
     }
   }
 
+<<<<<<< HEAD
   async signIn({email, password}: {email: string; password: string}) {
+=======
+  async signIn({ email, password }: { email: string; password: string }) {
+>>>>>>> development
     try {
-      const user = await UserModel.findOne({email}).select('+password').exec();
+      const user = await UserModel.findOne({ email });
       if (!user) {
-        throw new Error('Invalid credentials');
-      }
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        throw new Error('Invalid credentials');
+        throw new Error('User not found');
       }
 
-      const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET ?? '', {
         expiresIn: '4h',
       });
 
-      return token;
+      return { token, id: user._id};
     } catch (error) {
       throw new Error('Failed to sign in');
     }
   }
 
-  async deleteUser({id}: {id: string}): Promise<string> {
+  async deleteUser({ id }: { id: string }): Promise<string> {
     try {
       await UserModel.findByIdAndDelete(id);
       return 'User deleted successfully';
@@ -109,7 +113,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     }
   }
 
-  async createPost({input}: any): Promise<PostDocument> {
+  async createPost({ input }: any): Promise<PostDocument> {
     try {
       const words = input.content.split(' ').length;
       const timeToRead = Math.ceil(words / 200);
@@ -123,7 +127,7 @@ export class Posts extends MongoDataSource<PostDocument> {
       throw new Error('Failed to create post');
     }
   }
-  async updatePost({id, input}: any) {
+  async updatePost({ id, input }: any) {
     try {
       const words = input.content.split(' ').length;
       const timeToRead = Math.ceil(words / 200);
@@ -140,7 +144,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     }
   }
 
-  async deletePost({id}: {id: string}): Promise<string> {
+  async deletePost({ id }: { id: string }): Promise<string> {
     try {
       await PostModel.findByIdAndDelete(id);
       return 'Post deleted successfully';

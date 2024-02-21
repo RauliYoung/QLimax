@@ -1,8 +1,7 @@
-'use client';
-import React from 'react';
-import './blogpost.scss';
-import Editor from './textEditor/editor';
+import dynamic from 'next/dynamic';
 import Menubar from './menubar/menubar';
+
+const Editor = dynamic(() => import('./textEditor/editor'), { ssr: false });
 
 export function BlogPostComponent() {
   return (
@@ -16,3 +15,4 @@ export function BlogPostComponent() {
     </>
   );
 }
+

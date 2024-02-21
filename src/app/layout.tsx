@@ -6,7 +6,7 @@ import NavBar from './components/navbar/navbar';
 import client from './apolloClient';
 import {ApolloProvider} from '@apollo/client';
 import logo from '../../public/qlimax2.svg';
-import {Image} from '@chakra-ui/react';
+import {Image, Flex} from '@chakra-ui/react';
 
 const Overpass = Overpass_Mono({
   subsets: ['latin'],
@@ -32,13 +32,17 @@ export default function RootLayout({
           <Image
             src={logo.src}
             position="fixed"
-            alignContent="center"
-            top="26%"
+            width={{base: '90%', lg: '70vw'}}
+            h="auto"
+            left={{base: 'center', lg: 200}}
+            top={{base: '500', lg: '30vh'}}
             zIndex={-1}
             transform="rotate(-25deg)"
             maxW="90%"
           />
-          <ApolloProvider client={client}>{children}</ApolloProvider>
+          <Flex direction="column" m={{base: '2rem', lg: '1rem'}}>
+            <ApolloProvider client={client}>{children}</ApolloProvider>
+          </Flex>
         </Providers>
       </body>
     </html>

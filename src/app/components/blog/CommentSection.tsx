@@ -1,8 +1,8 @@
 'use client';
-import { useContext, useState } from 'react';
-import { UserContext } from '@/app/contexts/usercontext';
-import { useToast } from '@chakra-ui/react';
-import { Box, Text, Textarea, Button, VStack, Divider } from '@chakra-ui/react';
+import {useContext, useState} from 'react';
+import {UserContext} from '@/app/contexts/usercontext';
+import {useToast} from '@chakra-ui/react';
+import {Box, Text, Textarea, Button, VStack, Divider} from '@chakra-ui/react';
 
 interface Comment {
   id: string;
@@ -21,7 +21,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
 }) => {
   const [comment, setComment] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const { user } = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const toast = useToast();
 
   const handleCommentSubmit = async () => {
@@ -29,7 +29,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
     setTimeout(() => {
       setIsSubmitting(false);
     }, 1000);
-  }
+  };
 
   return (
     <Box w="full">
@@ -49,15 +49,15 @@ export const CommentSection: React.FC<CommentSectionProps> = ({
       >
         Submit
       </Button>
-        <VStack spacing={4} alignItems="flex-start" w="full">
-          {comments.map((comment) => (
-            <Box key={comment.id}>
-              <Text fontWeight="bold">{comment.user}</Text>
-              <Text>{comment.text}</Text>
-              <Divider />
-            </Box>
+      <VStack spacing={4} alignItems="flex-start" w="full">
+        {comments.map((comment) => (
+          <Box key={comment.id}>
+            <Text fontWeight="bold">{comment.user}</Text>
+            <Text>{comment.text}</Text>
+            <Divider />
+          </Box>
         ))}
-    </VStack>
-    </Box >
+      </VStack>
+    </Box>
   );
 };

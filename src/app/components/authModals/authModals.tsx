@@ -40,7 +40,7 @@ export default function AuthModals() {
       });
 
       if (data.signIn) {
-        setUser({token: data.signIn});
+        setUser({token: data.signIn, id: data.signIn.id});
         localStorage.setItem('QLimaxToken', data.signIn);
         toast({
           title: 'Signed in successfully',

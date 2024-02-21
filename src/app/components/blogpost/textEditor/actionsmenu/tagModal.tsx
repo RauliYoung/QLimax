@@ -1,3 +1,4 @@
+'use client';
 import {
   Modal,
   ModalOverlay,
@@ -12,7 +13,7 @@ import {
   TagCloseButton,
   TagLabel,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { randomColor } from './randomColors';
 import { useEditorContext } from '@/app/contexts/editorContext';
 
@@ -23,8 +24,9 @@ type TagModalProps = {
 
 export const TagModal = ({ isOpen, onClose }: TagModalProps) => {
 
-  const {tags, setTags} = useEditorContext();
+  const {tags, setTags,draft} = useEditorContext();
   const [tag, setTag] = useState('');
+
 
   const handleAddTag = () => {
     setTag(''); 
@@ -33,6 +35,13 @@ export const TagModal = ({ isOpen, onClose }: TagModalProps) => {
   const handleRemoveTag = (tagRevove: string) => {
     setTags(tags.filter((tag) => tag.tag !== tagRevove));
   }
+  useEffect(() => {
+    if (draft) {
+      setTags(draft.tags);
+    }
+  }
+  , [draft]);
+  
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
