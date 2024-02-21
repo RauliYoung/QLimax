@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import {ObjectId} from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
+import {ALL} from 'dns';
 
 interface UserDocument {
   _id: ObjectId;
@@ -45,7 +46,9 @@ export class Users extends MongoDataSource<UserDocument> {
   }
 
   async updateUser({input}: any) {
+    console.log(input);
     try {
+      // const hashedPassword = await bcrypt.hash(input.password, 12);
       const updatedUser = await UserModel.findByIdAndUpdate(
         input.id,
         {...input},
@@ -58,6 +61,7 @@ export class Users extends MongoDataSource<UserDocument> {
       throw new Error('Failed to update user');
     }
   }
+
   async signIn({email, password}: {email: string; password: string}) {
     try {
       const user = await UserModel.findOne({email}).select('+password').exec();

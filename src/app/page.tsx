@@ -7,7 +7,7 @@ import {UserContext} from './contexts/usercontext';
 import BlogPostPreview from './components/blogpost/blogPostPreview';
 import {Post} from '../../types';
 import Link from 'next/link';
-import SettingsModal from './components/authModals/settings';
+import SettingsPage from './components/authModals/settings';
 
 export default function Home() {
   const {user} = useContext(UserContext);
@@ -44,11 +44,7 @@ export default function Home() {
           </Flex>
         </Flex>
       )} */}
-      <SettingsModal
-        onClose={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
+      <SettingsPage />
     </>
   );
 }

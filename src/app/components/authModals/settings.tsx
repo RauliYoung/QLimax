@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Box,
   Button,
@@ -7,49 +7,88 @@ import {
   Text,
   useColorModeValue,
   Flex,
+  useStepContext,
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
+import {useMutation} from '@apollo/client';
+import {UPDATE_USER} from '@/app/lib/constants';
+import {UserContext} from '@/app/contexts/usercontext';
+import bcrypt from 'bcrypt';
 
 interface SettingsModalProps {
-  onClose: () => void;
+  onPasswordChange: (newPassword: string) => void;
 }
 
-const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
+// const SettingsPage: React.FC<SettingsModalProps> = ({onPasswordChange})
+
+const SettingsPage: React.FC = () => {
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState('');
+
+  const [newEmail, setNewEmail] = useState('');
+  const [confirmEmailPassword, setConfirmEmailPassword] = useState('');
+
+  const {user} = useContext(UserContext);
+
+  const [updateUser] = useMutation(UPDATE_USER);
+
+  const handlePasswordChange = () => {
+    console.log('USERUSERABUSER');
+    console.log(user);
+    if (newPassword !== confirmPassword) {
+      console.log('Passwords do not match');
+      return;
+    }
+
+    updateUser({
+      variables: {
+        input: {
+          id: '65d32e49d392ead3709b82c1',
+          password: newPassword,
+        },
+      },
+    })
+      .then(() => {
+        console.log('Password changed successfully');
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+      })
+      .catch((error) => {
+        console.error('Error changing password:', error);
+      });
+  };
+
+  const handleEmailChange = () => {
+    console.log('ASDASD');
+
+    updateUser({
+      variables: {
+        input: {
+          id: '65d32e49d392ead3709b82c1',
+          email: newEmail,
+        },
+      },
+    })
+      .then(() => {
+        console.log('Email changed successfully');
+      })
+      .catch((error) => {
+        console.error('Error changing email:', error);
+      });
+  };
+
+  const handleUserDelete = () => {};
+
+  const handleBackButton = () => {
+    console.log('save button pressed');
+  };
+
   const bg = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-pink');
   const inputsBg = useColorModeValue('qlimax.bg-pink', 'qlimax.bg-yellow');
   const buttonBg = useColorModeValue('qlimax.bg-blue', 'qlimax.bg-blue');
   const textColor = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-yellow');
-
-  const handlePasswordChange = () => {
-    const passwordSettings = document.getElementById('PasswordSettings');
-    if (passwordSettings) {
-      const computedStyle = window.getComputedStyle(passwordSettings);
-      const isHidden = computedStyle.getPropertyValue('display') === 'none';
-      passwordSettings.style.display = isHidden ? 'flex' : 'none';
-    }
-  };
-
-  const handleEmailChange = () => {
-    const emailSettings = document.getElementById('EmailSettings');
-    if (emailSettings) {
-      const computedStyle = window.getComputedStyle(emailSettings);
-      const isHidden = computedStyle.getPropertyValue('display') === 'none';
-      emailSettings.style.display = isHidden ? 'flex' : 'none';
-    }
-  };
-
-  const handleUserDelete = () => {
-    const deleteUserSettings = document.getElementById('DeleteUserSettings');
-    if (deleteUserSettings) {
-      const computedStyle = window.getComputedStyle(deleteUserSettings);
-      const isHidden = computedStyle.getPropertyValue('display') === 'none';
-      deleteUserSettings.style.display = isHidden ? 'flex' : 'none';
-    }
-  };
-
-  const handleSaveButton = () => {
-    console.log('save button pressed');
-  };
 
   return (
     <Box
@@ -96,6 +135,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
                 textColor="black"
                 placeholder="Enter your password"
                 type="password"
+                _placeholder={{color: 'grey'}}
+                borderColor={'gray'}
+                _hover={{borderColor: 'grey'}}
+                onChange={(e) => setCurrentPassword(e.target.value)}
               ></Input>
               <Input
                 backgroundColor="white"
@@ -103,6 +146,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
                 placeholder="New password"
                 type="password"
                 marginTop="2%"
+                _placeholder={{color: 'grey'}}
+                borderColor={'gray'}
+                _hover={{borderColor: 'grey'}}
+                onChange={(e) => setNewPassword(e.target.value)}
               ></Input>
               <Input
                 backgroundColor="white"
@@ -110,6 +157,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
                 placeholder="Confirm new password"
                 type="password"
                 marginTop="2%"
+                _placeholder={{color: 'grey'}}
+                borderColor={'gray'}
+                _hover={{borderColor: 'grey'}}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               ></Input>
             </Flex>
             <Flex>
@@ -132,6 +183,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
                 textColor="black"
                 placeholder="Enter new email"
                 type="email"
+                _placeholder={{color: 'grey'}}
+                borderColor={'gray'}
+                _hover={{borderColor: 'grey'}}
+                onChange={(e) => setNewEmail(e.target.value)}
               ></Input>
               <Input
                 backgroundColor="white"
@@ -139,6 +194,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
                 placeholder="Confirm with password"
                 type="password"
                 marginTop="2%"
+                _placeholder={{color: 'grey'}}
+                borderColor={'gray'}
+                _hover={{borderColor: 'grey'}}
+                onChange={(e) => setConfirmEmailPassword(e.target.value)}
               ></Input>
             </Flex>
             <Flex>
@@ -161,16 +220,20 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
                 textColor="black"
                 placeholder="Confirm with password"
                 type="password"
+                _placeholder={{color: 'grey'}}
+                borderColor={'gray'}
+                _hover={{borderColor: 'grey'}}
               ></Input>
             </Flex>
             <Button
               color={textColor}
               _hover={{bg: '#677589'}}
-              onClick={handleSaveButton}
+              onClick={handleBackButton}
               bg={buttonBg}
               border="solid 2px black"
+              id="BackButton"
             >
-              Save Settings
+              Back
             </Button>
           </VStack>
         </Flex>
@@ -179,4 +242,4 @@ const SettingsModal: React.FC<SettingsModalProps> = ({onClose}) => {
   );
 };
 
-export default SettingsModal;
+export default SettingsPage;

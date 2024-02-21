@@ -7,16 +7,19 @@ import {useRouter} from 'next/navigation';
 import {useMutation} from '@apollo/client';
 import {CREATE_USER} from '../../lib/constants';
 import {SIGN_IN} from '../../lib/constants';
+import {error} from 'console';
 
 export default function AuthModals() {
   const [showSignIn, setShowSignIn] = useState(true);
   const [showSignUp, setShowSignUp] = useState(false);
+
   const {setUser} = useContext(UserContext);
   const toast = useToast();
   const router = useRouter();
 
   const [createUser] = useMutation(CREATE_USER);
   const [signIn] = useMutation(SIGN_IN);
+
   const onClose = () => {
     setShowSignIn(false);
     setShowSignUp(false);
@@ -94,6 +97,7 @@ export default function AuthModals() {
       });
     }
   };
+
   const toggleForms = () => {
     setShowSignIn(!showSignIn);
     setShowSignUp(!showSignUp);
