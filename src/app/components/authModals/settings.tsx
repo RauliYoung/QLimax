@@ -103,7 +103,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleBackButton = () => {
-    console.log('save button pressed');
+    window.location.href = '/';
   };
 
   const bg = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-pink');
