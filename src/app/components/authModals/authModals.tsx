@@ -28,7 +28,7 @@ export default function AuthModals() {
     password: string;
   }
 
- const handleSignIn = async (userData) => {
+ const handleSignIn = async (userData: UserData) => {
   try {
     const { data } = await signIn({
       variables: {
