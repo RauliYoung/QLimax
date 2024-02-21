@@ -29,7 +29,7 @@ export function Drawer() {
   const {setUser} = React.useContext(UserContext);
 
   const handleLogout = () => {
-    localStorage.removeItem('QLimaxToken');
+    localStorage.removeItem('QLimaxUser');
     setUser(null);
     onModalClose();
     router.push('/');

@@ -14,16 +14,22 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('QLimaxToken');
-    if (storedUser) {
-      const initialUser: User = { token: storedUser, id:"" };
+    const storedUserJson = localStorage.getItem('QLimaxUser');
+    if (storedUserJson) {
+      const initialUser: User = JSON.parse(storedUserJson); 
       setUser(initialUser);
     }
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem('QLimaxUser', JSON.stringify(user));
+    }
+  }, [user]); 
   const value: UserContextType = { user, setUser };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 export default UserProvider;
+
