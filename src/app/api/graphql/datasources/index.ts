@@ -21,7 +21,7 @@ interface PostDocument {
   slug: string;
   timeToRead: number;
 }
-
+ 
 export class Users extends MongoDataSource<UserDocument> {
   async getAllUsers() {
     try {

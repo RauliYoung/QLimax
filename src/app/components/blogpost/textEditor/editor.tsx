@@ -1,11 +1,12 @@
-import {useState, useRef, useEffect} from 'react';
+"use client";
+import { useState, useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
-import {useColorMode} from '@chakra-ui/react';
+import { useColorMode } from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
-import EditorToolbar, {modules, formats} from './editorToolbar';
-import {ActionsMenu} from './actionsmenu/actionsmenu';
-import {useEditorContext} from '@/app/contexts/editorContext';
+import EditorToolbar, { modules, formats } from './editorToolbar';
+import { ActionsMenu } from './actionsmenu/actionsmenu';
+import { useEditorContext } from '@/app/contexts/editorContext';
 
 type Match = {
   offset: number;
@@ -16,10 +17,10 @@ interface SpellCheckResponse {
   matches: Match[];
 }
 
-export default function Editor() {
-  const {content, setContent,draft} = useEditorContext();
+const Editor: React.FC = () => {
+  const { content, setContent, draft } = useEditorContext();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const {colorMode} = useColorMode();
+  const { colorMode } = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
   const quillRef = useRef<ReactQuill>(null);
 
@@ -27,7 +28,7 @@ export default function Editor() {
     const quill = quillRef.current?.getEditor();
     if (quill) {
       quill.formatText(0, quill.getLength(), 'underline', false);
-      newMatches.forEach((match) => {
+      newMatches.forEach(match => {
         quill.formatText(match.offset, match.length, 'underline', true);
       });
     }
@@ -35,14 +36,14 @@ export default function Editor() {
 
   const checkSpelling = () => {
     const quill = quillRef.current?.getEditor();
-    if (quill) {
+    if (quill && typeof window !== 'undefined') {
       const plainText = quill.getText();
       fetch('/api/spellCheck', {
         method: 'POST',
-        body: JSON.stringify({text: plainText, language: 'en-US'}),
-        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ text: plainText, language: 'en-US' }),
+        headers: { 'Content-Type': 'application/json' },
       })
-        .then((res) => res.json())
+        .then(res => res.json())
         .then((data: SpellCheckResponse) => {
           if (data.matches.length === 0) {
             quill.formatText(0, plainText.length, 'underline', false);
@@ -53,11 +54,12 @@ export default function Editor() {
         });
     }
   };
+
   useEffect(() => {
     if (draft) {
       setContent(draft.content);
     }
-  }, [draft]);
+  }, [draft, setContent]);
 
   useEffect(() => {
     highlightErrors(matches);
@@ -72,18 +74,12 @@ export default function Editor() {
   }, [colorMode]);
 
   useEffect(() => {
-    if (quillRef.current) {
+    if (quillRef.current && typeof window !== 'undefined') {
       const quill = quillRef.current.getEditor();
       const toolbar = quill.getModule('toolbar');
       toolbar.addHandler('spellcheck', checkSpelling);
-      const button = document.querySelector('.ql-spellcheck');
-      if (button) {
-        button.addEventListener('click', () => {
-          checkSpelling();
-        });
-      }
     }
-  }, []);
+  }, [quillRef]);
 
   return (
     <div className="editorContainer">
@@ -101,4 +97,7 @@ export default function Editor() {
       />
     </div>
   );
-}
+};
+
+export default Editor;
+
