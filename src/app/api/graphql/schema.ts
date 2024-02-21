@@ -61,14 +61,14 @@ const typeDefs = `#graphql
 
   type AuthPayload {
     token: String
-    user: User
+    id: ID!
   }
 
   type Mutation {
     createUser(input: NewUserInput!): User
     updateUser(input: UpdateUserInput!): User
     deleteUser(id: ID!): String
-    signIn(email: String!, password: String!): String
+    signIn(email: String!, password: String!): AuthPayload
     createPost(input: NewPostInput): Post
     updatePost(input: UpdatePostInput): Post
     deletePost(id: ID!): String
