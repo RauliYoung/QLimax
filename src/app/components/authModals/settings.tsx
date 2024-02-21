@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 import {useMutation} from '@apollo/client';
-import {UPDATE_USER} from '@/app/lib/constants';
+import {UPDATE_USER, DELETE_USER} from '@/app/lib/constants';
 import {UserContext} from '@/app/contexts/usercontext';
 import bcrypt from 'bcrypt';
 
@@ -32,6 +32,7 @@ const SettingsPage: React.FC = () => {
   const {user} = useContext(UserContext);
 
   const [updateUser] = useMutation(UPDATE_USER);
+  const [deleteUser] = useMutation(DELETE_USER);
 
   const handlePasswordChange = () => {
     console.log('USERUSERABUSER');
@@ -44,7 +45,7 @@ const SettingsPage: React.FC = () => {
     updateUser({
       variables: {
         input: {
-          id: '65d32e49d392ead3709b82c1',
+          id: user?.id,
           password: newPassword,
         },
       },
@@ -66,7 +67,7 @@ const SettingsPage: React.FC = () => {
     updateUser({
       variables: {
         input: {
-          id: '65d32e49d392ead3709b82c1',
+          id: user?.id,
           email: newEmail,
         },
       },
@@ -79,7 +80,27 @@ const SettingsPage: React.FC = () => {
       });
   };
 
-  const handleUserDelete = () => {};
+  const handleUserDelete = () => {
+    const confirmation = window.confirm(
+      'Are you sure? \n This will delete your account'
+    );
+
+    if (!confirmation) {
+      return;
+    }
+
+    deleteUser({
+      variables: {
+        deleteUserId: user?.id,
+      },
+    })
+      .then(() => {
+        console.log('User deleted changed successfully');
+      })
+      .catch((error) => {
+        console.error('Error deleting user:', error);
+      });
+  };
 
   const handleBackButton = () => {
     console.log('save button pressed');
@@ -213,17 +234,6 @@ const SettingsPage: React.FC = () => {
               >
                 Delete User
               </Button>
-            </Flex>
-            <Flex display="flex" flexDirection="column" id="DeleteUserSettings">
-              <Input
-                backgroundColor="white"
-                textColor="black"
-                placeholder="Confirm with password"
-                type="password"
-                _placeholder={{color: 'grey'}}
-                borderColor={'gray'}
-                _hover={{borderColor: 'grey'}}
-              ></Input>
             </Flex>
             <Button
               color={textColor}

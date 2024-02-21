@@ -45,9 +45,17 @@ export class Users extends MongoDataSource<UserDocument> {
   }
 
   async updateUser({input}: any) {
+    console.log(input);
     try {
+      const {id, password, email} = input;
+
+      if (password) {
+        const hashedPassword = await bcrypt.hash(password, 12);
+        input.password = hashedPassword;
+      }
+
       const updatedUser = await UserModel.findByIdAndUpdate(
-        input.id,
+        id,
         {...input},
         {
           new: true,
@@ -77,6 +85,8 @@ export class Users extends MongoDataSource<UserDocument> {
   }
 
   async deleteUser({id}: {id: string}): Promise<string> {
+    console.log('ID');
+    console.log(id);
     try {
       await UserModel.findByIdAndDelete(id);
       return 'User deleted successfully';
