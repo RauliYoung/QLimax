@@ -7,6 +7,7 @@ import {UserContext} from './contexts/usercontext';
 import BlogPostPreview from './components/blogpost/blogPostPreview';
 import {Post} from '../../types';
 import Link from 'next/link';
+import OTPModal from './components/authModals/otpModal';
 
 export default function Home() {
   const {user} = useContext(UserContext);
