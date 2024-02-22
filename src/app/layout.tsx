@@ -38,6 +38,7 @@ export default function RootLayout({
             top={{base: '500', lg: '30vh'}}
             zIndex={-1}
             transform="rotate(-25deg)"
+            maxW="90%"
           />
           <Flex direction="column" m={{base: '2rem', lg: '1rem'}}>
             <ApolloProvider client={client}>{children}</ApolloProvider>
