@@ -72,6 +72,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
                   bg={inputsBg}
+                  color='black'
                 />
               </FormControl>
               <FormControl>
@@ -85,6 +86,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
                   bg={inputsBg}
+                  color='black'
                 />
               </FormControl>
               <FormControl>
@@ -98,6 +100,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
                   bg={inputsBg}
+                  color='black'
                 />
               </FormControl>
               <Button

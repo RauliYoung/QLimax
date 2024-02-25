@@ -1,13 +1,14 @@
 import {
   Box,
   Button,
-  Flex,
+  Center,
   FormControl,
   FormLabel,
   Input,
   PinInput,
   PinInputField,
   VStack,
+  useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
 import React, {useState} from 'react';
@@ -80,54 +81,64 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
     }
   };
 
+  const pinInputFieldBg = useColorModeValue('white', 'gray.200');
+  const pinInputFieldColor = useColorModeValue('black', 'black');
+
   return (
-    <VStack
-      spacing={4}
-      p={5}
-      borderRadius="md"
-      boxShadow="lg"
-      bg="white"
-      maxW="md"
-      mx="auto"
-      mt={10}
-    >
-      {!otpSent ? (
-        <FormControl as="form" onSubmit={(e) => e.preventDefault()}>
-          <FormLabel>Email</FormLabel>
-          <Input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder="Your Email"
-          />
-          <Button
-            colorScheme="green"
-            width="100%"
-            mt={4}
-            onClick={generateAndSendOTP}
-          >
-            Send Code
-          </Button>
-        </FormControl>
-      ) : (
-        <VStack spacing={4} width="100%">
-          <Box>
-            <PinInput onChange={handleOtpChange} autoFocus>
-              {Array(5)
-                .fill('')
-                .map((_, index) => (
-                  <PinInputField key={index} onChange={handleOtpChange} />
-                ))}
-            </PinInput>
-          </Box>
-          <Box>
-            <Button colorScheme="green" onClick={verifyOTP}>
-              Verify Code
+    <Center>
+      <VStack
+        spacing={4}
+        p={5}
+        borderRadius="md"
+        boxShadow="lg"
+        bg="white"
+        maxW="md"
+        mt={10}
+      >
+        {!otpSent ? (
+          <FormControl as="form" onSubmit={(e) => e.preventDefault()}>
+            <FormLabel color={pinInputFieldColor}>Email</FormLabel>
+            <Input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Your Email"
+              color={pinInputFieldColor}
+            />
+            <Button
+              colorScheme="green"
+              width="100%"
+              mt={4}
+              onClick={generateAndSendOTP}
+            >
+              Send Code
             </Button>
-          </Box>
-        </VStack>
-      )}
-    </VStack>
+          </FormControl>
+        ) : (
+          <VStack spacing={4} width="100%">
+            <Box>
+              <PinInput onChange={handleOtpChange} autoFocus otp size="lg">
+                {Array(5)
+                  .fill('')
+                  .map((_, index) => (
+                    <PinInputField
+                      key={index}
+                      onChange={handleOtpChange}
+                      bg={pinInputFieldBg}
+                      color={pinInputFieldColor}
+                    />
+                  ))}
+              </PinInput>
+            </Box>
+            <Box>
+              <Button colorScheme="green" onClick={verifyOTP}>
+                Verify Code
+              </Button>
+            </Box>
+          </VStack>
+        )}
+      </VStack>
+    </Center>
   );
 };
 
