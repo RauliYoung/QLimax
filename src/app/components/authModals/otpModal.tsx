@@ -1,7 +1,10 @@
 import {
   Box,
   Button,
+  Flex,
   FormControl,
+  FormLabel,
+  Input,
   PinInput,
   PinInputField,
   VStack,
@@ -17,7 +20,7 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
-  const [verificationStarted,setVerificationStarted] = useState(false);
+  const [verificationStarted, setVerificationStarted] = useState(false);
   const toast = useToast();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,10 +42,10 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
         to: email,
       }),
     });
- 
+
     if (response.ok) {
       setOtpSent(true);
-    } 
+    }
   };
 
   const verifyOTP = async () => {
@@ -80,7 +83,7 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
   return (
     <VStack
       spacing={4}
-      padding={5}
+      p={5}
       borderRadius="md"
       boxShadow="lg"
       bg="white"
@@ -89,19 +92,14 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
       mt={10}
     >
       {!otpSent ? (
-        <Box
-          as="form"
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => e.preventDefault()}
-        >
-          <FormControl isRequired>
-            <input
-              type="email"
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="Your Email"
-              style={{width: '100%', padding: '10px', borderRadius: '5px'}}
-            />
-          </FormControl>
+        <FormControl as="form" onSubmit={(e) => e.preventDefault()}>
+          <FormLabel>Email</FormLabel>
+          <Input
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            placeholder="Your Email"
+          />
           <Button
             colorScheme="green"
             width="100%"
@@ -110,27 +108,24 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
           >
             Send Code
           </Button>
-        </Box>
+        </FormControl>
       ) : (
-        <Box
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          width="100%"
-        >
-          <PinInput onChange={handleOtpChange} autoFocus>
-            {Array(5)
-              .fill('')
-              .map((_, index) => (
-                <PinInputField key={index} onChange={handleOtpChange} />
-              ))}
-          </PinInput>
-          <Box ml={4}>
+        <VStack spacing={4} width="100%">
+          <Box>
+            <PinInput onChange={handleOtpChange} autoFocus>
+              {Array(5)
+                .fill('')
+                .map((_, index) => (
+                  <PinInputField key={index} onChange={handleOtpChange} />
+                ))}
+            </PinInput>
+          </Box>
+          <Box>
             <Button colorScheme="green" onClick={verifyOTP}>
               Verify Code
             </Button>
           </Box>
-        </Box>
+        </VStack>
       )}
     </VStack>
   );
