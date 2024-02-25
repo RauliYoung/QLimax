@@ -39,7 +39,7 @@ const OTPModal = ({onVerify}: OTPModalProps) => {
         to: email,
       }),
     });
-
+ 
     if (response.ok) {
       setOtpSent(true);
     } 
