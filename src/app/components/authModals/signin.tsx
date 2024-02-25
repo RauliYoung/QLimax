@@ -64,6 +64,7 @@ const SignIn: React.FC<SignInProps> = ({onSignUp, onSignIn}) => {
                 borderColor="black"
                 bg={inputsBg}
                 _hover={{borderColor: 'black'}}
+                color='black'
               />
             </FormControl>
             <FormControl>
@@ -77,6 +78,7 @@ const SignIn: React.FC<SignInProps> = ({onSignUp, onSignIn}) => {
                 borderColor="black"
                 bg={inputsBg}
                 _hover={{borderColor: 'black'}}
+                color='black'
               />
             </FormControl>
             <Button

@@ -7,7 +7,7 @@ import {
   BsHeartFill,
   BsSearch,
 } from 'react-icons/bs';
-import { RiApps2Fill } from "react-icons/ri";
+import {RiApps2Fill} from 'react-icons/ri';
 import React from 'react';
 import './drawer.scss';
 import * as ChakraUi from '@chakra-ui/icons';
@@ -29,7 +29,7 @@ export function Drawer() {
   } = Chakra.useDisclosure();
   const {setUser} = React.useContext(UserContext);
 
- const handleLogout = () => {
+  const handleLogout = () => {
     localStorage.removeItem('QLimaxUser');
     setUser(null);
     onModalClose();
@@ -72,7 +72,11 @@ export function Drawer() {
                 >
                   Write
                 </Chakra.MenuItem>
-                <Chakra.MenuItem as={Chakra.Button} onClick={() => router.push('/search')} icon={<BsSearch />}>
+                <Chakra.MenuItem
+                  as={Chakra.Button}
+                  onClick={() => router.push('/search')}
+                  icon={<BsSearch />}
+                >
                   Search
                 </Chakra.MenuItem>
               </Chakra.MenuList>
@@ -85,7 +89,10 @@ export function Drawer() {
                 Profile
               </Chakra.MenuButton>
               <Chakra.MenuList>
-                <Chakra.MenuItem icon={<ChakraUi.SettingsIcon />} onClick={() => router.push('/settings')}>
+                <Chakra.MenuItem
+                  icon={<ChakraUi.SettingsIcon />}
+                  onClick={() => router.push('/settings')}
+                >
                   Settings
                 </Chakra.MenuItem>
                 <Chakra.MenuItem
