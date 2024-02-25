@@ -7,18 +7,20 @@ import {useRouter} from 'next/navigation';
 import {useMutation} from '@apollo/client';
 import {CREATE_USER} from '../../lib/constants';
 import {SIGN_IN} from '../../lib/constants';
+import {UPDATE_USER} from '../../lib/constants';
 import OTPModal from './otpModal';
 
 export default function AuthModals() {
   const [showSignIn, setShowSignIn] = useState(true);
   const [showSignUp, setShowSignUp] = useState(false);
   const {setUser} = useContext(UserContext);
-  const {user} = useContext(UserContext);
+  const [updateUser] = useMutation(UPDATE_USER);
   const toast = useToast();
   const router = useRouter();
   const [isOTPRequired, setIsOTPRequired] = useState(false);
   const [createUser] = useMutation(CREATE_USER);
   const [signIn] = useMutation(SIGN_IN);
+  const [userId, setUserId] = useState('');
   const onClose = () => {
     setShowSignIn(false);
     setShowSignUp(false);
@@ -75,6 +77,7 @@ export default function AuthModals() {
           input: userData,
         },
       });
+      setUserId(data.createUser.id);
 
       if (data.createUser) {
         toast({
@@ -86,6 +89,7 @@ export default function AuthModals() {
           position: 'bottom-left',
         });
       }
+
       setIsOTPRequired(true);
     } catch (e) {
       toast({
@@ -100,9 +104,42 @@ export default function AuthModals() {
   };
 
   const handleOTPVerification = async () => {
-    handleSignIn(userData);
-    setIsOTPRequired(false);
+    try {
+      await handleSignIn(userData);
+
+      const {data} = await updateUser({
+        variables: {
+          input: {
+            id: userId,
+            isValidated: true,
+          },
+        },
+      });
+
+      if (data.updateUser) {
+        toast({
+          title: 'OTP verification successful',
+          description: 'Your account has been validated.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
+      }
+
+      setIsOTPRequired(false);
+    } catch (e) {
+      toast({
+        title: 'Error verifying OTP',
+        description: 'Unable to verify OTP. Please try again.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-left',
+      });
+    }
   };
+
   const toggleForms = () => {
     setShowSignIn(!showSignIn);
     setShowSignUp(!showSignUp);

@@ -47,11 +47,17 @@ export class Users extends MongoDataSource<UserDocument> {
   async updateUser({input}: any) {
     console.log(input);
     try {
-      const {id, password, email} = input;
+      const {id, password, email,isValidated} = input;
 
       if (password) {
         const hashedPassword = await bcrypt.hash(password, 12);
         input.password = hashedPassword;
+      }
+      if (isValidated) {
+        input.isValidated = isValidated;
+      }
+      if (email) {
+        input.email = email;
       }
 
       const updatedUser = await UserModel.findByIdAndUpdate(

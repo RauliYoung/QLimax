@@ -23,6 +23,7 @@ export const UPDATE_USER = gql`
     updateUser(input: $input) {
       email
       id
+      isValidated
     }
   }
 `;

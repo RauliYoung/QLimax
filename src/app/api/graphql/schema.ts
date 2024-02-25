@@ -2,6 +2,7 @@ const typeDefs = `#graphql
   type User {
     id: ID!
     email: String!
+    isValidated: Boolean!
   }
 
   type Post {
@@ -30,6 +31,7 @@ const typeDefs = `#graphql
     id: ID!
     password: String
     email: String
+    isValidated: Boolean
   }
 
   input NewPostInput {
