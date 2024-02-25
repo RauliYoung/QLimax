@@ -8,12 +8,14 @@ import {
   useColorModeValue,
   Flex,
   useStepContext,
+  useDisclosure,
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 import {useMutation} from '@apollo/client';
 import {UPDATE_USER, DELETE_USER} from '@/app/lib/constants';
 import {UserContext} from '@/app/contexts/usercontext';
-import bcrypt from 'bcrypt';
+import {useToast} from '@chakra-ui/react';
+import {ConfirmationModal} from '../modals/confirmationModal';
 
 interface SettingsModalProps {
   onPasswordChange: (newPassword: string) => void;
@@ -25,6 +27,7 @@ const SettingsPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
+  const toast = useToast();
 
   const [newEmail, setNewEmail] = useState('');
   const [confirmEmailPassword, setConfirmEmailPassword] = useState('');
@@ -33,12 +36,20 @@ const SettingsPage: React.FC = () => {
 
   const [updateUser] = useMutation(UPDATE_USER);
   const [deleteUser] = useMutation(DELETE_USER);
+  const {isOpen, onOpen, onClose} = useDisclosure();
 
   const handlePasswordChange = () => {
     console.log('USERUSERABUSER');
     console.log(user);
     if (newPassword !== confirmPassword) {
-      console.log('Passwords do not match');
+      toast({
+        title: 'Passwords do not match',
+        description: 'Please make sure your passwords match.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-left',
+      });
       return;
     }
 
@@ -73,35 +84,46 @@ const SettingsPage: React.FC = () => {
       },
     })
       .then(() => {
-        console.log('Email changed successfully');
+        toast({
+          title: 'Email changed successfully',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
       })
       .catch((error) => {
-        console.error('Error changing email:', error);
+        toast({
+          title: 'Error changing email',
+          description: 'Unable to change email. Please try again.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
       });
   };
-
   const handleUserDelete = () => {
-    const confirmation = window.confirm(
-      'Are you sure? \n This will delete your account'
-    );
-
-    if (!confirmation) {
-      return;
-    }
-
-    deleteUser({
-      variables: {
-        deleteUserId: user?.id,
-      },
-    })
-      .then(() => {
-        console.log('User deleted changed successfully');
-      })
-      .catch((error) => {
-        console.error('Error deleting user:', error);
+  deleteUser({
+    variables: {
+      deleteUserId: user?.id,
+    },
+  })
+    .then(() => {
+      toast({
+        title: 'User deleted successfully',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-left',
       });
-  };
+    })
+    .catch((error) => {
+      console.error('Error deleting user:', error);
+    });
+};
 
+ 
   const handleBackButton = () => {
     window.location.href = '/';
   };
@@ -221,21 +243,13 @@ const SettingsPage: React.FC = () => {
                 onChange={(e) => setConfirmEmailPassword(e.target.value)}
               ></Input>
             </Flex>
-            <Flex>
+            <ConfirmationModal
+              isOpen={isOpen}
+              onClose={onClose}
+              message="Are you sure you want to delete your account?"
+              onConfirm={handleUserDelete}
+            />
               <Button
-                textAlign="center"
-                color="black"
-                _hover={{bg: '#677589'}}
-                onClick={handleUserDelete}
-                bg={inputsBg}
-                minW={'10rem'}
-                border={`1px solid ${customTheme.colors.black}`}
-                borderRadius="8px"
-              >
-                Delete User
-              </Button>
-            </Flex>
-            <Button
               color={textColor}
               _hover={{bg: '#677589'}}
               onClick={handleBackButton}
