@@ -9,7 +9,11 @@ import {
 } from '@chakra-ui/react';
 import React, {useState} from 'react';
 
-const OTPModal = () => {
+interface OTPModalProps {
+  onVerify: () => void;
+}
+
+const OTPModal = ({onVerify}: OTPModalProps) => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
@@ -36,8 +40,6 @@ const OTPModal = () => {
       }),
     });
 
-    const data = await response.json();
-    console.log(data);
     if (response.ok) {
       setOtpSent(true);
     } 
@@ -56,8 +58,6 @@ const OTPModal = () => {
       }),
     });
 
-    const data = await response.json();
-    console.log(data);
     if (response.ok) {
       toast({
         title: 'Code verified!',
@@ -66,7 +66,7 @@ const OTPModal = () => {
         isClosable: true,
       });
       setVerificationStarted(false);
-      
+      onVerify();
     } else {
       toast({
         title: 'Invalid Code! Please try again.',

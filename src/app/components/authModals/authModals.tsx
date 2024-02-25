@@ -112,7 +112,7 @@ export default function AuthModals() {
     <Modal isOpen={true} onClose={() => {}}>
       <Flex direction="column" justifyContent="center" alignItems="center">
         {isOTPRequired ? (
-          <OTPModal onVerify={() => handleOTPVerification(userData)} />
+          <OTPModal onVerify={handleOTPVerification} />
         ) : (
           <>
             {showSignIn && (
