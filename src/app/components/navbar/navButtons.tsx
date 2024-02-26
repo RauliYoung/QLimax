@@ -27,7 +27,7 @@ export const NavButtons: FC<NavButtonsProps> = ({isOpen, isLoggedIn}) => {
         {isLoggedIn && <Drawer />}
         <Toggle id="theme-toggle" />
         {!isLoggedIn && (
-          <Button variant="solid" size="sm" rounded="md">
+          <Button variant="solid" size="sm" rounded="md" onClick={() => { window.location.href = '/auth'; }}>
             Get started
           </Button>
         )}

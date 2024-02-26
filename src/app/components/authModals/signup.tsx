@@ -11,6 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
+import {useToast} from '@chakra-ui/react';
 
 interface SignUpProps {
   onSignUp: (data: {email: string; password: string}) => void;
@@ -22,6 +23,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
     password: '',
     confirmPassword: '',
   });
+  const toast = useToast();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({...formData, [e.target.name]: e.target.value});
@@ -30,7 +32,14 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords don't match");
+      toast({
+        title: 'Passwords do not match',
+        description: 'Please make sure your passwords match.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-left',
+      });
       return;
     }
     const {confirmPassword, ...dataToSend} = formData;
@@ -72,6 +81,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
                   bg={inputsBg}
+                  color='black'
                 />
               </FormControl>
               <FormControl>
@@ -85,6 +95,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
                   bg={inputsBg}
+                  color='black'
                 />
               </FormControl>
               <FormControl>
@@ -98,6 +109,7 @@ const SignUp: React.FC<SignUpProps> = ({onSignUp}) => {
                   borderColor="black"
                   _hover={{borderColor: 'black'}}
                   bg={inputsBg}
+                  color='black'
                 />
               </FormControl>
               <Button

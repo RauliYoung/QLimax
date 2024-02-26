@@ -20,7 +20,6 @@ export default function AuthModals() {
   const [isOTPRequired, setIsOTPRequired] = useState(false);
   const [createUser] = useMutation(CREATE_USER);
   const [signIn] = useMutation(SIGN_IN);
-  const [userId, setUserId] = useState('');
   const onClose = () => {
     setShowSignIn(false);
     setShowSignUp(false);
@@ -71,67 +70,45 @@ export default function AuthModals() {
 
   const handleSignUp = async (userData: UserData) => {
     setUserData(userData);
-    try {
-      const {data} = await createUser({
-        variables: {
-          input: userData,
-        },
-      });
-      setUserId(data.createUser.id);
-
-      if (data.createUser) {
-        toast({
-          title: 'Account created successfully',
-          description: 'Welcome to QLIMAX!',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-          position: 'bottom-left',
-        });
-      }
-
-      setIsOTPRequired(true);
-    } catch (e) {
-      toast({
-        title: 'Error creating account',
-        description: 'Unable to create account. Please try again.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom-left',
-      });
-    }
+    setIsOTPRequired(true);
   };
 
   const handleOTPVerification = async () => {
     try {
-      await handleSignIn(userData);
-
-      const {data} = await updateUser({
+      const createUserResponse = await createUser({
         variables: {
-          input: {
-            id: userId,
-            isValidated: true,
-          },
+          input: userData,
         },
       });
 
-      if (data.updateUser) {
+      if (createUserResponse.data.createUser) {
+        const userId = createUserResponse.data.createUser.id;
+
+        await updateUser({
+          variables: {
+            input: {
+              id: userId,
+              isValidated: true,
+            },
+          },
+        });
+
         toast({
-          title: 'OTP verification successful',
-          description: 'Your account has been validated.',
+          title: 'Account created and verified successfully!',
+          description: 'Welcome!',
           status: 'success',
           duration: 5000,
           isClosable: true,
           position: 'bottom-left',
         });
+        await handleSignIn(userData);
+        setIsOTPRequired(false);
       }
-
-      setIsOTPRequired(false);
     } catch (e) {
       toast({
-        title: 'Error verifying OTP',
-        description: 'Unable to verify OTP. Please try again.',
+        title: 'Error verifying Code',
+        description:
+          'Unable to verify Code and create account. Please try again.',
         status: 'error',
         duration: 5000,
         isClosable: true,
