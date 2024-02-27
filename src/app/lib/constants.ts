@@ -125,7 +125,7 @@ export const DELETE_POST = gql`
   mutation DeletePost($deletePostId: ID!) {
     deletePost(id: $deletePostId)
   }
-`;
+`; 
 export const FETCH_COMMENTS = gql`
   query getComments($postId: ID!) {
     post(id: $postId) {
@@ -133,16 +133,18 @@ export const FETCH_COMMENTS = gql`
         id
         content
         createdAt
+        authorId
       }
     }
   }
 `;
 
 export const CREATE_COMMENT = gql`
-  mutation createComment($postId: ID!, $content: String!) {
-    createComment(input: {postId: $postId, content: $content}) {
+  mutation createComment($postId: ID!, $content: String!, $authorId: String!) {
+    createComment(input: {postId: $postId, content: $content, authorId: $authorId}) {
       id
       content
+      authorId
     }
   }
 `;

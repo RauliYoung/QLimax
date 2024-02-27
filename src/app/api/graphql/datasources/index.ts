@@ -27,11 +27,13 @@ interface CommentDocument {
   content: string;
   createdAt: Date;
   post: PostDocument;
+  authorId: string;
 }
 interface NewComment {
   content: string;
   post: PostDocument;
   id: string;
+  authorId: string;
 }
 
 export class Users extends MongoDataSource<UserDocument> {
@@ -177,13 +179,14 @@ export class Posts extends MongoDataSource<PostDocument> {
       throw new Error('Failed to delete post');
     }
   }
-  async createComment({ postId, content }: any) {
+  async createComment({ postId, content,authorId }: any) {
     try {
       const post = await PostModel.findById(postId);
       const newComment: NewComment = {
         id: crypto.randomUUID(),
         content,
         post,
+        authorId,
       };
       post.comments.push(newComment);
       await post.save();

@@ -22,6 +22,7 @@ const typeDefs = `#graphql
     id : ID!
     content: String!
     createdAt: String!
+    authorId: String!
   }
 
   type Tag {
@@ -58,6 +59,7 @@ const typeDefs = `#graphql
   input NewCommentInput {
     content: String!
     postId: ID!
+    authorId: String!
   }
   input UpdateCommentInput {
     id: ID!

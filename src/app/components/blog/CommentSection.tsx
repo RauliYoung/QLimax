@@ -9,30 +9,41 @@ import {useEffect} from 'react';
 
 interface Comment {
   id: string;
-  user: string;
-  text: string;
+  content: string;
+  authorId: string;
+  author: string;
 }
 
 interface CommentSectionProps {
   postId: string;
+  authorId: string;
 }
 
-export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
+export const CommentSection: React.FC<CommentSectionProps> = ({postId,authorId}) => {
   const [comment, setComment] = useState<string>('');
   const [comments, setComments] = useState<Comment[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const toast = useToast();
+  const {user} = useContext(UserContext);
 
   const [createCommentMutation] = useMutation(CREATE_COMMENT);
- 
+  const {data, loading, error} = useQuery(FETCH_COMMENTS, {
+    variables: {postId, authorId},
+  });
+  useEffect(() => {
+    if (!loading && data) {
+      setComments(data.post.comments);
+    }
+  }, [loading, data]);
 
-  console.log(postId);
+  const userStamp = user?.id.slice(0, 5);
+  console.log(userStamp);
 
   const handleCommentSubmit = async () => {
     if (comment.length < 1) {
       toast({
         title: 'Comment cannot be empty',
-        status: 'error',
+        status: 'info',
         duration: 3000,
         isClosable: true,
       });
@@ -41,7 +52,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
     setIsSubmitting(true);
     try {
       await createCommentMutation({
-        variables: {postId, content: comment},
+        variables: {postId, content: comment, authorId: userStamp},
       });
       setComment('');
       setIsSubmitting(false);
@@ -77,8 +88,10 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
       <VStack spacing={4} alignItems="flex-start" w="full">
         {comments.map((comment) => (
           <Box key={comment.id}>
-            <Text fontWeight="bold">{comment.user}</Text>
-            <Text>{comment.text}</Text>
+            <Text fontSize="sm" color="gray.500">
+              {comment.authorId}
+            </Text>
+            <Text fontWeight='bold'>{comment.content}</Text>
             <Divider />
           </Box>
         ))}
