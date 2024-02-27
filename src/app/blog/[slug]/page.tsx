@@ -15,6 +15,7 @@ import {
 import {BsHeartFill} from 'react-icons/bs';
 import parse from 'html-react-parser';
 import {useQuery} from '@apollo/client';
+import { CommentSection } from '@/app/components/blog/CommentSection';
 
 export default function BlogPostPage({params}: {params: {slug: string}}) {
 
@@ -30,7 +31,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
 
   if (error) return <Container>{error.message}</Container>;
 
-  const {title, content, tags, timeToRead} = data.postBySlug;
+  const {title, content, tags, timeToRead,id} = data.postBySlug;
   return (
     <Container bg="white" p={4} borderRadius="md" boxShadow="md">
       <VStack spacing={4} align="start">
@@ -55,6 +56,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
         </Stack>
         <Divider />
         <Text>{parse(content)}</Text>
+        <CommentSection postId={id} />
       </VStack>
     </Container>
   );

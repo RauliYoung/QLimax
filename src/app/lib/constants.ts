@@ -126,3 +126,49 @@ export const DELETE_POST = gql`
     deletePost(id: $deletePostId)
   }
 `;
+export const FETCH_COMMENTS = gql`
+  query getComments($postId: ID!) {
+    post(id: $postId) {
+      comments {
+        id
+        content
+        createdAt
+        user {
+          id
+          email
+        }
+      }
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation createComment($postId: ID!, $content: String!) {
+    createComment(input: {postId: $postId, content: $content}) {
+      id
+      content
+      createdAt
+      user {
+        id
+        email
+      }
+    }
+  }
+`;
+
+export const UPDATE_COMMENT = gql`
+  mutation updateComment($postId: ID!, $commentId: ID!, $content: String!) {
+    updateComment(
+      input: {postId: $postId, commentId: $commentId, content: $content}
+    ) {
+      id
+      content
+    }
+  }
+`;
+
+export const DELETE_COMMENT = gql`
+  mutation deleteComment($postId: ID!, $commentId: ID!) {
+    deleteComment(postId: $postId, commentId: $commentId)
+  }
+`;

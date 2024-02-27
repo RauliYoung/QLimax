@@ -3,6 +3,9 @@ import {useContext, useState} from 'react';
 import {UserContext} from '@/app/contexts/usercontext';
 import {useToast} from '@chakra-ui/react';
 import {Box, Text, Textarea, Button, VStack, Divider} from '@chakra-ui/react';
+import {useMutation, useQuery} from '@apollo/client';
+import {CREATE_COMMENT, FETCH_COMMENTS} from '@/app/lib/constants';
+import {useEffect} from 'react';
 
 interface Comment {
   id: string;
@@ -11,26 +14,59 @@ interface Comment {
 }
 
 interface CommentSectionProps {
-  comments: Comment[];
   postId: string;
 }
 
-export const CommentSection: React.FC<CommentSectionProps> = ({
-  comments,
-  postId,
-}) => {
+export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
   const [comment, setComment] = useState<string>('');
+  const [comments, setComments] = useState<Comment[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const {user} = useContext(UserContext);
   const toast = useToast();
 
+  const [createCommentMutation] = useMutation(CREATE_COMMENT);
+  const {data: commentsData, refetch: refetchComments} = useQuery(
+    FETCH_COMMENTS,
+    {
+      variables: {postId},
+    },
+  );
+  useEffect(() => {
+    if (commentsData) {
+      setComments(commentsData.comments);
+      console.log(user);
+    }
+  }
+  , [commentsData]);
   const handleCommentSubmit = async () => {
+    if (comment.length < 1) {
+      toast({
+        title: 'Comment cannot be empty',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     setIsSubmitting(true);
-    setTimeout(() => {
+    try {
+      await createCommentMutation({
+        variables: {postId,user, content: comment},
+      });
+      await refetchComments();
+      setComment('');
       setIsSubmitting(false);
-    }, 1000);
-  };
-
+    } catch (error) {
+      setIsSubmitting(false);
+      toast({
+        title: 'An error occurred',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  }
+  
   return (
     <Box w="full">
       <Textarea
