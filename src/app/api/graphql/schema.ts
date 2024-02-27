@@ -15,6 +15,14 @@ const typeDefs = `#graphql
     isPublished: Boolean!
     slug: String!
     timeToRead: Int!
+    comments: [Comment]
+  }
+
+  type Comment {
+    id : ID!
+    content: String!
+    author: User!
+    createdAt: String!
   }
 
   type Tag {
@@ -48,6 +56,15 @@ const typeDefs = `#graphql
     tags: [TagInput]
     isPublished: Boolean
   }
+  input NewCommentInput {
+    content: String!
+    postId: ID!
+  }
+  input UpdateCommentInput {
+    id: ID!
+    content: String
+  }
+
 
   input TagInput {
     tag: String
@@ -73,6 +90,9 @@ const typeDefs = `#graphql
     createPost(input: NewPostInput): Post
     updatePost(input: UpdatePostInput): Post
     deletePost(id: ID!): String
+    createComment(input: NewCommentInput): Comment
+    updateComment(input: UpdateCommentInput): Comment
+    deleteComment(id: ID!): String
   }
 `;
 
