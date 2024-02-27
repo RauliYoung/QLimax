@@ -68,14 +68,13 @@ const resolvers = {
     createComment: async (_: any, {input}: any, context: any) => {
       try {
         const newComment = await context.dataSources.posts.createComment({
-          input,
+        ...input,
         });
         return newComment;
       } catch (error) {
         throw new Error('Failed to create comment');
       }
     },
-
     updateComment: async (_: any, {input}: any, context: any) => {
       try {
         return await context.dataSources.posts.updateComment({input});

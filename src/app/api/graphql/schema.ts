@@ -21,7 +21,6 @@ const typeDefs = `#graphql
   type Comment {
     id : ID!
     content: String!
-    author: User!
     createdAt: String!
   }
 

@@ -133,10 +133,6 @@ export const FETCH_COMMENTS = gql`
         id
         content
         createdAt
-        user {
-          id
-          email
-        }
       }
     }
   }
@@ -147,14 +143,10 @@ export const CREATE_COMMENT = gql`
     createComment(input: {postId: $postId, content: $content}) {
       id
       content
-      createdAt
-      user {
-        id
-        email
-      }
     }
   }
 `;
+    
 
 export const UPDATE_COMMENT = gql`
   mutation updateComment($postId: ID!, $commentId: ID!, $content: String!) {

@@ -21,23 +21,13 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
   const [comment, setComment] = useState<string>('');
   const [comments, setComments] = useState<Comment[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const {user} = useContext(UserContext);
   const toast = useToast();
 
   const [createCommentMutation] = useMutation(CREATE_COMMENT);
-  const {data: commentsData, refetch: refetchComments} = useQuery(
-    FETCH_COMMENTS,
-    {
-      variables: {postId},
-    },
-  );
-  useEffect(() => {
-    if (commentsData) {
-      setComments(commentsData.comments);
-      console.log(user);
-    }
-  }
-  , [commentsData]);
+ 
+
+  console.log(postId);
+
   const handleCommentSubmit = async () => {
     if (comment.length < 1) {
       toast({
@@ -51,9 +41,8 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
     setIsSubmitting(true);
     try {
       await createCommentMutation({
-        variables: {postId,user, content: comment},
+        variables: {postId, content: comment},
       });
-      await refetchComments();
       setComment('');
       setIsSubmitting(false);
     } catch (error) {
