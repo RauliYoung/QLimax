@@ -22,7 +22,7 @@ const resolvers = {
         throw new Error('Failed to fetch posts');
       }
     },
-        postBySlug: async (
+    postBySlug: async (
       _: any,
       {slug}: {slug: string},
       context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}},
@@ -65,7 +65,32 @@ const resolvers = {
         throw new Error('Failed to sign in');
       }
     },
- 
+    createComment: async (_: any, {input}: any, context: any) => {
+      try {
+        const newComment = await context.dataSources.comments.createComment({
+          input,
+        });
+        return newComment;
+      } catch (error) {
+        throw new Error('Failed to create comment');
+      }
+    },
+
+    updateComment: async (_: any, {input}: any, context: any) => {
+      try {
+        return await context.dataSources.comments.updateComment({input});
+      } catch (error) {
+        throw new Error('Failed to update comment');
+      }
+    },
+
+    deleteComment: async (_: any, {id}: any, context: any) => {
+      try {
+        return await context.dataSources.comments.deleteComment({id});
+      } catch (error) {
+        throw new Error('Failed to delete comment');
+      }
+    },
 
     updateUser: async (_: any, {input}: any, context: any) => {
       try {
