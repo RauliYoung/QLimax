@@ -53,7 +53,6 @@ const typeDefs = `#graphql
     tag: String
     color: String
   }
-
   type Query {
     users: [User]
     posts: [Post]

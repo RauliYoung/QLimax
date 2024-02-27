@@ -60,6 +60,26 @@ export const FETCH_POSTS = gql`
   }
 `;
 
+export const FETCH_POST = gql`
+  query getPost($slug: String!) {
+    postBySlug(slug: $slug) {
+      id
+      title
+      content
+      slug
+      timeToRead
+      isPublished
+      tags {
+        tag
+        color
+      }
+
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const CREATE_POST = gql`
   mutation createPost($input: NewPostInput!) {
     createPost(input: $input) {

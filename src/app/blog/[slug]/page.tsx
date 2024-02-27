@@ -1,144 +1,69 @@
-// import React, {useState} from 'react';
+'use client';
+import {FETCH_POST} from '@/app/lib/constants';
 import {
-  Box,
-  Container,
   Heading,
   Text,
   VStack,
   Divider,
-  Button,
-  Textarea,
   IconButton,
   Flex,
   Tag,
   Stack,
-  useColorMode,
+  Container,
+  Spinner,
 } from '@chakra-ui/react';
-import {fetchData} from '@/app/lib/fetchTestData';
 import {BsHeartFill} from 'react-icons/bs';
+import parse from 'html-react-parser';
+import {useQuery} from '@apollo/client';
 
-import {Post} from '../../../../types';
+export default function BlogPostPage({params}: {params: {slug: string}}) {
 
-export async function generateStaticParams() {
-  const posts = fetchData();
+  const {loading, error, data} = useQuery(FETCH_POST, {
+    variables: {slug: params.slug},
+  });
+  if (loading)
+    return (
+      <Container>
+        <Spinner />
+      </Container>
+    );
 
-  return posts.map((post) => ({
-    slug: post.id,
-  }));
-}
+  if (error) return <Container>{error.message}</Container>;
 
-// Multiple versions of this page will be statically generated
-// using the `params` returned by `generateStaticParams`
-
-// export default function Page({ params }) {
-//   const { slug } = params
-//   // ...
-// }
-
-type Comment = {
-  id: number;
-  user: string;
-  text: string;
-};
-
-const BlogPostPage: React.FC = () => {
-  const date = new Date().toLocaleDateString('fi-FI');
-  // const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [comment, setComment] = useState('');
-  // const [comments, setComments] = useState<Comment[]>([]);
-
-  // comment functions just for funsies and to show to ilkka
-  // TODO: replace with actual comment functionality and backend connection
-
-  // const handleCommentSubmit = () => {
-  //   setIsSubmitting(true);
-  //   const newComment: Comment = {
-  //     id: comments.length + 1,
-  //     user: 'Username',
-  //     text: comment,
-  //   };
-  //   setTimeout(() => {
-  //     setComments([...comments, newComment]);
-  //     setIsSubmitting(false);
-  //     setComment('');
-  //   }, 1000);
-  // };
-  //rgba(39, 170, 225, 1)
-  //rgba(241, 125, 177, 0.8)
-  // const buttonBg = useColorModeValue('qlimax.bg-blue', 'qlimax.bg-blue');
-  // const textColor = useColorModeValue('qlimax.bg-yellow', 'qlimax.bg-yellow');
-
+  const {title, content, tags, timeToRead} = data.postBySlug;
   return (
-    <Container
-      py={10}
-      bg="rgba(241, 125, 177, 0.8)"
-      borderRadius={18}
-      border="solid 2px black"
-    >
-      <VStack spacing={8} alignItems="flex-start">
-        <Heading>BLOGPOST</Heading>
-        <Flex alignItems="center" justifyContent="space-between">
-          <h1>Blog Post Title</h1>
-          <Stack alignItems="flex-end">
-            <Tag bg={'qlimax.bg-blue'}>sometag</Tag>
-            <Tag bg={'qlimax.bg-blue'}>someothertag</Tag>
-          </Stack>
-        </Flex>
-        <p>Posted on: {date}</p>
-        <p>Author: Fahey Schmidt</p>
-        <Divider
-          borderColor="qlimax.bg-pink"
-          border="solid 2px qlimax.bg-pink"
-        />
-        <Text>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </Text>
-        <Divider
-          borderColor="qlimax.bg-pink"
-          border="solid 2px qlimax.bg-pink"
-        />
-        <Flex alignItems="center" justifyContent="space-between" w="full">
-          <Heading size="md">Comments</Heading>
-          <IconButton aria-label="like" icon={<BsHeartFill />} />
-        </Flex>
-        {/* <Box w="full">
-          <Textarea
-            placeholder="Write a comment..."
-            mb={4}
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+    <Container bg="white" p={4} borderRadius="md" boxShadow="md">
+      <VStack spacing={4} align="start">
+        <Heading>{title}</Heading>
+        <Flex align="center">
+          <Text fontSize="sm" color="gray.500">
+            {timeToRead} min read
+          </Text>
+          <IconButton
+            aria-label="Like post"
+            icon={<BsHeartFill />}
+            colorScheme="red"
+            size="sm"
           />
-          <Button
-            colorScheme="blue"
-            isLoading={isSubmitting}
-            loadingText="Submitting"
-            spinnerPlacement="start"
-            onClick={handleCommentSubmit}
-            aria-label="submit comment"
-          >
-            Submit
-          </Button>
-        </Box> */}
-        {/* <VStack spacing={4} alignItems="flex-start" w="full">
-          {comments.map((comment) => (
-            <Box key={comment.id}>
-              <Text fontWeight="bold">{comment.user}</Text>
-              <Text>{comment.text}</Text>
-              <Divider />
-            </Box>
+        </Flex>
+        <Stack direction="row" spacing={2}>
+          {tags.map((tag: any) => (
+            <Tag key={tag.tag} color={tag.color}>
+              {tag.tag}
+            </Tag>
           ))}
-        </VStack> */}
+        </Stack>
+        <Divider />
+        <Text>{parse(content)}</Text>
       </VStack>
     </Container>
   );
-};
+}
 
-export default BlogPostPage;
+
+
+
+
+  
+ 
+

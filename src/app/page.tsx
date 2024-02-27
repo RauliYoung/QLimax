@@ -13,6 +13,7 @@ export default function Home() {
   const {user} = useContext(UserContext);
   return (
     <>
+      hello
       {/* {!user ? (
         <Auth />
       ) : (
