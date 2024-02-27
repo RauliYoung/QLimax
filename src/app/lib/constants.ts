@@ -28,6 +28,15 @@ export const UPDATE_USER = gql`
   }
 `;
 
+export const CONFIRM_PASSWORD = gql`
+  mutation ConfirmPassword($id: ID!, $password: String!) {
+    confirmPassword(id: $id, password: $password) {
+      id
+      password
+    }
+  }
+`;
+
 export const DELETE_USER = gql`
   mutation DeleteUser($deleteUserId: ID!) {
     deleteUser(id: $deleteUserId)

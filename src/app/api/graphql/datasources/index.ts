@@ -71,11 +71,24 @@ export class Users extends MongoDataSource<UserDocument> {
         {...input},
         {
           new: true,
-        },
+        }
       );
       return updatedUser;
     } catch (error) {
       throw new Error('Failed to update user');
+    }
+  }
+
+  async confirmPass({email, password}: {email: string; password: string}) {
+    try {
+      const user = await UserModel.findOne({email});
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      return {id: user._id};
+    } catch (error) {
+      throw new Error('Failed to sign in');
     }
   }
 

@@ -19,6 +19,7 @@
     "@emotion/styled": "^11.11.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@sendgrid/mail": "^8.1.1",
     "@types/quill": "^2.0.14",
     "apollo-datasource-mongodb": "^0.6.0",
     "bcrypt": "^5.1.1",

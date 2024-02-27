@@ -34,6 +34,11 @@ const typeDefs = `#graphql
     isValidated: Boolean
   }
 
+  input ConfirmPasswordInput {
+    id: ID!
+    password: String!
+  }
+
   input NewPostInput {
     title: String!
     content: String!
@@ -73,6 +78,7 @@ const typeDefs = `#graphql
     createPost(input: NewPostInput): Post
     updatePost(input: UpdatePostInput): Post
     deletePost(id: ID!): String
+    confirmPassword(input: ConfirmPasswordInput!): User
   }
 `;
 

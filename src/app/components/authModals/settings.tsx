@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
 import {useMutation} from '@apollo/client';
-import {UPDATE_USER, DELETE_USER} from '@/app/lib/constants';
+import {UPDATE_USER, DELETE_USER, CONFIRM_PASSWORD} from '@/app/lib/constants';
 import {UserContext} from '@/app/contexts/usercontext';
 import {useToast} from '@chakra-ui/react';
 import {ConfirmationModal} from '../modals/confirmationModal';
@@ -36,6 +36,7 @@ const SettingsPage: React.FC = () => {
 
   const [updateUser] = useMutation(UPDATE_USER);
   const [deleteUser] = useMutation(DELETE_USER);
+  const [confirmPass] = useMutation(CONFIRM_PASSWORD);
   const {isOpen, onOpen, onClose} = useDisclosure();
 
   const handlePasswordChange = () => {
@@ -53,23 +54,31 @@ const SettingsPage: React.FC = () => {
       return;
     }
 
-    updateUser({
+    confirmPass({
       variables: {
-        input: {
-          id: user?.id,
-          password: newPassword,
-        },
+        id: user?.id,
+        password: currentPassword,
       },
-    })
-      .then(() => {
-        console.log('Password changed successfully');
-        setCurrentPassword('');
-        setNewPassword('');
-        setConfirmPassword('');
+    }).then(() => {
+      console.log('Password confirmed');
+      updateUser({
+        variables: {
+          input: {
+            id: user?.id,
+            password: newPassword,
+          },
+        },
       })
-      .catch((error) => {
-        console.error('Error changing password:', error);
-      });
+        .then(() => {
+          console.log('Password changed successfully');
+          setCurrentPassword('');
+          setNewPassword('');
+          setConfirmPassword('');
+        })
+        .catch((error) => {
+          console.error('Error changing password:', error);
+        });
+    });
   };
 
   const handleEmailChange = () => {
@@ -104,26 +113,25 @@ const SettingsPage: React.FC = () => {
       });
   };
   const handleUserDelete = () => {
-  deleteUser({
-    variables: {
-      deleteUserId: user?.id,
-    },
-  })
-    .then(() => {
-      toast({
-        title: 'User deleted successfully',
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-        position: 'bottom-left',
-      });
+    deleteUser({
+      variables: {
+        deleteUserId: user?.id,
+      },
     })
-    .catch((error) => {
-      console.error('Error deleting user:', error);
-    });
-};
+      .then(() => {
+        toast({
+          title: 'User deleted successfully',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
+      })
+      .catch((error) => {
+        console.error('Error deleting user:', error);
+      });
+  };
 
- 
   const handleBackButton = () => {
     window.location.href = '/';
   };
@@ -249,7 +257,7 @@ const SettingsPage: React.FC = () => {
               message="Are you sure you want to delete your account?"
               onConfirm={handleUserDelete}
             />
-              <Button
+            <Button
               color={textColor}
               _hover={{bg: '#677589'}}
               onClick={handleBackButton}
