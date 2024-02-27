@@ -56,7 +56,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
         </Stack>
         <Divider />
         <Text>{parse(content)}</Text>
-        <CommentSection postId={id} />
+        <CommentSection postId={id} authorId={id} />
       </VStack>
     </Container>
   );

@@ -19,7 +19,7 @@ interface CommentSectionProps {
   authorId: string;
 }
 
-export const CommentSection: React.FC<CommentSectionProps> = ({postId,authorId}) => {
+export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
   const [comment, setComment] = useState<string>('');
   const [comments, setComments] = useState<Comment[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -28,7 +28,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId,authorId})
 
   const [createCommentMutation] = useMutation(CREATE_COMMENT);
   const {data, loading, error} = useQuery(FETCH_COMMENTS, {
-    variables: {postId, authorId},
+    variables: {postId},
   });
   useEffect(() => {
     if (!loading && data) {
