@@ -67,7 +67,7 @@ const resolvers = {
     },
     createComment: async (_: any, {input}: any, context: any) => {
       try {
-        const newComment = await context.dataSources.comments.createComment({
+        const newComment = await context.dataSources.posts.createComment({
           input,
         });
         return newComment;
@@ -78,7 +78,7 @@ const resolvers = {
 
     updateComment: async (_: any, {input}: any, context: any) => {
       try {
-        return await context.dataSources.comments.updateComment({input});
+        return await context.dataSources.posts.updateComment({input});
       } catch (error) {
         throw new Error('Failed to update comment');
       }
@@ -86,7 +86,7 @@ const resolvers = {
 
     deleteComment: async (_: any, {id}: any, context: any) => {
       try {
-        return await context.dataSources.comments.deleteComment({id});
+        return await context.dataSources.posts.deleteComment({id});
       } catch (error) {
         throw new Error('Failed to delete comment');
       }

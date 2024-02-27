@@ -20,12 +20,18 @@ interface PostDocument {
   isPublished: boolean;
   slug: string;
   timeToRead: number;
-  comments: {
-    id: ObjectId;
-    content: string;
-    createdAt: Date;
-    user: UserDocument;
-  }[];
+}
+interface CommentDocument {
+  _id: ObjectId;
+  content: string;
+  createdAt: Date;
+  user: UserDocument;
+  post: PostDocument;
+}
+interface NewComment {
+  content: string;
+  user: UserDocument;
+  post: PostDocument;
 }
 
 export class Users extends MongoDataSource<UserDocument> {
@@ -169,6 +175,50 @@ export class Posts extends MongoDataSource<PostDocument> {
       return 'Post deleted successfully';
     } catch (error) {
       throw new Error('Failed to delete post');
+    }
+  }
+
+  async createComment({
+    postId,
+    content,
+    userId,
+  }: any): Promise<CommentDocument> {
+    try {
+      const post = await PostModel.findById(postId);
+      const user = await UserModel.findById(userId);
+      const newComment:NewComment = {content, user, post};
+      post.comments.push(newComment);
+      await post.save();
+      return newComment as CommentDocument;
+    } catch (error) {
+      throw new Error('Failed to create comment');
+    }
+  }
+
+  async updateComment({
+    postId,
+    commentId,
+    content,
+  }: any): Promise<CommentDocument> {
+    try {
+      const post = await PostModel.findById(postId);
+      const comment = post.comments.id(commentId);
+      comment.content = content;
+      await post.save();
+      return comment;
+    } catch (error) {
+      throw new Error('Failed to update comment');
+    }
+  }
+
+  async deleteComment({postId, commentId}: any): Promise<string> {
+    try {
+      const post = await PostModel.findById(postId);
+      post.comments.id(commentId).remove();
+      await post.save();
+      return 'Comment deleted successfully';
+    } catch (error) {
+      throw new Error('Failed to delete comment');
     }
   }
 }
