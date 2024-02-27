@@ -77,7 +77,10 @@ const resolvers = {
     },
     updateComment: async (_: any, {input}: any, context: any) => {
       try {
-        return await context.dataSources.posts.updateComment({input});
+        const updatedComment = await context.dataSources.posts.updateComment({
+        ...input,
+        });
+        return updatedComment;
       } catch (error) {
         throw new Error('Failed to update comment');
       }

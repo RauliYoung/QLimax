@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
-import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 interface UserDocument {
   _id: ObjectId;
@@ -181,7 +181,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     try {
       const post = await PostModel.findById(postId);
       const newComment: NewComment = {
-        id: Date.now().toString(),
+        id: crypto.randomUUID(),
         content,
         post,
       };
