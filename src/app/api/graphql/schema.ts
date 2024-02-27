@@ -37,6 +37,7 @@ const typeDefs = `#graphql
   input ConfirmPasswordInput {
     id: ID!
     password: String!
+    newPassword: String!
   }
 
   input NewPostInput {
@@ -78,7 +79,7 @@ const typeDefs = `#graphql
     createPost(input: NewPostInput): Post
     updatePost(input: UpdatePostInput): Post
     deletePost(id: ID!): String
-    confirmPassword(input: ConfirmPasswordInput!): User
+    confirmPassword(id: ID!, password: String!): Boolean
   }
 `;
 

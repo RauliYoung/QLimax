@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const FETCH_USERS = gql`
   query getUsers {
@@ -30,10 +30,7 @@ export const UPDATE_USER = gql`
 
 export const CONFIRM_PASSWORD = gql`
   mutation ConfirmPassword($id: ID!, $password: String!) {
-    confirmPassword(id: $id, password: $password) {
-      id
-      password
-    }
+    confirmPassword(id: $id, password: $password) 
   }
 `;
 
