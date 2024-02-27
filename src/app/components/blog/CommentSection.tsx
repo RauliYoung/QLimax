@@ -35,8 +35,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId,authorId})
       setComments(data.post.comments);
     }
   }, [loading, data]);
-
-  const userStamp = user?.id.slice(0, 5);
+  const userStamp = user?.id.slice(-6);
   console.log(userStamp);
 
   const handleCommentSubmit = async () => {
@@ -79,7 +78,7 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId,authorId})
       <Button
         isLoading={isSubmitting}
         loadingText="Submitting"
-        spinnerPlacement="start"
+        spinnerPlacement="start" 
         onClick={handleCommentSubmit}
         aria-label="submit comment"
       >
