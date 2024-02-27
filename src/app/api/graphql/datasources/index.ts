@@ -20,6 +20,12 @@ interface PostDocument {
   isPublished: boolean;
   slug: string;
   timeToRead: number;
+  comments: {
+    id: ObjectId;
+    content: string;
+    createdAt: Date;
+    user: UserDocument;
+  }[];
 }
 
 export class Users extends MongoDataSource<UserDocument> {
@@ -47,7 +53,7 @@ export class Users extends MongoDataSource<UserDocument> {
   async updateUser({input}: any) {
     console.log(input);
     try {
-      const {id, password, email,isValidated} = input;
+      const {id, password, email, isValidated} = input;
 
       if (password) {
         const hashedPassword = await bcrypt.hash(password, 12);
@@ -65,7 +71,7 @@ export class Users extends MongoDataSource<UserDocument> {
         {...input},
         {
           new: true,
-        }
+        },
       );
       return updatedUser;
     } catch (error) {
@@ -117,6 +123,13 @@ export class Posts extends MongoDataSource<PostDocument> {
       throw new Error('Failed to fetch post');
     }
   }
+  async getPostBySlug(slug: string) {
+    try {
+      return await PostModel.findOne({slug});
+    } catch (error) {
+      throw new Error('Failed to fetch post');
+    }
+  }
 
   async createPost({input}: any): Promise<PostDocument> {
     try {
@@ -132,6 +145,7 @@ export class Posts extends MongoDataSource<PostDocument> {
       throw new Error('Failed to create post');
     }
   }
+
   async updatePost({id, input}: any) {
     try {
       const words = input.content.split(' ').length;

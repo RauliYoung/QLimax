@@ -3,7 +3,7 @@ const resolvers = {
     users: async (
       _: any,
       __: any,
-      context: {dataSources: {users: {getAllUsers: () => any}}}
+      context: {dataSources: {users: {getAllUsers: () => any}}},
     ) => {
       try {
         return await context.dataSources.users.getAllUsers();
@@ -14,7 +14,7 @@ const resolvers = {
     posts: async (
       _: any,
       __: any,
-      context: {dataSources: {posts: {getAllPosts: () => any}}}
+      context: {dataSources: {posts: {getAllPosts: () => any}}},
     ) => {
       try {
         return await context.dataSources.posts.getAllPosts();
@@ -22,10 +22,10 @@ const resolvers = {
         throw new Error('Failed to fetch posts');
       }
     },
-    postBySlug: async (
+        postBySlug: async (
       _: any,
       {slug}: {slug: string},
-      context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}}
+      context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}},
     ) => {
       try {
         return await context.dataSources.posts.getPostBySlug(slug);
@@ -37,7 +37,7 @@ const resolvers = {
     post: async (
       _: any,
       {id}: {id: string},
-      context: {dataSources: {posts: {getPostById: (id: string) => any}}}
+      context: {dataSources: {posts: {getPostById: (id: string) => any}}},
     ) => {
       try {
         return await context.dataSources.posts.getPostById(id);
@@ -65,6 +65,8 @@ const resolvers = {
         throw new Error('Failed to sign in');
       }
     },
+ 
+
     updateUser: async (_: any, {input}: any, context: any) => {
       try {
         return await context.dataSources.users.updateUser({input});
@@ -107,6 +109,7 @@ const resolvers = {
         throw new Error('Failed to update post');
       }
     },
+
     deletePost: async (_: any, {id}: any, context: any) => {
       try {
         return await context.dataSources.posts.deletePost({id});
