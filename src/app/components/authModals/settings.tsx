@@ -7,7 +7,6 @@ import {
   Text,
   useColorModeValue,
   Flex,
-  useStepContext,
   useDisclosure,
 } from '@chakra-ui/react';
 import customTheme from '../../../../themes/theme';
@@ -16,12 +15,6 @@ import {UPDATE_USER, DELETE_USER, CONFIRM_PASSWORD} from '@/app/lib/constants';
 import {UserContext} from '@/app/contexts/usercontext';
 import {useToast} from '@chakra-ui/react';
 import {ConfirmationModal} from '../modals/confirmationModal';
-
-interface SettingsModalProps {
-  onPasswordChange: (newPassword: string) => void;
-}
-
-// const SettingsPage: React.FC<SettingsModalProps> = ({onPasswordChange})
 
 const SettingsPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -40,8 +33,6 @@ const SettingsPage: React.FC = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
 
   const handlePasswordChange = () => {
-    console.log('USERUSERABUSER');
-    console.log(user);
     if (newPassword !== confirmPassword) {
       toast({
         title: 'Passwords do not match',
@@ -60,7 +51,6 @@ const SettingsPage: React.FC = () => {
         password: currentPassword,
       },
     }).then(() => {
-      console.log('Password confirmed');
       updateUser({
         variables: {
           input: {
@@ -70,48 +60,67 @@ const SettingsPage: React.FC = () => {
         },
       })
         .then(() => {
-          console.log('Password changed successfully');
           setCurrentPassword('');
           setNewPassword('');
           setConfirmPassword('');
+          toast({
+            title: 'Password changed successfully',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+            position: 'bottom-left',
+          });
         })
         .catch((error) => {
-          console.error('Error changing password:', error);
+          toast({
+            title: 'Error changing password',
+            description: 'Unable to change password. Error: {$error.message}',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'bottom-left',
+          });
         });
     });
   };
 
   const handleEmailChange = () => {
-    console.log('ASDASD');
-
-    updateUser({
+    confirmPass({
       variables: {
-        input: {
-          id: user?.id,
-          email: newEmail,
-        },
+        id: user?.id,
+        password: confirmEmailPassword,
       },
-    })
-      .then(() => {
-        toast({
-          title: 'Email changed successfully',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-          position: 'bottom-left',
-        });
+    }).then(() => {
+      updateUser({
+        variables: {
+          input: {
+            id: user?.id,
+            email: newEmail,
+          },
+        },
       })
-      .catch((error) => {
-        toast({
-          title: 'Error changing email',
-          description: 'Unable to change email. Please try again.',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-          position: 'bottom-left',
+        .then(() => {
+          toast({
+            title: 'Email changed successfully',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+            position: 'bottom-left',
+          });
+        })
+        .catch((error) => {
+          toast({
+            title: 'Error changing email',
+            description: 'Unable to change email. Please try again.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'bottom-left',
+          });
         });
-      });
+    });
   };
+
   const handleUserDelete = () => {
     deleteUser({
       variables: {
@@ -128,7 +137,14 @@ const SettingsPage: React.FC = () => {
         });
       })
       .catch((error) => {
-        console.error('Error deleting user:', error);
+        toast({
+          title: 'Error changing email',
+          description: 'Unable to change email. Please try again.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
       });
   };
 
