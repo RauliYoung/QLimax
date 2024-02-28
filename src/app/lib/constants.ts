@@ -51,8 +51,8 @@ export const LIKE_POST = gql`
 `;
 
 export const ADD_BOOKMARK = gql`
-  mutation AddBookmark($userId: ID!, $postSlug: String!) {
-    addBookmark(userId: $userId, postSlug: $postSlug) {
+  mutation AddBookmark($userId: ID!, $postId: ID!) {
+    addBookmark(userId: $userId, postId: $postId) {
       id
       bookmarks
     }

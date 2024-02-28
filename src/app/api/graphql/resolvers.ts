@@ -133,13 +133,13 @@ const resolvers = {
 
     addBookmark: async (
       _: any,
-      {userId, postSlug}: {userId: string; postSlug: string},
+      {userId, postId}: {userId: string; postId: string},
       context: any,
     ) => {
       try {
         const user = await context.dataSources.users.addBookmark(
           userId,
-          postSlug,
+          postId,
         );
         return user;
       } catch (error) {

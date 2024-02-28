@@ -48,7 +48,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
   const handleSaveToBookmarks = async () => {
     try {
       await addBookmark({
-        variables: {userId: user?.id, postSlug: data.postBySlug.id},
+        variables: {userId: user?.id, postId: data.postBySlug.id},
     });
     }
     catch (error) {

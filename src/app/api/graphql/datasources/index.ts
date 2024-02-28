@@ -44,10 +44,10 @@ export class Users extends MongoDataSource<UserDocument> {
       throw new Error('Failed to fetch users');
     }
   }
-  async addBookmark(userId: string, postSlug: string) {
+  async addBookmark(userId: string, postId: string) {
     try {
       const user = await UserModel.findById(userId);
-      user.bookmarks.push(postSlug);
+      user.bookmarks.push(postId);
       await user.save();
       return user;
     } catch (error) {
@@ -215,7 +215,6 @@ export class Posts extends MongoDataSource<PostDocument> {
       await post.save();
       return post;
     } catch (error) {
-      console.log(error);
       throw new Error('Failed to like post');
     }
   }

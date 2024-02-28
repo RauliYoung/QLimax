@@ -99,7 +99,7 @@ const typeDefs = `#graphql
     updateComment(input: UpdateCommentInput): Comment
     deleteComment(id: ID!): String
     likePost(postId: ID!): Post
-    addBookmark(userId: ID!, postSlug: String!): User
+    addBookmark(userId: ID!, postId: ID!): User
   }
 `;
 
