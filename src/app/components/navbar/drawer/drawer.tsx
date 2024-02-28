@@ -74,7 +74,7 @@ export function Drawer() {
                 </Chakra.MenuItem>
                 <Chakra.MenuItem
                   as={Chakra.Button}
-                  onClick={() => router.push('/search')}
+                  onClick={() => {router.push('/search'); onDrawerClose();}}
                   icon={<BsSearch />}
                 >
                   Search
