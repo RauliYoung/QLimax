@@ -13,6 +13,11 @@ function redoChange(this: any) {
   this.quill.history.redo();
 }
 
+// not a good fix for custom spellcheck handler but it works
+async function checkSpelling(this: any) {
+  await this.quill.checkSpelling();
+}
+
 const Size = Quill.import('formats/size');
 Size.whitelist = ['extra-small', 'small', 'medium', 'large'];
 Quill.register(Size, true);
@@ -23,6 +28,7 @@ export const modules = {
     handlers: {
       undo: undoChange,
       redo: redoChange,
+      spellcheck: checkSpelling,
     },
   },
   history: {
