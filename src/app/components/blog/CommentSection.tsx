@@ -64,6 +64,12 @@ export const CommentSection: React.FC<CommentSectionProps> = ({postId}) => {
         isClosable: true,
       });
     }
+    toast({
+      title: 'Comment submitted',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   }
   
   return (

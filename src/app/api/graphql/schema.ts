@@ -3,6 +3,7 @@ const typeDefs = `#graphql
     id: ID!
     email: String!
     isValidated: Boolean!
+    bookmarks: [String!]
   }
 
   type Post {
@@ -16,6 +17,7 @@ const typeDefs = `#graphql
     slug: String!
     timeToRead: Int!
     comments: [Comment]
+    likes: Int!
   }
 
   type Comment {
@@ -40,6 +42,7 @@ const typeDefs = `#graphql
     password: String
     email: String
     isValidated: Boolean
+    bookmarks: [String]
   }
 
   input NewPostInput {
@@ -55,6 +58,7 @@ const typeDefs = `#graphql
     content: String
     tags: [TagInput]
     isPublished: Boolean
+    likes: Int
   }
   input NewCommentInput {
     content: String!
@@ -94,6 +98,8 @@ const typeDefs = `#graphql
     createComment(input: NewCommentInput): Comment
     updateComment(input: UpdateCommentInput): Comment
     deleteComment(id: ID!): String
+    likePost(postId: ID!): Post
+    addBookmark(userId: ID!, postId: ID!): User
   }
 `;
 

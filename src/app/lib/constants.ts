@@ -41,6 +41,23 @@ export const SIGN_IN = gql`
     }
   }
 `;
+export const LIKE_POST = gql`
+  mutation LikePost($postId: ID!) {
+    likePost(postId: $postId) {
+      id
+      likes
+    }
+  }
+`;
+
+export const ADD_BOOKMARK = gql`
+  mutation AddBookmark($userId: ID!, $postId: ID!) {
+    addBookmark(userId: $userId, postId: $postId) {
+      id
+      bookmarks
+    }
+  }
+`;
 export const FETCH_POSTS = gql`
   query getPosts {
     posts {

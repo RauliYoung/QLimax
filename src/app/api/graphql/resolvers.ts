@@ -68,7 +68,7 @@ const resolvers = {
     createComment: async (_: any, {input}: any, context: any) => {
       try {
         const newComment = await context.dataSources.posts.createComment({
-        ...input,
+          ...input,
         });
         return newComment;
       } catch (error) {
@@ -78,7 +78,7 @@ const resolvers = {
     updateComment: async (_: any, {input}: any, context: any) => {
       try {
         const updatedComment = await context.dataSources.posts.updateComment({
-        ...input,
+          ...input,
         });
         return updatedComment;
       } catch (error) {
@@ -122,6 +122,31 @@ const resolvers = {
         throw new Error('Failed to create post');
       }
     },
+    likePost: async (_: any, {postId}: {postId: string}, context: any) => {
+      try {
+        const post = await context.dataSources.posts.likePost(postId);
+        return post;
+      } catch (error) {
+        throw new Error('Failed to like post');
+      }
+    },
+
+    addBookmark: async (
+      _: any,
+      {userId, postId}: {userId: string; postId: string},
+      context: any,
+    ) => {
+      try {
+        const user = await context.dataSources.users.addBookmark(
+          userId,
+          postId,
+        );
+        return user;
+      } catch (error) {
+        throw new Error('Failed to add bookmark');
+      }
+    },
+
     updatePost: async (_: any, {id, input}: any, context: any) => {
       try {
         const updatePostInput = {
