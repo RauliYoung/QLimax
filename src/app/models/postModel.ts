@@ -51,6 +51,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     unique: true,
   }, 
+  likes: {
+    type: Number,
+    default: 0,
+  },
   timeToRead: {
     type: Number,
     default: 0,

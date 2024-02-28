@@ -1,7 +1,7 @@
-import { MongoDataSource } from 'apollo-datasource-mongodb';
+import {MongoDataSource} from 'apollo-datasource-mongodb';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { ObjectId } from 'mongodb';
+import {ObjectId} from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
 import crypto from 'crypto';
@@ -15,7 +15,7 @@ interface PostDocument {
   _id: ObjectId;
   title: string;
   content: string;
-  tags: { tag: string; color: string }[];
+  tags: {tag: string; color: string}[];
   createdAt: Date;
   updatedAt: Date;
   isPublished: boolean;
@@ -44,8 +44,18 @@ export class Users extends MongoDataSource<UserDocument> {
       throw new Error('Failed to fetch users');
     }
   }
+  async addBookmark(userId: string, postSlug: string) {
+    try {
+      const user = await UserModel.findById(userId);
+      user.bookmarks.push(postSlug);
+      await user.save();
+      return user;
+    } catch (error) {
+      throw new Error('Failed to add bookmark');
+    }
+  }
 
-  async createUser({ input }: any): Promise<UserDocument> {
+  async createUser({input}: any): Promise<UserDocument> {
     try {
       const hashedPassword = await bcrypt.hash(input.password, 12);
       const newUser = await UserModel.create({
@@ -58,10 +68,10 @@ export class Users extends MongoDataSource<UserDocument> {
     }
   }
 
-  async updateUser({ input }: any) {
+  async updateUser({input}: any) {
     console.log(input);
     try {
-      const { id, password, email, isValidated } = input;
+      const {id, password, email, isValidated} = input;
 
       if (password) {
         const hashedPassword = await bcrypt.hash(password, 12);
@@ -76,7 +86,7 @@ export class Users extends MongoDataSource<UserDocument> {
 
       const updatedUser = await UserModel.findByIdAndUpdate(
         id,
-        { ...input },
+        {...input},
         {
           new: true,
         },
@@ -87,24 +97,24 @@ export class Users extends MongoDataSource<UserDocument> {
     }
   }
 
-  async signIn({ email, password }: { email: string; password: string }) {
+  async signIn({email, password}: {email: string; password: string}) {
     try {
-      const user = await UserModel.findOne({ email });
+      const user = await UserModel.findOne({email});
       if (!user) {
         throw new Error('User not found');
       }
 
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET ?? '', {
+      const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET ?? '', {
         expiresIn: '4h',
       });
 
-      return { token, id: user._id };
+      return {token, id: user._id};
     } catch (error) {
       throw new Error('Failed to sign in');
     }
   }
 
-  async deleteUser({ id }: { id: string }): Promise<string> {
+  async deleteUser({id}: {id: string}): Promise<string> {
     console.log('ID');
     console.log(id);
     try {
@@ -133,13 +143,13 @@ export class Posts extends MongoDataSource<PostDocument> {
   }
   async getPostBySlug(slug: string) {
     try {
-      return await PostModel.findOne({ slug });
+      return await PostModel.findOne({slug});
     } catch (error) {
       throw new Error('Failed to fetch post');
     }
   }
 
-  async createPost({ input }: any): Promise<PostDocument> {
+  async createPost({input}: any): Promise<PostDocument> {
     try {
       const words = input.content.split(' ').length;
       const timeToRead = Math.ceil(words / 200);
@@ -154,7 +164,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     }
   }
 
-  async updatePost({ id, input }: any) {
+  async updatePost({id, input}: any) {
     try {
       const words = input.content.split(' ').length;
       const timeToRead = Math.ceil(words / 200);
@@ -171,7 +181,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     }
   }
 
-  async deletePost({ id }: { id: string }): Promise<string> {
+  async deletePost({id}: {id: string}): Promise<string> {
     try {
       await PostModel.findByIdAndDelete(id);
       return 'Post deleted successfully';
@@ -179,7 +189,7 @@ export class Posts extends MongoDataSource<PostDocument> {
       throw new Error('Failed to delete post');
     }
   }
-  async createComment({ postId, content,authorId }: any) {
+  async createComment({postId, content, authorId}: any) {
     try {
       const post = await PostModel.findById(postId);
       const newComment: NewComment = {
@@ -191,9 +201,22 @@ export class Posts extends MongoDataSource<PostDocument> {
       post.comments.push(newComment);
       await post.save();
       return newComment;
-    }
-    catch (error) {
+    } catch (error) {
       throw new Error('Failed to create comment');
+    }
+  }
+  async likePost(postId: string) {
+    try {
+      const post = await PostModel.findById(postId);
+      if (!post) {
+        throw new Error('Post not found');
+      }
+      post.likes += 1;
+      await post.save();
+      return post;
+    } catch (error) {
+      console.log(error);
+      throw new Error('Failed to like post');
     }
   }
 
@@ -213,7 +236,7 @@ export class Posts extends MongoDataSource<PostDocument> {
     }
   }
 
-  async deleteComment({ postId, commentId }: any): Promise<string> {
+  async deleteComment({postId, commentId}: any): Promise<string> {
     try {
       const post = await PostModel.findById(postId);
       post.comments.id(commentId).remove();
