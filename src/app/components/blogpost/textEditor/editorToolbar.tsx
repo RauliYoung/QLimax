@@ -13,7 +13,6 @@ function redoChange(this: any) {
   this.quill.history.redo();
 }
 
-// not a good fix for custom spellcheck handler but it works
 async function checkSpelling(this: any) {
   await this.quill.checkSpelling();
 }
