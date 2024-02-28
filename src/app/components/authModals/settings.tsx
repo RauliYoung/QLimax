@@ -22,7 +22,6 @@ interface SettingsModalProps {
 }
 
 // const SettingsPage: React.FC<SettingsModalProps> = ({onPasswordChange})
-
 const SettingsPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
