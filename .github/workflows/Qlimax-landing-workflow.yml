@@ -1,8 +1,9 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
-branches:
-  - main
+on:
+  pull_request:
+    branches:
+      - main
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
