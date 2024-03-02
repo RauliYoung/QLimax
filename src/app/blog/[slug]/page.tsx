@@ -42,6 +42,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <Spinner />
       </Container>
     );
+    console.log(data);
 
   const handleLike = async () => {
     try {
@@ -77,7 +78,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
   if (error) return <Container>{error.message}</Container>;
 
-  const { title, content, tags, timeToRead, id } = data.postBySlug;
+  const { title, content, tags, timeToRead, id, likes } = data.postBySlug;
   return (
     <Container bg="white" p={4} borderRadius="md" boxShadow="md">
       <VStack spacing={4} align="start">
@@ -98,6 +99,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <Text>{parse(content)}</Text>
       </VStack>
       <Box w="100%" pt="10" pb="10" display="flex" justifyContent="flex-end">
+        <Text fontSize="sm" color="gray.500">
+          {likes} likes
+        </Text>
         <Tooltip label={liked ? 'You like this': 'Like post'} aria-label="Like post">
           <IconButton
             onClick={() => {

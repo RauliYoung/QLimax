@@ -65,6 +65,7 @@ export const FETCH_POSTS = gql`
       title
       content
       slug
+      likes
       timeToRead
       isPublished
       tags {
@@ -84,6 +85,7 @@ export const FETCH_POST = gql`
       title
       content
       slug
+      likes
       timeToRead
       isPublished
       tags {
