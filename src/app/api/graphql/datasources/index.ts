@@ -96,12 +96,16 @@ export class Users extends MongoDataSource<UserDocument> {
       throw new Error('Failed to update user');
     }
   }
-
   async signIn({email, password}: {email: string; password: string}) {
     try {
       const user = await UserModel.findOne({email});
       if (!user) {
         throw new Error('User not found');
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        throw new Error('Invalid credentials');
       }
 
       const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET ?? '', {
