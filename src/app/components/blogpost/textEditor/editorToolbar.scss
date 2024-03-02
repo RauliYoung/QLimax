@@ -1,0 +1,48 @@
+.ql-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #000;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ql-toolbar button {
+  border: none;
+  background: none;
+  color: #fff;
+}
+
+.ql-toolbar button:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.ql-toolbar .ql-picker-label {
+  color: #fff;
+}
+
+.ql-toolbar .ql-picker-label:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+.ql-toolbar .ql-picker-options {
+  padding: 10px;
+  background-color: #000;
+  border: none;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ql-toolbar .ql-picker-item:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .ql-toolbar {
+    display: none;
+  }
+}

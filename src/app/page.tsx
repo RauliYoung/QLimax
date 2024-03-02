@@ -1,70 +1,50 @@
 'use client';
-import {
-  Flex,
-  Heading,
-  Text,
-  Card,
-  CardBody,
-  CardHeader,
-} from '@chakra-ui/react';
+import {Flex, Heading, Grid} from '@chakra-ui/react';
 import testData from '../../testData/testPosts.json';
+import Auth from './components/authModals/authModals';
+import {useContext} from 'react';
+import {UserContext} from './contexts/usercontext';
+import BlogPostPreview from './components/blogpost/blogPostPreview';
+import {Post} from '../../types';
+import Link from 'next/link';
+import SettingsPage from './components/authModals/settings';
 
-interface Post {
-  title: string;
-  header: string;
-  body: string;
-}
 export default function Home() {
+  const {user} = useContext(UserContext);
   return (
-    <Flex as='main' direction='column'>
-      <Flex
-        as='section'
-        direction='column'
-        p='1rem'
-        justifyContent='center'
-        alignItems='center'
-      >
-        <Heading as='h1'>Hello world, is an old message</Heading>
-        <Text as='p'>
-          This is a paragraph, and it is the child of a flex container with
-          direction column
-        </Text>
-        <Text as='p'>
-          Whereas disregard and contempt for human rights have resulted
-        </Text>
-      </Flex>
-      <Flex maxW='100%' justifyContent='center'>
-        <Flex
-          as='section'
-          wrap='wrap'
-          justifyContent='center'
-          maxW='798px'
-          gap='1rem'
-          m='auto'
-        >
-          {testData
-            .map((post: Post) => ({
-              title: post.title,
-              header: post.header,
-              body: post.body,
-            }))
-            .map((post: Post) => (
-              <Card w='250px' h='300px'>
-                <CardBody overflow='auto'>
-                  <Heading as='h2' fontSize={'28px'}>
-                    {post.title}
-                  </Heading>
-                  <Text as='p' fontSize='15px'>
-                    {post.header}
-                  </Text>
-                  <Text as='p' fontSize='15px'>
-                    {post.body}
-                  </Text>
-                </CardBody>
-              </Card>
-            ))}
+    <>
+      hello
+      {/* {!user ? (
+        <Auth />
+      ) : (
+        <Flex as="main" direction="column" pb="1rem">
+          <Flex
+            as="section"
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Heading as="h1" fontSize={{base: '42px', lg: '64px'}} pb="1rem">
+              Our top blogs
+            </Heading>
+          </Flex>
+          <Flex maxW="100%" justifyContent="center">
+            <Grid
+              as="section"
+              gridTemplateColumns={{base: '1fr', lg: 'repeat(3, 1fr)'}}
+              justifyContent="center"
+              gap="1rem"
+              m="auto"
+            >
+              {testData.map((post: Post, index: number) => (
+                <Link key={index} href={`/blog/${post.id}`}>
+                  <BlogPostPreview post={post} />
+                </Link>
+              ))}
+            </Grid>
+          </Flex>
         </Flex>
-      </Flex>
-    </Flex>
+      )} */}
+    </>
   );
 }

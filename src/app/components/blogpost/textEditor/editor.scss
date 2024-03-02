@@ -1,0 +1,55 @@
+.editorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 100%;
+  padding: 20px;
+  width: 50vw;
+  min-width: 80vw;
+}
+
+.editor {
+  width: 100%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+
+  .ql-editor {
+    height: 100%;
+    min-height: 50vh;
+    border-radius: 5px;
+    padding: 5%;
+    font-size: 1rem;
+    width: 100%;
+  }
+}
+
+.editor.light .ql-editor {
+  background-color: #fff;
+}
+
+.editor.dark .ql-editor {
+  background-color: #333;
+}
+
+.ql-editor.ql-blank::before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  position: absolute;
+  left: 5%;
+  top: 15%;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .editorContainer {
+    width: 100%;
+    padding: 0;
+  }
+
+  .editor {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 20px;
+  }
+}

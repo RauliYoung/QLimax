@@ -1,52 +1,92 @@
 [
   {
+    "id":"1",
     "title": "Exploring the Wonders of Machine Learning",
     "header": "Unveiling the Power of Artificial Intelligence",
-    "body": "In this blog post, we delve into the fascinating world of machine learning, exploring its applications, challenges, and potential impact on various industries. Join us on a journey to understand the underlying concepts and discover the magic behind intelligent algorithms."
+    "body": "In this blog post, we delve into the fascinating world of machine learning, exploring its applications, challenges, and potential impact on various industries. Join us on a journey to understand the underlying concepts and discover the magic behind intelligent algorithms.",
+    "rating": 4.5,
+    "preview": "Discover the fascinating world of machine learning and its potential impact on industries. Join us to understand the magic behind intelligent algorithms.",
+    "timeToRead": "3"
   },
   {
+    "id":"2",
     "title": "The Art of Cooking: A Culinary Adventure",
     "header": "Savoring Flavors from Around the Globe",
-    "body": "Embark on a culinary adventure with our exploration of diverse cuisines. From mouthwatering recipes to the cultural significance of different dishes, this blog post celebrates the art of cooking and invites you to discover the joy of creating delicious meals at home."
+    "body": "Embark on a culinary adventure with our exploration of diverse cuisines. From mouthwatering recipes to the cultural significance of different dishes, this blog post celebrates the art of cooking and invites you to discover the joy of creating delicious meals at home.",
+    "rating": 4.8,
+    "preview": "Embark on a culinary adventure and discover the joy of cooking diverse cuisines. Explore mouthwatering recipes and cultural significance.",
+    "timeToRead": "5"
   },
   {
+    "id":"3",
     "title": "Mindfulness Meditation: Finding Inner Peace",
     "header": "Nurturing Your Mental Well-being",
-    "body": "Discover the transformative power of mindfulness meditation in this blog post. We explore the benefits of cultivating awareness, share practical techniques for meditation, and discuss how incorporating mindfulness into your daily routine can contribute to overall mental well-being."
+    "body": "Discover the transformative power of mindfulness meditation in this blog post. We explore the benefits of cultivating awareness, share practical techniques for meditation, and discuss how incorporating mindfulness into your daily routine can contribute to overall mental well-being.",
+    "rating": 4.7,
+    "preview": "Explore the transformative power of mindfulness meditation and its benefits for mental well-being. Learn practical techniques for cultivating awareness.",
+    "timeToRead": "2"
   },
   {
+    "id":"4",
     "title": "The Future of Space Exploration",
     "header": "Unveiling the Mysteries Beyond Our Atmosphere",
-    "body": "Journey into the cosmos as we discuss the latest advancements in space exploration. From cutting-edge technologies to ambitious missions, this blog post offers a glimpse into the future of space travel and our quest to unlock the secrets of the universe."
+    "body": "Journey into the cosmos as we discuss the latest advancements in space exploration. From cutting-edge technologies to ambitious missions, this blog post offers a glimpse into the future of space travel and our quest to unlock the secrets of the universe.",
+    "rating": 4.9,
+    "preview": "Explore the latest advancements in space exploration and the future of space travel. Join us in unraveling the mysteries of the cosmos.",
+    "timeToRead": "10"
   },
   {
+    "id":"5",
     "title": "Digital Nomad Lifestyle: Work from Anywhere",
     "header": "Breaking Free from the Traditional 9-to-5",
-    "body": "Explore the freedom of the digital nomad lifestyle in this blog post. Learn how individuals are reshaping their work environments, embracing remote opportunities, and creating a perfect balance between professional success and personal fulfillment."
+    "body": "Explore the freedom of the digital nomad lifestyle in this blog post. Learn how individuals are reshaping their work environments, embracing remote opportunities, and creating a perfect balance between professional success and personal fulfillment.",
+    "rating": 4.6,
+    "preview": "Discover the freedom of the digital nomad lifestyle and reshaping work environments. Embrace remote opportunities for a balanced life.",
+    "timeToRead": "8"
   },
   {
+    "id":"5",
     "title": "The Impact of Climate Change: A Call to Action",
     "header": "Understanding the Environmental Challenges Ahead",
-    "body": "Addressing the pressing issue of climate change, this blog post provides insights into its far-reaching consequences. We discuss the importance of sustainable practices, highlight current environmental initiatives, and emphasize the collective responsibility we share in preserving our planet."
+    "body": "Addressing the pressing issue of climate change, this blog post provides insights into its far-reaching consequences. We discuss the importance of sustainable practices, highlight current environmental initiatives, and emphasize the collective responsibility we share in preserving our planet.",
+    "rating": 4.8,
+    "preview": "Gain insights into the pressing issue of climate change and its consequences. Learn about sustainable practices and environmental initiatives.",
+    "timeToRead": "2"
   },
   {
+    "id":"6",
     "title": "The World of Virtual Reality Gaming",
     "header": "Immersive Experiences Redefining Entertainment",
-    "body": "Dive into the exciting realm of virtual reality gaming in this blog post. From mind-bending simulations to interactive adventures, we explore how VR technology is revolutionizing the gaming industry and offering players an unparalleled level of immersion."
+    "body": "Dive into the exciting realm of virtual reality gaming in this blog post. From mind-bending simulations to interactive adventures, we explore how VR technology is revolutionizing the gaming industry and offering players an unparalleled level of immersion.",
+    "rating": 4.9,
+    "preview": "Dive into the realm of virtual reality gaming and experience mind-bending simulations. Explore how VR is revolutionizing entertainment.",
+    "timeToRead": "4"
   },
   {
+    "id":"7",
     "title": "Artificial Intelligence in Healthcare",
     "header": "Transforming Patient Care with Smart Solutions",
-    "body": "Discover the groundbreaking applications of artificial intelligence in healthcare. This blog post delves into how AI is enhancing diagnostics, improving treatment plans, and revolutionizing patient care, ultimately shaping the future of the medical field."
+    "body": "Discover the groundbreaking applications of artificial intelligence in healthcare. This blog post delves into how AI is enhancing diagnostics, improving treatment plans, and revolutionizing patient care, ultimately shaping the future of the medical field.",
+    "rating": 4.7,
+    "preview": "Explore groundbreaking applications of AI in healthcare and its impact on diagnostics and patient care. Shape the future of the medical field.",
+    "timeToRead": "5"
   },
   {
+    "id":"8",
     "title": "Mastering the Art of Photography",
     "header": "Capturing Moments with Creative Precision",
-    "body": "Uncover the secrets to becoming a skilled photographer in this blog post. From composition techniques to post-processing tips, we guide you through the artistic journey of mastering photography and capturing breathtaking moments with creative precision."
+    "body": "Uncover the secrets to becoming a skilled photographer in this blog post. From composition techniques to post-processing tips, we guide you through the artistic journey of mastering photography and capturing breathtaking moments with creative precision.",
+    "rating": 4.6,
+    "preview": "Uncover the secrets to becoming a skilled photographer and capturing breathtaking moments. Learn composition techniques and post-processing tips.",
+    "timeToRead": "6"
   },
   {
+    "id":"9",
     "title": "The Rise of Sustainable Fashion",
     "header": "Fashioning a Greener Future for the Industry",
-    "body": "Explore the growing trend of sustainable fashion and its impact on the global garment industry. This blog post highlights eco-friendly practices, ethical fashion brands, and the role consumers play in driving positive change toward a more sustainable and conscious future."
+    "body": "Explore the growing trend of sustainable fashion and its impact on the global garment industry. This blog post highlights eco-friendly practices, ethical fashion brands, and the role consumers play in driving positive change toward a more sustainable and conscious future.",
+    "rating": 4.8,
+    "preview": "Explore the growing trend of sustainable fashion and its impact on the garment industry. Discover eco-friendly practices and ethical brands.",
+    "timeToRead": "3"
   }
 ]
