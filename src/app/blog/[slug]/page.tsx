@@ -99,7 +99,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <Text>{parse(content)}</Text>
       </VStack>
       <Box w="100%" pt="10" pb="10" display="flex" justifyContent="flex-end">
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize="sm" color="gray.500" alignSelf="flex-end" mr="2">
           {likes} likes
         </Text>
         <Tooltip label={liked ? 'You like this': 'Like post'} aria-label="Like post">
