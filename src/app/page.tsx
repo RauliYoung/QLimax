@@ -13,10 +13,6 @@ export default function Home() {
   const {user} = useContext(UserContext);
   return (
     <>
-      hello
-      {/* {!user ? (
-        <Auth />
-      ) : (
         <Flex as="main" direction="column" pb="1rem">
           <Flex
             as="section"
@@ -44,7 +40,7 @@ export default function Home() {
             </Grid>
           </Flex>
         </Flex>
-      )} */}
+      )
     </>
   );
 }

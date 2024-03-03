@@ -7,14 +7,16 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('QlimaxUser');
+  const storedValue = localStorage.getItem('QLimaxUser');
+  const token = storedValue ? JSON.parse(storedValue).token : null;
   return {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
     }
   }
-});
+}); 
+
 
 const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (graphQLErrors) {
@@ -33,3 +35,5 @@ const client = new ApolloClient({
 });
 
 export default client;
+
+

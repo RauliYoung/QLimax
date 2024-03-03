@@ -5,9 +5,6 @@ const resolvers = {
       __: any,
       context: { user: any; dataSources: { users: { getAllUsers: () => any } } },
     ) => {
-      if (!context.user) {
-        throw new Error('Unauthorized');
-      }
       try {
         return await context.dataSources.users.getAllUsers();
       } catch (error) {
@@ -104,9 +101,6 @@ const resolvers = {
     },
 
     updateUser: async (_: any, { input }: any, context: any) => {
-      if (!context.user) {
-        throw new Error('Unauthorized');
-      }
       try {
         return await context.dataSources.users.updateUser({ input });
       } catch (error) {

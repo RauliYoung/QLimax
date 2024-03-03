@@ -23,21 +23,24 @@ const server = new ApolloServer({
 
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req, res) => {
-    const token = req.headers.get('authorization') || '';
+    const authHeader = req.headers.get('authorization') || '';
+    const token = authHeader.split(' ')[1];
     let user = null;
+    const jwtsecret = process.env.JWT_SECRET || '';
 
     try {
       if (token) {
-        user = jwt.verify(token, process.env.JWT_SECRET);
+        user = jwt.verify(token, jwtsecret);
       }
     } catch (e) {
       console.log('Invalid token');
+      console.log(e);
     }
 
     return {
       req,
       res,
-      user,
+      user, 
       dataSources: {
         users: new Users({modelOrCollection: UserModel as any}),
         posts: new Posts({modelOrCollection: PostModel as any}),
@@ -46,9 +49,12 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   },
 });
 export async function GET(request: NextRequest) {
-  return handler(request);
+  const response = await handler(request);
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  return response;
 }
 export async function POST(request: NextRequest) {
-  return handler(request);
+  const response = await handler(request);
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  return response;
 }
-
