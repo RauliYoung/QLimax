@@ -101,7 +101,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
   return (
     <Container bg="white" p={4} borderRadius="md" boxShadow="md" maxW="container.lg">
       <VStack spacing={4} align="start">
-        <Heading>{title}</Heading>
+        <Heading color= 'black'>{title}</Heading>
         <Flex align="center">
           <Text fontSize="sm" color="gray.500">
             {timeToRead} min read
@@ -123,7 +123,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
                 }
           }
         >
-          <Text>
+          <Text color="black">
             {user ? parse(content) : parse(getTrimmedContent(content))}
           </Text>
         </Box>
