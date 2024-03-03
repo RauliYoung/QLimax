@@ -8,6 +8,7 @@ import {Users, Posts} from './datasources';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
 import {makeExecutableSchema} from 'graphql-tools';
+import jwt from 'jsonwebtoken';
 
 mongoConnect();
 
@@ -21,14 +22,28 @@ const server = new ApolloServer({
 });
 
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
-  context: async (req, res) => ({
-    req,
-    res,
-    dataSources: {
-      users: new Users({modelOrCollection: UserModel as any}),
-      posts: new Posts({modelOrCollection: PostModel as any}),
-    },
-  }),
+  context: async (req, res) => {
+    const token = req.headers.get('authorization') || '';
+    let user = null;
+
+    try {
+      if (token) {
+        user = jwt.verify(token, process.env.JWT_SECRET);
+      }
+    } catch (e) {
+      console.log('Invalid token');
+    }
+
+    return {
+      req,
+      res,
+      user,
+      dataSources: {
+        users: new Users({modelOrCollection: UserModel as any}),
+        posts: new Posts({modelOrCollection: PostModel as any}),
+      },
+    };
+  },
 });
 export async function GET(request: NextRequest) {
   return handler(request);
