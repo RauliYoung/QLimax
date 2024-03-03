@@ -1,5 +1,5 @@
 'use client';
-import { FETCH_POST } from '@/app/lib/constants';
+import {FETCH_POST} from '@/app/lib/constants';
 import {
   Heading,
   Text,
@@ -14,39 +14,49 @@ import {
   Tooltip,
   Box,
 } from '@chakra-ui/react';
-import { BsBookmarkFill, BsHeartFill } from 'react-icons/bs';
+import {BsBookmarkFill, BsHeartFill} from 'react-icons/bs';
 import parse from 'html-react-parser';
-import { useQuery } from '@apollo/client';
-import { CommentSection } from '@/app/components/blog/CommentSection';
-import { LIKE_POST, ADD_BOOKMARK } from '@/app/lib/constants';
-import { useMutation } from '@apollo/client';
-import { UserContext } from '@/app/contexts/usercontext';
-import { useContext, useState } from 'react';
-import { useToast } from '@chakra-ui/react';
+import {useQuery} from '@apollo/client';
+import {CommentSection} from '@/app/components/blog/CommentSection';
+import {LIKE_POST, ADD_BOOKMARK} from '@/app/lib/constants';
+import {useMutation} from '@apollo/client';
+import {UserContext} from '@/app/contexts/usercontext';
+import {useContext, useState} from 'react';
+import {useToast} from '@chakra-ui/react';
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default function BlogPostPage({params}: {params: {slug: string}}) {
   const [likePost] = useMutation(LIKE_POST);
   const [addBookmark] = useMutation(ADD_BOOKMARK);
-  const { user } = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const toast = useToast();
 
   const [liked, setLiked] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
 
-  const { loading, error, data } = useQuery(FETCH_POST, {
-    variables: { slug: params.slug },
+  const {loading, error, data} = useQuery(FETCH_POST, {
+    variables: {slug: params.slug},
   });
   if (loading)
     return (
-      <Container>
-        <Spinner />
-      </Container>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="50vh"
+      >
+        <Spinner
+          size="xl"
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="plum"
+          color="#27AAE1"
+        />
+      </Box>
     );
-    console.log(data);
 
   const handleLike = async () => {
     try {
-      await likePost({ variables: { postId: data.postBySlug.id } });
+      await likePost({variables: {postId: data.postBySlug.id}});
       setLiked(true);
     } catch (error) {
       console.error(error);
@@ -62,7 +72,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const handleSaveToBookmarks = async () => {
     try {
       await addBookmark({
-        variables: { userId: user?.id, postId: data.postBySlug.id },
+        variables: {userId: user?.id, postId: data.postBySlug.id},
       });
       setBookmarked(true);
     } catch (error) {
@@ -76,9 +86,15 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     });
   };
 
+  const getTrimmedContent = (content:string, limit = 500) => {
+    return content.length > limit
+      ? content.substring(0, limit) + '...'
+      : content;
+  };
+
   if (error) return <Container>{error.message}</Container>;
 
-  const { title, content, tags, timeToRead, id, likes } = data.postBySlug;
+  const {title, content, tags, timeToRead, id, likes} = data.postBySlug;
   return (
     <Container bg="white" p={4} borderRadius="md" boxShadow="md">
       <VStack spacing={4} align="start">
@@ -96,18 +112,30 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           ))}
         </Stack>
         <Divider />
-        <Text>{parse(content)}</Text>
+        <Text>
+          {user ? parse(content) : parse(getTrimmedContent(content))}
+          {!user && (
+            <Text color="plum" fontSize="sm">
+              Login to read more
+            </Text>
+          )}
+        </Text>
       </VStack>
       <Box w="100%" pt="10" pb="10" display="flex" justifyContent="flex-end">
         <Text fontSize="sm" color="gray.500" alignSelf="flex-end" mr="2">
           {likes} likes
         </Text>
-        <Tooltip label={liked ? 'You like this': 'Like post'} aria-label="Like post">
+        {user && (
+        <Tooltip
+          label={liked ? 'You like this' : 'Like post'}
+          aria-label="Like post"
+        >
           <IconButton
             onClick={() => {
               handleLike();
             }}
-            aria-label='like post' icon={<BsHeartFill />}
+            aria-label="like post"
+            icon={<BsHeartFill />}
             colorScheme={liked ? 'gray' : 'red'}
             size="sm"
             alignSelf="flex-end"
@@ -115,7 +143,12 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             isDisabled={liked}
           />
         </Tooltip>
-        <Tooltip label={bookmarked ? 'Saved to bookmarks' : 'Save to bookmarks'} aria-label="Save to bookmarks">
+        )}
+        {user && (
+        <Tooltip
+          label={bookmarked ? 'Saved to bookmarks' : 'Save to bookmarks'}
+          aria-label="Save to bookmarks"
+        >
           <IconButton
             onClick={() => {
               handleSaveToBookmarks();
@@ -128,8 +161,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             isDisabled={bookmarked}
           />
         </Tooltip>
+        )}
       </Box>
-      <CommentSection postId={id} authorId={id} />
+      {user && <CommentSection postId={id} authorId={id} />}
     </Container>
   );
 }

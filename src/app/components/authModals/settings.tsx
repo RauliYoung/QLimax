@@ -120,6 +120,7 @@ const SettingsPage: React.FC = () => {
     .catch((error) => {
       console.error('Error deleting user:', error);
     });
+    window.location.href = '/';
 };
 
  
