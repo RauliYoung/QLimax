@@ -34,7 +34,6 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
       }
     } catch (e) {
       console.log('Invalid token');
-      console.log(e);
     }
 
     return {
