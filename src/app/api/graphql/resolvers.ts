@@ -103,7 +103,6 @@ const resolvers = {
     updateUser: async (_: any, {input}: any, context: any) => {
       try {
         return await context.dataSources.users.updateUser({input});
-        return await context.dataSources.users.updateUser({input});
       } catch (error) {
         throw new Error('Failed to update user');
       }
@@ -117,7 +116,6 @@ const resolvers = {
     },
     deleteUser: async (_: any, {id}: any, context: any) => {
       try {
-        return await context.dataSources.users.deleteUser({id});
         return await context.dataSources.users.deleteUser({id});
       } catch (error) {
         throw new Error('Failed to delete user');
