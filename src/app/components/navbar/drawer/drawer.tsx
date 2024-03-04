@@ -123,15 +123,7 @@ export function Drawer() {
             >
               Bookmarks
             </Chakra.Button>
-            <Chakra.Button
-              leftIcon={<BsHeartFill />}
-              className="drawer-button"
-              variant="outline"
-            >
-              Favourites
-            </Chakra.Button>
           </Chakra.DrawerBody>
-
           <Chakra.DrawerFooter className="drawer-footer"></Chakra.DrawerFooter>
         </Chakra.DrawerContent>
       </Chakra.Drawer>
