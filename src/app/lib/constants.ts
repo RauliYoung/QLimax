@@ -47,6 +47,23 @@ export const SIGN_IN = gql`
     }
   }
 `;
+export const LIKE_POST = gql`
+  mutation LikePost($postId: ID!) {
+    likePost(postId: $postId) {
+      id
+      likes
+    }
+  }
+`;
+
+export const ADD_BOOKMARK = gql`
+  mutation AddBookmark($userId: ID!, $postId: ID!) {
+    addBookmark(userId: $userId, postId: $postId) {
+      id
+      bookmarks
+    }
+  }
+`;
 export const FETCH_POSTS = gql`
   query getPosts {
     posts {
@@ -54,6 +71,7 @@ export const FETCH_POSTS = gql`
       title
       content
       slug
+      likes
       timeToRead
       isPublished
       tags {
@@ -73,6 +91,7 @@ export const FETCH_POST = gql`
       title
       content
       slug
+      likes
       timeToRead
       isPublished
       tags {
@@ -130,5 +149,45 @@ export const UPDATE_POST = gql`
 export const DELETE_POST = gql`
   mutation DeletePost($deletePostId: ID!) {
     deletePost(id: $deletePostId)
+  }
+`; 
+export const FETCH_COMMENTS = gql`
+  query getComments($postId: ID!) {
+    post(id: $postId) {
+      comments {
+        id
+        content
+        createdAt
+        authorId
+      }
+    }
+  }
+`;
+
+export const CREATE_COMMENT = gql`
+  mutation createComment($postId: ID!, $content: String!, $authorId: String!) {
+    createComment(input: {postId: $postId, content: $content, authorId: $authorId}) {
+      id
+      content
+      authorId
+    }
+  }
+`;
+    
+
+export const UPDATE_COMMENT = gql`
+  mutation updateComment($postId: ID!, $commentId: ID!, $content: String!) {
+    updateComment(
+      input: {postId: $postId, commentId: $commentId, content: $content}
+    ) {
+      id
+      content
+    }
+  }
+`;
+
+export const DELETE_COMMENT = gql`
+  mutation deleteComment($postId: ID!, $commentId: ID!) {
+    deleteComment(postId: $postId, commentId: $commentId)
   }
 `;

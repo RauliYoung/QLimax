@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import {ObjectId} from 'mongodb';
 import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
+import crypto from 'crypto';
 
 interface UserDocument {
   _id: ObjectId;
@@ -20,12 +21,19 @@ interface PostDocument {
   isPublished: boolean;
   slug: string;
   timeToRead: number;
-  comments: {
-    id: ObjectId;
-    content: string;
-    createdAt: Date;
-    user: UserDocument;
-  }[];
+}
+interface CommentDocument {
+  _id: ObjectId;
+  content: string;
+  createdAt: Date;
+  post: PostDocument;
+  authorId: string;
+}
+interface NewComment {
+  content: string;
+  post: PostDocument;
+  id: string;
+  authorId: string;
 }
 
 export class Users extends MongoDataSource<UserDocument> {
@@ -34,6 +42,16 @@ export class Users extends MongoDataSource<UserDocument> {
       return await UserModel.find();
     } catch (error) {
       throw new Error('Failed to fetch users');
+    }
+  }
+  async addBookmark(userId: string, postId: string) {
+    try {
+      const user = await UserModel.findById(userId);
+      user.bookmarks.push(postId);
+      await user.save();
+      return user;
+    } catch (error) {
+      throw new Error('Failed to add bookmark');
     }
   }
 
@@ -71,34 +89,23 @@ export class Users extends MongoDataSource<UserDocument> {
         {...input},
         {
           new: true,
-        },
+        }
       );
       return updatedUser;
     } catch (error) {
       throw new Error('Failed to update user');
     }
   }
-  async confirmPassword({id, password}: {id: string; password: string}) {
-    try {
-      const user = await UserModel.findById(id);
-      if (!user) {
-        throw new Error('User not found');
-      }
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid) {
-        throw new Error('Invalid password');
-      }
-      return true;
-    } catch (error) {
-      throw new Error('Failed to confirm password');
-    }
-  }
-
   async signIn({email, password}: {email: string; password: string}) {
     try {
       const user = await UserModel.findOne({email});
       if (!user) {
         throw new Error('User not found');
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        throw new Error('Invalid credentials');
       }
 
       const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET ?? '', {
@@ -184,6 +191,62 @@ export class Posts extends MongoDataSource<PostDocument> {
       return 'Post deleted successfully';
     } catch (error) {
       throw new Error('Failed to delete post');
+    }
+  }
+  async createComment({postId, content, authorId}: any) {
+    try {
+      const post = await PostModel.findById(postId);
+      const newComment: NewComment = {
+        id: crypto.randomUUID(),
+        content,
+        post,
+        authorId,
+      };
+      post.comments.push(newComment);
+      await post.save();
+      return newComment;
+    } catch (error) {
+      throw new Error('Failed to create comment');
+    }
+  }
+  async likePost(postId: string) {
+    try {
+      const post = await PostModel.findById(postId);
+      if (!post) {
+        throw new Error('Post not found');
+      }
+      post.likes += 1;
+      await post.save();
+      return post;
+    } catch (error) {
+      throw new Error('Failed to like post');
+    }
+  }
+
+  async updateComment({
+    postId,
+    commentId,
+    content,
+  }: any): Promise<CommentDocument> {
+    try {
+      const post = await PostModel.findById(postId);
+      const comment = post.comments.id(commentId);
+      comment.content = content;
+      await post.save();
+      return comment;
+    } catch (error) {
+      throw new Error('Failed to update comment');
+    }
+  }
+
+  async deleteComment({postId, commentId}: any): Promise<string> {
+    try {
+      const post = await PostModel.findById(postId);
+      post.comments.id(commentId).remove();
+      await post.save();
+      return 'Comment deleted successfully';
+    } catch (error) {
+      throw new Error('Failed to delete comment');
     }
   }
 }

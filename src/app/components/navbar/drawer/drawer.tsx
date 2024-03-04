@@ -74,7 +74,7 @@ export function Drawer() {
                 </Chakra.MenuItem>
                 <Chakra.MenuItem
                   as={Chakra.Button}
-                  onClick={() => router.push('/search')}
+                  onClick={() => {router.push('/search'); onDrawerClose();}}
                   icon={<BsSearch />}
                 >
                   Search
@@ -91,7 +91,7 @@ export function Drawer() {
               <Chakra.MenuList>
                 <Chakra.MenuItem
                   icon={<ChakraUi.SettingsIcon />}
-                  onClick={() => router.push('/settings')}
+                  onClick={() => {router.push('/settings'); onDrawerClose();}}
                 >
                   Settings
                 </Chakra.MenuItem>

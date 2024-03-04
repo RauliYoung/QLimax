@@ -1,5 +1,22 @@
-import { ApolloClient, HttpLink, InMemoryCache, from } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import { onError } from '@apollo/client/link/error';
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3000/api/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const storedValue = localStorage.getItem('QLimaxUser');
+  const token = storedValue ? JSON.parse(storedValue).token : null;
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+}); 
+
 
 const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (graphQLErrors) {
@@ -8,18 +25,15 @@ const errorLink = onError(({ networkError, graphQLErrors }) => {
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
       );
     });
-    if (networkError) console.log(`[Network error]: ${networkError}`);
   }
+  if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-const httpLink = new HttpLink({
-  uri: '/api/graphql'
-})
-
 const client = new ApolloClient({
-  uri: "http://localhost:3000/api/graphql",
+  link: errorLink.concat(authLink.concat(httpLink)),
   cache: new InMemoryCache(),
-  link: from([errorLink, httpLink]),
 });
 
 export default client;
+
+

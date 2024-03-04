@@ -1,8 +1,6 @@
 /* theme.ts */
 import {StyleFunctionProps, theme as chakraTheme} from '@chakra-ui/react';
 import {extendTheme} from '@chakra-ui/react';
-import {url} from 'inspector';
-import bgImage from '../public/GroupBg.svg';
 import {mode} from '@chakra-ui/theme-tools';
 
 const sizes = {
@@ -41,6 +39,11 @@ const breakpoints = {
   '2xl': '96em',
 };
 
+const fonts = {
+  heading: 'var(--font-expletus-sans)',
+  body: 'var(--font-overpass-mono)',
+};
+
 const styles = {
   global: (props: StyleFunctionProps) => ({
     body: {
@@ -63,6 +66,12 @@ const colors = {
     'text-black': '#000000',
   },
 };
-export const customTheme = extendTheme({styles, sizes, breakpoints, colors});
+export const customTheme = extendTheme({
+  styles,
+  sizes,
+  breakpoints,
+  colors,
+  fonts,
+});
 
 export default customTheme;

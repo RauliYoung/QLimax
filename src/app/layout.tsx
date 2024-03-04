@@ -1,7 +1,7 @@
 'use client';
 import {Expletus_Sans, Overpass_Mono} from 'next/font/google';
 import {Providers} from './providers';
-import './styles/globals.scss';
+// import './styles/globals.scss';
 import NavBar from './components/navbar/navbar';
 import client from './apolloClient';
 import {ApolloProvider} from '@apollo/client';
@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${Overpass.variable} ${expletus.variable}`}>
+    <html lang="en" className={`${Overpass.variable} ${expletus.variable}`}>
+      <body>
         <Providers>
           <NavBar />
           <Image
