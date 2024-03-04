@@ -23,7 +23,7 @@ interface QueryData {
   user: User;
 }
 
-const UsersBookmarks: React.FC = () => {
+export const UsersBookmarks: React.FC = () => {
   const {user} = useContext(UserContext);
   const router = useRouter();
   const client = useApolloClient();
@@ -120,4 +120,3 @@ const UsersBookmarks: React.FC = () => {
 };
 
 
-export default UsersBookmarks;

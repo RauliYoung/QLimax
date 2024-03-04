@@ -1,8 +1,8 @@
-import UsersBookmarks from "../components/Bookmarks";
+'use client';
+import { UsersBookmarks } from "../components/Bookmarks";
 
-export function UsersBookmarksPage() {
+export default function UsersBookmarksPage() {
   return (
     <UsersBookmarks />
   );
 }
-export default UsersBookmarksPage;
