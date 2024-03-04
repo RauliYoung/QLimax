@@ -45,6 +45,12 @@ const typeDefs = `#graphql
     bookmarks: [String]
   }
 
+  input ConfirmPasswordInput {
+    id: ID!
+    password: String!
+    newPassword: String!
+  }
+
   input NewPostInput {
     title: String!
     content: String!
@@ -95,6 +101,7 @@ const typeDefs = `#graphql
     createPost(input: NewPostInput): Post
     updatePost(input: UpdatePostInput): Post
     deletePost(id: ID!): String
+    confirmPassword(id: ID!, password: String!): Boolean
     createComment(input: NewCommentInput): Comment
     updateComment(input: UpdateCommentInput): Comment
     deleteComment(id: ID!): String

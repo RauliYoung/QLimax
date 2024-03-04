@@ -89,13 +89,29 @@ export class Users extends MongoDataSource<UserDocument> {
         {...input},
         {
           new: true,
-        },
+        }
       );
       return updatedUser;
     } catch (error) {
       throw new Error('Failed to update user');
     }
   }
+  async confirmPassword({id, password}: {id: string; password: string}) {
+    try {
+      const user = await UserModel.findById(id);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        throw new Error('Invalid password');
+      }
+      return true;
+    } catch (error) {
+      throw new Error('Failed to confirm password');
+    }
+  }
+
   async signIn({email, password}: {email: string; password: string}) {
     try {
       const user = await UserModel.findOne({email});

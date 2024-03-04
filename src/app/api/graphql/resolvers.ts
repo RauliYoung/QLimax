@@ -3,7 +3,7 @@ const resolvers = {
     users: async (
       _: any,
       __: any,
-      context: { user: any; dataSources: { users: { getAllUsers: () => any } } },
+      context: {dataSources: {users: {getAllUsers: () => any}}}
     ) => {
       try {
         return await context.dataSources.users.getAllUsers();
@@ -14,7 +14,7 @@ const resolvers = {
     posts: async (
       _: any,
       __: any,
-      context: { dataSources: { posts: { getAllPosts: () => any } } },
+      context: {dataSources: {posts: {getAllPosts: () => any}}}
     ) => {
       try {
         return await context.dataSources.posts.getAllPosts();
@@ -24,8 +24,8 @@ const resolvers = {
     },
     postBySlug: async (
       _: any,
-      { slug }: { slug: string },
-      context: { dataSources: { posts: { getPostBySlug: (slug: string) => any } } },
+      {slug}: {slug: string},
+      context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}}
     ) => {
       try {
         return await context.dataSources.posts.getPostBySlug(slug);
@@ -36,8 +36,8 @@ const resolvers = {
 
     post: async (
       _: any,
-      { id }: { id: string },
-      context: { dataSources: { posts: { getPostById: (id: string) => any } } },
+      {id}: {id: string},
+      context: {dataSources: {posts: {getPostById: (id: string) => any}}}
     ) => {
       try {
         return await context.dataSources.posts.getPostById(id);
@@ -48,7 +48,7 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async (_: any, { input }: any, context: any) => {
+    createUser: async (_: any, {input}: any, context: any) => {
       try {
         const newUser = await context.dataSources.users.createUser({
           input,
@@ -58,14 +58,14 @@ const resolvers = {
         throw new Error('Failed to create user');
       }
     },
-    signIn: async (_: any, { email, password }: any, context: any) => {
+    signIn: async (_: any, {email, password}: any, context: any) => {
       try {
-        return await context.dataSources.users.signIn({ email, password });
+        return await context.dataSources.users.signIn({email, password});
       } catch (error) {
         throw new Error('Failed to sign in');
       }
     },
-    createComment: async (_: any, { input }: any, context: any) => {
+    createComment: async (_: any, {input}: any, context: any) => {
       if (!context.user) {
         throw new Error('Unauthorized');
       }
@@ -78,7 +78,7 @@ const resolvers = {
         throw new Error('Failed to create comment');
       }
     },
-    updateComment: async (_: any, { input }: any, context: any) => {
+    updateComment: async (_: any, {input}: any, context: any) => {
       if (!context.user) {
         throw new Error('Unauthorized');
       }
@@ -92,32 +92,38 @@ const resolvers = {
       }
     },
 
-    deleteComment: async (_: any, { id }: any, context: any) => {
+    deleteComment: async (_: any, {id}: any, context: any) => {
       try {
-        return await context.dataSources.posts.deleteComment({ id });
+        return await context.dataSources.posts.deleteComment({id});
       } catch (error) {
         throw new Error('Failed to delete comment');
       }
     },
 
-    updateUser: async (_: any, { input }: any, context: any) => {
+    updateUser: async (_: any, {input}: any, context: any) => {
       try {
-        return await context.dataSources.users.updateUser({ input });
+        return await context.dataSources.users.updateUser({input});
+        return await context.dataSources.users.updateUser({input});
       } catch (error) {
         throw new Error('Failed to update user');
       }
     },
-    deleteUser: async (_: any, { id }: any, context: any) => {
-      if (!context.user) {
-        throw new Error('Unauthorized');
-      }
+    confirmPassword: async (_: any, {id, password}: any, context: any) => {
       try {
-        return await context.dataSources.users.deleteUser({ id });
+        return await context.dataSources.users.confirmPassword({id, password});
+      } catch (error) {
+        throw new Error('Failed to confirm password');
+      }
+    },
+    deleteUser: async (_: any, {id}: any, context: any) => {
+      try {
+        return await context.dataSources.users.deleteUser({id});
+        return await context.dataSources.users.deleteUser({id});
       } catch (error) {
         throw new Error('Failed to delete user');
       }
     },
-    createPost: async (_: any, { input }: any, context: any) => {
+    createPost: async (_: any, {input}: any, context: any) => {
       if (!context.user) {
         throw new Error('Unauthorized');
       }
@@ -134,7 +140,7 @@ const resolvers = {
         throw new Error('Failed to create post');
       }
     },
-    likePost: async (_: any, { postId }: { postId: string }, context: any) => {
+    likePost: async (_: any, {postId}: {postId: string}, context: any) => {
       if (!context.user) {
         throw new Error('Unauthorized');
       }
@@ -148,13 +154,13 @@ const resolvers = {
 
     addBookmark: async (
       _: any,
-      { userId, postId }: { userId: string; postId: string },
-      context: any,
+      {userId, postId}: {userId: string; postId: string},
+      context: any
     ) => {
       try {
         const user = await context.dataSources.users.addBookmark(
           userId,
-          postId,
+          postId
         );
         return user;
       } catch (error) {
@@ -162,7 +168,7 @@ const resolvers = {
       }
     },
 
-    updatePost: async (_: any, { id, input }: any, context: any) => {
+    updatePost: async (_: any, {id, input}: any, context: any) => {
       if (!context.user) {
         throw new Error('Unauthorized');
       }
@@ -180,12 +186,12 @@ const resolvers = {
       }
     },
 
-    deletePost: async (_: any, { id }: any, context: any) => {
+    deletePost: async (_: any, {id}: any, context: any) => {
       if (!context.user) {
         throw new Error('Unauthorized');
       }
       try {
-        return await context.dataSources.posts.deletePost({ id });
+        return await context.dataSources.posts.deletePost({id});
       } catch (error) {
         throw new Error('Failed to delete post');
       }

@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const FETCH_USERS = gql`
   query getUsers {
@@ -27,6 +27,12 @@ export const UPDATE_USER = gql`
       id
       isValidated
     }
+  }
+`;
+
+export const CONFIRM_PASSWORD = gql`
+  mutation ConfirmPassword($id: ID!, $password: String!) {
+    confirmPassword(id: $id, password: $password) 
   }
 `;
 
