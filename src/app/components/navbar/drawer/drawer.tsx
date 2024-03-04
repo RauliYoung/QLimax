@@ -1,3 +1,4 @@
+'use client';
 import * as Chakra from '@chakra-ui/react';
 import {
   BsBookFill,
@@ -16,6 +17,8 @@ import {useRouter} from 'next/navigation';
 
 export function Drawer() {
   const router = useRouter();
+  const {user} = React.useContext(UserContext);
+  const {setUser} = React.useContext(UserContext);
 
   const {
     isOpen: isDrawerOpen,
@@ -27,7 +30,7 @@ export function Drawer() {
     onOpen: onModalOpen,
     onClose: onModalClose,
   } = Chakra.useDisclosure();
-  const {setUser} = React.useContext(UserContext);
+
 
   const handleLogout = () => {
     localStorage.removeItem('QLimaxUser');
