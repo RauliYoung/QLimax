@@ -38,7 +38,6 @@ const Editor: React.FC = () => {
     const quill = quillRef.current?.getEditor();
     if (quill && typeof window !== 'undefined') {
       const plainText = quill.getText();
-      console.log(plainText);
       fetch('/api/spellCheck', {
         method: 'POST',
         body: JSON.stringify({text: plainText, language: 'en-US'}),
