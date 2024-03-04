@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  bookmarks: [
+    {
+      type: String,
+      ref: 'Post',
+    },
+  ],
 });
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
