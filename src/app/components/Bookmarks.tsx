@@ -116,16 +116,17 @@ export const UsersBookmarks: React.FC = () => {
       minW="lg"
     >
       <Box textAlign="center" mb={6}>
-        <Text fontSize="4xl" fontWeight="bold" mb={2}>
+        <Text fontSize="4xl" fontWeight="bold" mb={2} color="black">
           Your Bookmarks
         </Text>
-        <Text fontSize="smaller">You've saved these posts for later.</Text>
+        <Text fontSize="smaller" color='black'>You've saved these posts for later.</Text>
       </Box>
       <Box mb={6}>
         <Input
           placeholder="Search"
           size="lg"
           onChange={handleSearch}
+          bg="gray.100"
         />
       </Box>
       <Divider mb={6} />
@@ -143,7 +144,7 @@ export const UsersBookmarks: React.FC = () => {
             _hover={{bg: 'gray.200'}}
           >
             <Box flex="1" pr={4}>
-              <Text fontSize="xl" fontWeight="bold" isTruncated>
+              <Text fontSize="xl" fontWeight="bold" isTruncated color="black">
                 {post.title}
               </Text>
               <Text fontSize="small">Read time {post.timeToRead} min</Text>
