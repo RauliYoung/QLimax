@@ -1,12 +1,13 @@
 'use client';
 import {useState, useRef, useEffect} from 'react';
 import ReactQuill from 'react-quill';
-import {useColorMode} from '@chakra-ui/react';
+import {Button, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, useColorMode} from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
 import EditorToolbar, {modules, formats} from './editorToolbar';
 import {ActionsMenu} from './actionsmenu/actionsmenu';
 import {useEditorContext} from '@/app/contexts/editorContext';
+import {useToast} from '@chakra-ui/react';
 
 type Match = {
   offset: number;
@@ -23,6 +24,8 @@ const Editor: React.FC = () => {
   const {colorMode} = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
   const quillRef = useRef<ReactQuill>(null);
+  const toast = useToast();
+  const toastShown = useRef(false);
 
   const highlightErrors = (newMatches: Match[]) => {
     const quill = quillRef.current?.getEditor();
@@ -33,6 +36,19 @@ const Editor: React.FC = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (draft && draft.content && !toastShown.current) {
+      toast({
+        title: `Draft Loaded: ${draft.title}`,
+        description: 'Your draft been loaded successfully.',
+        status: 'info',
+        duration: 3000,
+        isClosable: true,
+      });
+      toastShown.current = true;
+    }
+  }, [draft, toast]);
 
   const checkSpelling = () => {
     const quill = quillRef.current?.getEditor();
@@ -54,8 +70,6 @@ const Editor: React.FC = () => {
         });
     }
   };
-
-
 
   useEffect(() => {
     const loadDraft = async () => {
