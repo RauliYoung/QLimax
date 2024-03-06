@@ -1,7 +1,7 @@
 'use client';
 import {useState, useRef, useEffect} from 'react';
 import ReactQuill from 'react-quill';
-import {Button, Flex, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, useColorMode} from '@chakra-ui/react';
+import {useColorMode} from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
 import EditorToolbar, {modules, formats} from './editorToolbar';
@@ -67,6 +67,13 @@ const Editor: React.FC = () => {
             setMatches(data.matches);
             highlightErrors(data.matches);
           }
+          toast({
+            title: 'Spell Check Completed',
+            description: `Found ${data.matches.length} errors.`,
+            status: 'info',
+            duration: 3000,
+            isClosable: true,
+          });
         });
     }
   };

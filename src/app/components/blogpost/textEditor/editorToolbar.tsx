@@ -6,6 +6,7 @@ import {RedoIcon} from '../../ui/icons/redoicon';
 import {AiIcon} from '../../ui/icons/aiicon';
 import './editorToolbar.scss';
 
+
 function undoChange(this: any) {
   this.quill.history.undo();
 }
@@ -14,7 +15,7 @@ function redoChange(this: any) {
 }
 
 async function checkSpelling(this: any) {
-  await this.quill.checkSpelling();
+  await this.quill.checkSpelling(); 
 }
 
 const Size = Quill.import('formats/size');
