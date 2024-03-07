@@ -26,11 +26,11 @@ interface QueryData {
 }
 
 export const UsersBookmarks: React.FC = () => {
-  const { user } = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const router = useRouter();
   const client = useApolloClient();
-  const { loading, error, data } = useQuery<QueryData>(FETCH_USER, {
-    variables: { id: user?.id },
+  const {loading, error, data} = useQuery<QueryData>(FETCH_USER, {
+    variables: {id: user?.id},
     skip: !user?.id,
   });
 
@@ -47,7 +47,7 @@ export const UsersBookmarks: React.FC = () => {
           const postsPromises = data.user.bookmarks.map((bookmarkId) =>
             client.query({
               query: FETCH_POST_BY_ID,
-              variables: { id: bookmarkId },
+              variables: {id: bookmarkId},
             }),
           );
           const results = await Promise.all(postsPromises);
@@ -114,12 +114,15 @@ export const UsersBookmarks: React.FC = () => {
       boxShadow="sm"
       maxW="xl"
       minW="lg"
+      maxH="xl"
     >
       <Box textAlign="center" mb={6}>
         <Text fontSize="4xl" fontWeight="bold" mb={2} color="black">
           Your Bookmarks
         </Text>
-        <Text fontSize="smaller" color='black'>You've saved these posts for later.</Text>
+        <Text fontSize="smaller" color="black">
+          You've saved these posts for later.
+        </Text>
       </Box>
       <Box mb={6}>
         <Input
@@ -130,7 +133,18 @@ export const UsersBookmarks: React.FC = () => {
         />
       </Box>
       <Divider mb={6} />
-      <VStack spacing={4} align="stretch">
+      <VStack
+        spacing={4}
+        align="stretch"
+        overflowY="auto"
+        sx={{
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          '-ms-overflow-style': 'none', 
+          'scrollbar-width': 'none'
+        }}
+      >
         {bookmarkedPosts.map((post) => (
           <Box
             key={post.slug}
@@ -151,7 +165,14 @@ export const UsersBookmarks: React.FC = () => {
             </Box>
             <Box>
               {post.tags.map((tag, index) => (
-                <Text key={index} fontSize="x-small" color={tag.color} bg='transparent' p={1} borderRadius="md">
+                <Text
+                  key={index}
+                  fontSize="x-small"
+                  color={tag.color}
+                  bg="transparent"
+                  p={1}
+                  borderRadius="md"
+                >
                   {tag.tag}
                 </Text>
               ))}
