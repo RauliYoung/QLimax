@@ -1,10 +1,9 @@
 'use client';
 import {Expletus_Sans, Overpass_Mono} from 'next/font/google';
 import {Providers} from './providers';
-// import './styles/globals.scss';
 import NavBar from './components/navbar/navbar';
 import client from './apolloClient';
-import {ApolloProvider} from '@apollo/client';
+import {ApolloProvider, useQuery} from '@apollo/client';
 import logo from '../../public/qlimax2.svg';
 import {Image, Flex} from '@chakra-ui/react';
 
