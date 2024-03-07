@@ -1,16 +1,16 @@
 'use client';
 import {Flex, Heading, Grid} from '@chakra-ui/react';
-import testData from '../../testData/testPosts.json';
-import Auth from './components/authModals/authModals';
-import {useContext} from 'react';
-import {UserContext} from './contexts/usercontext';
 import BlogPostPreview from './components/blogpost/blogPostPreview';
 import {Post} from '../../types';
 import Link from 'next/link';
-import SettingsPage from './components/authModals/settings';
+import {FETCH_POSTS} from './lib/constants';
+import {useQuery} from '@apollo/client';
 
 export default function Home() {
-  const {user} = useContext(UserContext);
+  const {loading, error, data} = useQuery(FETCH_POSTS);
+
+  const results: Post[] = data?.posts;
+
   return (
     <>
       <Flex as="main" direction="column" pb="1rem">
@@ -32,15 +32,22 @@ export default function Home() {
             gap="1rem"
             m="auto"
           >
-            {testData.map((post: Post, index: number) => (
-              <Link key={index} href={`/blog/${post.id}`}>
-                <BlogPostPreview post={post} />
-              </Link>
-            ))}
+            {!results ? (
+              <Flex>
+                <Heading as="h2" fontSize={{base: '24px', lg: '32px'}}>
+                  Loading...
+                </Heading>
+              </Flex>
+            ) : (
+              results.map((post: Post, index: number) => (
+                <Link key={index} href={`/blog/${post.slug}`}>
+                  <BlogPostPreview post={post} />
+                </Link>
+              ))
+            )}
           </Grid>
         </Flex>
       </Flex>
-      )
     </>
   );
 }
