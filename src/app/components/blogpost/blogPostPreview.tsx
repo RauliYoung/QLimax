@@ -23,7 +23,7 @@ const truncateText = (text: string, maxLength: number) => {
   const lastIndex = Math.max(lastSpaceIndex, lastDotIndex);
 
   const truncatedAtSpaceOrDot =
-    lastIndex > 0 ? truncated.substr(0, lastIndex) : truncated;
+    lastIndex > 0 ? truncated.substring(0, lastIndex) : truncated;
 
   return truncatedAtSpaceOrDot;
 };
