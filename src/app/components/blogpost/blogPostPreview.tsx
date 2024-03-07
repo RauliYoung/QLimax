@@ -76,7 +76,7 @@ const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({post, index}) => {
                 fontSize={{base: '16px', lg: '18px'}}
                 color="#qlimax.bg-blue"
               >
-                Rating: {post.likes}
+                Likes: {post.likes}
               </Text>
             </Flex>
             <Heading
