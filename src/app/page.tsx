@@ -41,7 +41,7 @@ export default function Home() {
             ) : (
               results.map((post: Post, index: number) => (
                 <Link key={index} href={`/blog/${post.slug}`}>
-                  <BlogPostPreview post={post} />
+                  <BlogPostPreview post={post} index={index} />
                 </Link>
               ))
             )}
