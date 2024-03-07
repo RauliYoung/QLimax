@@ -38,8 +38,8 @@ const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({post, index}) => {
   return (
     <AnimatePresence>
       <motion.div
-        initial={{opacity: 0, x: '0%'}}
-        animate={{opacity: 1, x: '-100%'}}
+        initial={{opacity: 0, x: '100%'}}
+        animate={{opacity: 1, x: '0%'}}
         exit={{opacity: 0, x: '-100%'}}
         transition={{duration: 1, delay: slideInDelay}}
       >
@@ -48,7 +48,7 @@ const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({post, index}) => {
           h="400px"
           bg="rgba(241, 125, 177, 0.8)"
           sx={{transition: 'transform 2s, opacity 2s'}}
-          transform="translateX(100%)"
+          transform="translateX(0%)"
         >
           <CardBody overflow="auto">
             <Heading as="h2" fontSize={'28px'}>
