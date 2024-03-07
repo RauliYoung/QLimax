@@ -88,6 +88,7 @@ export const QuillToolbar = () => (
     </span>
     <span className="ql-formats">
       <button className="ql-formula" />
+      <button className="ql-image" />
       <button className="ql-code-block" />
     </span>
     <span className="ql-formats">
