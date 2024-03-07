@@ -3,6 +3,7 @@ export interface Post {
   slug: string;
   content?: string;
   title: string;
+  likes?: number;
   header: string;
   body: string;
   preview: string;
