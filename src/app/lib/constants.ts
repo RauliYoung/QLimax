@@ -1,10 +1,22 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const FETCH_USERS = gql`
   query getUsers {
     users {
       id
       email
+      isValidated
+      bookmarks
+    }
+  }
+`;
+export const FETCH_USER = gql`
+  query getUser($id: ID!) {
+    user(id: $id) {
+      id
+      email
+      isValidated
+      bookmarks
     }
   }
 `;
@@ -25,6 +37,12 @@ export const UPDATE_USER = gql`
       id
       isValidated
     }
+  }
+`;
+
+export const CONFIRM_PASSWORD = gql`
+  mutation ConfirmPassword($id: ID!, $password: String!) {
+    confirmPassword(id: $id, password: $password) 
   }
 `;
 
@@ -65,6 +83,26 @@ export const FETCH_POSTS = gql`
       title
       content
       slug
+      likes
+      timeToRead
+      isPublished
+      tags {
+        tag
+        color
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const FETCH_POST_BY_ID = gql`
+  query getPost($id: ID!) {
+    post(id: $id) {
+      id
+      title
+      content
+      slug
+      likes
       timeToRead
       isPublished
       tags {
@@ -84,6 +122,7 @@ export const FETCH_POST = gql`
       title
       content
       slug
+      likes
       timeToRead
       isPublished
       tags {

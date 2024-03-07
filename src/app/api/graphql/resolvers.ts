@@ -11,6 +11,18 @@ const resolvers = {
         throw new Error('Failed to fetch users');
       }
     },
+    user: async (
+      _: any,
+      {id}: {id: string},
+      context: {dataSources: {users: {getUser: (id: string) => any}}},
+    ) => {
+      try {
+        return await context.dataSources.users.getUser(id);
+      } catch (error) {
+        throw new Error('Failed to fetch user');
+      }
+    },
+     
     posts: async (
       _: any,
       __: any,
@@ -66,6 +78,9 @@ const resolvers = {
       }
     },
     createComment: async (_: any, {input}: any, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         const newComment = await context.dataSources.posts.createComment({
           ...input,
@@ -76,6 +91,9 @@ const resolvers = {
       }
     },
     updateComment: async (_: any, {input}: any, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         const updatedComment = await context.dataSources.posts.updateComment({
           ...input,
@@ -101,6 +119,13 @@ const resolvers = {
         throw new Error('Failed to update user');
       }
     },
+    confirmPassword: async (_: any, {id, password}: any, context: any) => {
+      try {
+        return await context.dataSources.users.confirmPassword({id, password});
+      } catch (error) {
+        throw new Error('Failed to confirm password');
+      }
+    },
     deleteUser: async (_: any, {id}: any, context: any) => {
       try {
         return await context.dataSources.users.deleteUser({id});
@@ -109,6 +134,9 @@ const resolvers = {
       }
     },
     createPost: async (_: any, {input}: any, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         const newPostInput = {
           ...input,
@@ -123,6 +151,9 @@ const resolvers = {
       }
     },
     likePost: async (_: any, {postId}: {postId: string}, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         const post = await context.dataSources.posts.likePost(postId);
         return post;
@@ -148,6 +179,9 @@ const resolvers = {
     },
 
     updatePost: async (_: any, {id, input}: any, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         const updatePostInput = {
           ...input,
@@ -163,6 +197,9 @@ const resolvers = {
     },
 
     deletePost: async (_: any, {id}: any, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         return await context.dataSources.posts.deletePost({id});
       } catch (error) {

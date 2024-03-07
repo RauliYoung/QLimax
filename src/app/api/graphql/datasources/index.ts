@@ -44,6 +44,7 @@ export class Users extends MongoDataSource<UserDocument> {
       throw new Error('Failed to fetch users');
     }
   }
+
   async addBookmark(userId: string, postId: string) {
     try {
       const user = await UserModel.findById(userId);
@@ -52,6 +53,13 @@ export class Users extends MongoDataSource<UserDocument> {
       return user;
     } catch (error) {
       throw new Error('Failed to add bookmark');
+    }
+  }
+  async getUser(userId: string) {
+    try {
+      return await UserModel.findById(userId);
+    } catch (error) {
+      throw new Error('Failed to fetch user');
     }
   }
 
@@ -89,13 +97,29 @@ export class Users extends MongoDataSource<UserDocument> {
         {...input},
         {
           new: true,
-        },
+        }
       );
       return updatedUser;
     } catch (error) {
       throw new Error('Failed to update user');
     }
   }
+  async confirmPassword({id, password}: {id: string; password: string}) {
+    try {
+      const user = await UserModel.findById(id);
+      if (!user) {
+        throw new Error('User not found');
+      }
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        throw new Error('Invalid password');
+      }
+      return true;
+    } catch (error) {
+      throw new Error('Failed to confirm password');
+    }
+  }
+
   async signIn({email, password}: {email: string; password: string}) {
     try {
       const user = await UserModel.findOne({email});

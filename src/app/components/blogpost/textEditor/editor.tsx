@@ -7,6 +7,7 @@ import './editor.scss';
 import EditorToolbar, {modules, formats} from './editorToolbar';
 import {ActionsMenu} from './actionsmenu/actionsmenu';
 import {useEditorContext} from '@/app/contexts/editorContext';
+import {useToast} from '@chakra-ui/react';
 
 type Match = {
   offset: number;
@@ -23,6 +24,8 @@ const Editor: React.FC = () => {
   const {colorMode} = useColorMode();
   const [matches, setMatches] = useState<Match[]>([]);
   const quillRef = useRef<ReactQuill>(null);
+  const toast = useToast();
+  const toastShown = useRef(false);
 
   const highlightErrors = (newMatches: Match[]) => {
     const quill = quillRef.current?.getEditor();
@@ -33,6 +36,19 @@ const Editor: React.FC = () => {
       });
     }
   };
+
+  useEffect(() => {
+    if (draft && draft.content && !toastShown.current) {
+      toast({
+        title: `Draft Loaded: ${draft.title}`,
+        description: 'Your draft been loaded successfully.',
+        status: 'info',
+        duration: 3000,
+        isClosable: true,
+      });
+      toastShown.current = true;
+    }
+  }, [draft, toast]);
 
   const checkSpelling = () => {
     const quill = quillRef.current?.getEditor();
@@ -51,14 +67,24 @@ const Editor: React.FC = () => {
             setMatches(data.matches);
             highlightErrors(data.matches);
           }
+          toast({
+            title: 'Spell Check Completed',
+            description: `Found ${data.matches.length} errors.`,
+            status: 'info',
+            duration: 3000,
+            isClosable: true,
+          });
         });
     }
   };
 
   useEffect(() => {
-    if (draft) {
-      setContent(draft.content);
-    }
+    const loadDraft = async () => {
+      if (draft && draft.content) {
+        handleProcedureContentChange(draft.content);
+      }
+    };
+    loadDraft();
   }, [draft, setContent]);
 
   useEffect(() => {
