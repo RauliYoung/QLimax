@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ReactNode, FC } from 'react';
 import { UserContext, UserContextType } from '../contexts/usercontext';
+import jwt from 'jsonwebtoken';
 
 interface User {
   token: string;
@@ -16,8 +17,13 @@ const UserProvider: FC<UserProviderProps> = ({ children }) => {
   useEffect(() => {
     const storedUserJson = localStorage.getItem('QLimaxUser');
     if (storedUserJson) {
-      const initialUser: User = JSON.parse(storedUserJson); 
-      setUser(initialUser);
+      const storedUser = JSON.parse(storedUserJson);
+      const decodedToken: any = jwt.decode(storedUser.token);
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem('QLimaxUser');
+      } else {
+        setUser(storedUser);
+      }
     }
   }, []);
 
