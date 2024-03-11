@@ -87,7 +87,8 @@ export const UsersBookmarks: React.FC = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        height="100vh"
+        height="50vh"
+        width="100%"
       >
         <Spinner
           size="xl"
@@ -100,8 +101,15 @@ export const UsersBookmarks: React.FC = () => {
     );
   if (error) return <p>Error :(</p>;
 
-  // TODO: style more if time permits and soul desires
-
+  if (!loading && !fetchingPosts && !bookmarkedPosts.length) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Text fontSize="2xl" color="black">
+          You haven't bookmarked any posts yet.
+        </Text>
+      </Box>
+    );
+  }
   return (
     <Box
       display="flex"
@@ -141,8 +149,8 @@ export const UsersBookmarks: React.FC = () => {
           '&::-webkit-scrollbar': {
             display: 'none',
           },
-          '-ms-overflow-style': 'none', 
-          'scrollbar-width': 'none'
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
         }}
       >
         {bookmarkedPosts.map((post) => (

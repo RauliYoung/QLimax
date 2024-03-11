@@ -99,9 +99,15 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
 
   const {title, content, tags, timeToRead, id, likes} = data.postBySlug;
   return (
-    <Container bg="white" p={4} borderRadius="md" boxShadow="md" maxW="container.lg">
+    <Container
+      bg="white"
+      p={4}
+      borderRadius="md"
+      boxShadow="md"
+      maxW="container.lg"
+    >
       <VStack spacing={4} align="start">
-        <Heading color= 'black'>{title}</Heading>
+        <Heading color="black">{title}</Heading>
         <Flex align="center">
           <Text fontSize="sm" color="gray.500">
             {timeToRead} min read
@@ -115,14 +121,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
           ))}
         </Stack>
         <Divider />
-        <Box
-          style={
-            user
-              ? {}
-              : {
-                }
-          }
-        >
+        <Box style={user ? {} : {}}>
           <Text color="black">
             {user ? parse(content) : parse(getTrimmedContent(content))}
           </Text>

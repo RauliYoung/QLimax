@@ -3,7 +3,7 @@ import {Expletus_Sans, Overpass_Mono} from 'next/font/google';
 import {Providers} from './providers';
 import NavBar from './components/navbar/navbar';
 import client from './apolloClient';
-import {ApolloProvider, useQuery} from '@apollo/client';
+import {ApolloProvider} from '@apollo/client';
 import logo from '../../public/qlimax2.svg';
 import {Image, Flex} from '@chakra-ui/react';
 

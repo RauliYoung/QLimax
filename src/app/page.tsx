@@ -1,5 +1,5 @@
 'use client';
-import {Flex, Heading, Grid} from '@chakra-ui/react';
+import {Flex, Heading, Grid, Box, Spinner} from '@chakra-ui/react';
 import BlogPostPreview from './components/blogpost/blogPostPreview';
 import {Post} from '../../types';
 import Link from 'next/link';
@@ -10,6 +10,24 @@ export default function Home() {
   const {loading, error, data} = useQuery(FETCH_POSTS);
 
   const results: Post[] = data?.posts;
+
+  const loaingSpinner = (
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="50vh"
+      width="100%"
+    >
+      <Spinner
+        size="xl"
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="gray.200"
+        color="plum"
+      />
+    </Box>
+  );
 
   return (
     <>
@@ -33,11 +51,7 @@ export default function Home() {
             m="auto"
           >
             {!results ? (
-              <Flex>
-                <Heading as="h2" fontSize={{base: '24px', lg: '32px'}}>
-                  Loading...
-                </Heading>
-              </Flex>
+              <Flex>{loading ? loaingSpinner : null}</Flex>
             ) : (
               results.map((post: Post, index: number) => (
                 <Link key={index} href={`/blog/${post.slug}`}>
