@@ -10,4 +10,5 @@ export interface Post {
   tags: {tag: string; color: string}[];
   timeToRead: number;
   comments: Comment[];
+  likes: number;
 }
