@@ -16,6 +16,11 @@ import {UserContext} from '@/app/contexts/usercontext';
 import {useToast} from '@chakra-ui/react';
 import {ConfirmationModal} from '../modals/confirmationModal';
 
+interface SettingsModalProps {
+  onPasswordChange: (newPassword: string) => void;
+}
+
+// const SettingsPage: React.FC<SettingsModalProps> = ({onPasswordChange})
 const SettingsPage: React.FC = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -85,51 +90,19 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleEmailChange = () => {
-    confirmPass({
-      variables: {
-        id: user?.id,
-        password: confirmEmailPassword,
-      },
-    }).then(() => {
-      updateUser({
-        variables: {
-          input: {
-            id: user?.id,
-            email: newEmail,
-          },
-        },
-      })
-        .then(() => {
-          toast({
-            title: 'Email changed successfully',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-            position: 'bottom-left',
-          });
-        })
-        .catch((error) => {
-          toast({
-            title: 'Error changing email',
-            description: 'Unable to change email. Please try again.',
-            status: 'error',
-            duration: 5000,
-            isClosable: true,
-            position: 'bottom-left',
-          });
-        });
-    });
-  };
+    console.log('ASDASD');
 
-  const handleUserDelete = () => {
-    deleteUser({
+    updateUser({
       variables: {
-        deleteUserId: user?.id,
+        input: {
+          id: user?.id,
+          email: newEmail,
+        },
       },
     })
       .then(() => {
         toast({
-          title: 'User deleted successfully',
+          title: 'Email changed successfully',
           status: 'success',
           duration: 5000,
           isClosable: true,
@@ -146,6 +119,26 @@ const SettingsPage: React.FC = () => {
           position: 'bottom-left',
         });
       });
+  };
+  const handleUserDelete = () => {
+    deleteUser({
+      variables: {
+        deleteUserId: user?.id,
+      },
+    })
+      .then(() => {
+        toast({
+          title: 'User deleted successfully',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom-left',
+        });
+      })
+      .catch((error) => {
+        console.error('Error deleting user:', error);
+      });
+    window.location.href = '/';
   };
 
   const handleBackButton = () => {

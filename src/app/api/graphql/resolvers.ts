@@ -3,7 +3,7 @@ const resolvers = {
     users: async (
       _: any,
       __: any,
-      context: {dataSources: {users: {getAllUsers: () => any}}},
+      context: {user: any; dataSources: {users: {getAllUsers: () => any}}}
     ) => {
       try {
         return await context.dataSources.users.getAllUsers();
@@ -11,22 +11,10 @@ const resolvers = {
         throw new Error('Failed to fetch users');
       }
     },
-    user: async (
-      _: any,
-      {id}: {id: string},
-      context: {dataSources: {users: {getUser: (id: string) => any}}},
-    ) => {
-      try {
-        return await context.dataSources.users.getUser(id);
-      } catch (error) {
-        throw new Error('Failed to fetch user');
-      }
-    },
-     
     posts: async (
       _: any,
       __: any,
-      context: {dataSources: {posts: {getAllPosts: () => any}}},
+      context: {dataSources: {posts: {getAllPosts: () => any}}}
     ) => {
       try {
         return await context.dataSources.posts.getAllPosts();
@@ -37,7 +25,7 @@ const resolvers = {
     postBySlug: async (
       _: any,
       {slug}: {slug: string},
-      context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}},
+      context: {dataSources: {posts: {getPostBySlug: (slug: string) => any}}}
     ) => {
       try {
         return await context.dataSources.posts.getPostBySlug(slug);
@@ -49,7 +37,7 @@ const resolvers = {
     post: async (
       _: any,
       {id}: {id: string},
-      context: {dataSources: {posts: {getPostById: (id: string) => any}}},
+      context: {dataSources: {posts: {getPostById: (id: string) => any}}}
     ) => {
       try {
         return await context.dataSources.posts.getPostById(id);
@@ -119,14 +107,10 @@ const resolvers = {
         throw new Error('Failed to update user');
       }
     },
-    confirmPassword: async (_: any, {id, password}: any, context: any) => {
-      try {
-        return await context.dataSources.users.confirmPassword({id, password});
-      } catch (error) {
-        throw new Error('Failed to confirm password');
-      }
-    },
     deleteUser: async (_: any, {id}: any, context: any) => {
+      if (!context.user) {
+        throw new Error('Unauthorized');
+      }
       try {
         return await context.dataSources.users.deleteUser({id});
       } catch (error) {
@@ -165,12 +149,12 @@ const resolvers = {
     addBookmark: async (
       _: any,
       {userId, postId}: {userId: string; postId: string},
-      context: any,
+      context: any
     ) => {
       try {
         const user = await context.dataSources.users.addBookmark(
           userId,
-          postId,
+          postId
         );
         return user;
       } catch (error) {
