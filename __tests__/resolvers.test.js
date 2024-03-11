@@ -18,6 +18,8 @@ describe('Resolvers', () => {
         getPostById: jest.fn(),
         getPostBySlug: jest.fn(),
       },
+      bookmarks: {},
+      likes: {},
     },
   };
 
