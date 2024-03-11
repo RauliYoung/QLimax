@@ -3,10 +3,11 @@ export interface Post {
   slug: string;
   content?: string;
   title: string;
-  likes?: number;
   header: string;
   body: string;
   preview: string;
   rating: number;
-  timeToRead: string;
+  tags: {tag: string; color: string}[];
+  timeToRead: number;
+  comments: Comment[];
 }

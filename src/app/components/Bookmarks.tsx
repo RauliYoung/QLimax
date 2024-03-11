@@ -7,14 +7,7 @@ import {Spinner} from '@chakra-ui/react';
 import {useRouter} from 'next/navigation';
 import {Box, Input, Text, VStack, Divider, IconButton} from '@chakra-ui/react';
 import {FiBookOpen} from 'react-icons/fi';
-
-interface Post {
-  title: string;
-  content: string;
-  tags: {tag: string; color: string}[];
-  slug: string;
-  timeToRead: number;
-}
+import {Post} from '../../../types';
 
 interface User {
   id: string;

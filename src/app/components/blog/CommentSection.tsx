@@ -6,6 +6,7 @@ import { Box, Text, Textarea, Button, VStack, Divider } from '@chakra-ui/react';
 import { useMutation, useQuery } from '@apollo/client';
 import { CREATE_COMMENT, FETCH_COMMENTS } from '@/app/lib/constants';
 import { useEffect } from 'react';
+import { Post } from '@/../types';
 
 interface Comment {
   id: string;
@@ -18,11 +19,7 @@ interface CommentSectionProps {
   postId: string;
   authorId: string;
 }
-interface Post {
-  id: string;
-  title: string;
-  comments: Comment[];
-}
+
 
 export const CommentSection: React.FC<CommentSectionProps> = ({ postId }) => {
   const [comment, setComment] = useState<string>('');
