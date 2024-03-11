@@ -63,4 +63,4 @@ jobs:
           app-name: 'QLimax-Prod'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DE142739AD4C4CD9AF7A2385F1824D50 }}
-          output_location: '.next'
+          package: ./src/build/standalone
