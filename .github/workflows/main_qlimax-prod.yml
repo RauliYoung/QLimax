@@ -12,6 +12,9 @@ on:
     types: [opened, reopened]
 
   workflow_dispatch:
+env:
+  APP_LOCATION_PATH: '/'
+  APP_ARTIFACT_LOCATION: '/.next'
 
 jobs:
   build:
@@ -63,5 +66,7 @@ jobs:
           app-name: 'QLimax-Prod'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DE142739AD4C4CD9AF7A2385F1824D50 }}
-          app_location: '/build'
+          app_location: '${{env.APP_LOCATION_PATH}}'
           output_location: ''
+          app_build_command: 'npm run build'
+          api_build_command: 'rm -rf ./node_modules/@next/swc-* && rm -rf ./.next/cache'
