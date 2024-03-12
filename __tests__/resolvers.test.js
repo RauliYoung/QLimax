@@ -18,7 +18,7 @@ beforeEach(() => {
 describe('User Resolvers', () => {
   describe('Query users', () => {
     it('should return a list of users', async () => {
-      const mockUsers = [{ id: '1', name: 'Test User' }];
+      const mockUsers = [{ id: '1', email: 'user@mail.com' }];
       mockUsersDataSource.getAllUsers.mockResolvedValue(mockUsers);
 
       const result = await resolvers.Query.users(null, {}, mockContext);
@@ -136,7 +136,7 @@ describe('User Resolvers', () => {
 
       it('should throw an error if unauthorized', async () => {
         await expect(
-          resolvers.Mutation.createPost(null, { input: postInput }, mockContext), // no user in context
+          resolvers.Mutation.createPost(null, { input: postInput }, mockContext), 
         ).rejects.toThrow('Unauthorized');
       });
     });
