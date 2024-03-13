@@ -49,7 +49,7 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 - **NextJS:** Utilizes
 - **Vercel Deployment:** Takes advantage of Vercel's platform for easy deployment, continuous integration, and scalability.
 
-![Code example](photo/readme_code_example.png)
+![Code example](photo/frontpage_qlimax.png)
 
 ## Features
 
