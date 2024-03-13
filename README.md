@@ -73,6 +73,6 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 <!-- ![Matrix](photo/matrix_tres_amigos.gif) -->
 
-<p align="right">
-<img src="photo/matrix_tres_amigos.gif" width="100" height="100" border="10"/>
+<p align="center">
+<img src="photo/matrix_tres_amigos.gif" border="10"/>
 </p>
