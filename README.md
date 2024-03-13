@@ -67,22 +67,17 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 ## Developers
 
-<p align="left">
-Tristan Ellenberg: [GitHub](https://github.com/RauliYoung)
-</p>
-
 <p align="center">
-Joonas Jouttijärvi: [GitHub](https://github.com/joonasjouttijarvi)
-</p>
-
-<p align="right">
-Niko Mäenpää: [GitHub](https://github.com/Mashadeve)
+  <b>Tristan Ellenberg:</b> <a href="https://github.com/RauliYoung">GitHub</a><br/>
+  <b>Joonas Jouttijärvi:</b> <a href="https://github.com/joonasjouttijarvi">GitHub</a><br/>
+  <b>Niko Mäenpää:</b> <a href="https://github.com/Mashadeve">GitHub</a><br/>
+  <img src="photo/matrix_tres_amigos.gif" alt="Matrix Tres Amigos" style="border: 10px solid black;" />
 </p>
 
 <!-- - **Tristan Ellenberg:** [GitHub](https://github.com/RauliYoung)
 - **Joonas Jouttijärvi:** [GitHub](https://github.com/joonasjouttijarvi)
-- **Niko Mäenpää:** [GitHub](https://github.com/Mashadeve) -->
+- **Niko Mäenpää:** [GitHub](https://github.com/Mashadeve)
 
 <p align="center">
 <img src="photo/matrix_tres_amigos.gif" border="10"/>
-</p>
+</p> -->
