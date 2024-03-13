@@ -49,6 +49,7 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 - **Apollo Client:** Integrates with Apollo Client for seamless data fetching and management on the client-side.
 - **MongoDB:** Stores data reliably and allows for easy scalability as the platform grows.
 - **NextJS:** Utilizes
+- **Chackra UI:** Utilizes Chackra UI for building a consistent and visually appealing user interface.
 - **Vercel Deployment:** Takes advantage of Vercel's platform for easy deployment, continuous integration, and scalability.
 
 ## Features
