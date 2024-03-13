@@ -4,6 +4,8 @@
 
 Welcome to QLimax Blog Platform, a TypeScript-based blog platform utilizing React, GraphQL with Apollo Client, MongoDB, and deployed on Vercel.
 
+![Code example](photo/frontpage_qlimax.png)
+
 ## Introduction
 
 QLimax is designed to provide a streamlined experience for both bloggers and readers with pleasant easy-to-eye UI. It offers users a platform to share their thoughts, engulf in conversation in comment section and like others blogs. QLimax is a solid blogging platform with its use of modern technologies like TypeScript, React, GraphQL, and Apollo Client, along with the reliability of MongoDB for data storage and Vercel for deployment, it offers a robust and scalable solution for managing and sharing blog content.
@@ -48,8 +50,6 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 - **MongoDB:** Stores data reliably and allows for easy scalability as the platform grows.
 - **NextJS:** Utilizes
 - **Vercel Deployment:** Takes advantage of Vercel's platform for easy deployment, continuous integration, and scalability.
-
-![Code example](photo/frontpage_qlimax.png)
 
 ## Features
 
