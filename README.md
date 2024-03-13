@@ -65,13 +65,12 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 - **Performance:** The platform is optimized for speed and efficiency, providing fast load times and smooth interactions for users. This ensures a seamless and enjoyable experience, even when accessing content or performing actions on the platform.
 - **Day/Night Mode:** Users have the flexibility to switch between light and dark mode based on their preferences or environmental conditions. This feature enhances user comfort and readability, especially during extended usage sessions or in low-light environments.
 
+<center>
 ## Developers
 
-- **Tristan Ellenberg:** [GitHub](https://github.com/RauliYoung)
-- **Joonas Jouttijärvi:** [GitHub](https://github.com/joonasjouttijarvi)
-- **Niko Mäenpää:** [GitHub](https://github.com/Mashadeve)
+- **Tristan Ellenberg:** [GitHub](https://github.com/RauliYoung), - **Joonas Jouttijärvi:** [GitHub](https://github.com/joonasjouttijarvi), - **Niko Mäenpää:** [GitHub](https://github.com/Mashadeve)
 
-<!-- ![Matrix](photo/matrix_tres_amigos.gif) -->
+</center>
 
 <p align="center">
 <img src="photo/matrix_tres_amigos.gif" border="10"/>
