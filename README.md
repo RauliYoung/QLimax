@@ -67,7 +67,17 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 ## Developers
 
-Tristan Ellenberg: [GitHub](https://github.com/RauliYoung)&emsp;&emsp;&emsp;&emsp;Joonas Jouttijärvi: [GitHub](https://github.com/joonasjouttijarvi)&emsp;&emsp;&emsp;&emsp;Niko Mäenpää: [GitHub](https://github.com/Mashadeve)
+<p align="left">
+Tristan Ellenberg: [GitHub](https://github.com/RauliYoung)
+</p>
+
+<p align="center">
+Joonas Jouttijärvi: [GitHub](https://github.com/joonasjouttijarvi)
+</p>
+
+<p align="right">
+Niko Mäenpää: [GitHub](https://github.com/Mashadeve)
+</p>
 
 <!-- - **Tristan Ellenberg:** [GitHub](https://github.com/RauliYoung)
 - **Joonas Jouttijärvi:** [GitHub](https://github.com/joonasjouttijarvi)
