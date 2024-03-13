@@ -8,29 +8,35 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 1. **Clone the Repository:**
 
-> > git clone https://github.com/RauliYoung/QLimax.git
+   ```
+   git clone https://github.com/RauliYoung/QLimax.git
+   ```
 
 2. **Install the Dependencies:**
 
-> > npm i
+   ```
+   npm i
+   ```
 
 3. **Set Up Environment Variables:**
 
-> > your own mongodb connection string and sendgrid mailer api key
+   your own mongodb connection string and sendgrid mailer api key
 
-```
-DATABASE_URI
-JWT_SECRET
-SG_API_KEY
-```
+   ```
+   DATABASE_URI
+   JWT_SECRET
+   SG_API_KEY
+   ```
 
 4. **Run the Development Server:**
 
-> > npm run dev
+   ```
+   npm run dev
+   ```
 
 5. **Open the Application:**
 
-> > Once the server is running, open your browser and navigate to `http://localhost:3000` to view the application.
+   Once the server is running, open your browser and navigate to `http://localhost:3000` to view the application.
 
 ## Technologies
 
