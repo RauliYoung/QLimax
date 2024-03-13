@@ -71,4 +71,8 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 - **Joonas Jouttijärvi:** [GitHub](https://github.com/joonasjouttijarvi)
 - **Niko Mäenpää:** [GitHub](https://github.com/Mashadeve)
 
-![Matrix](photo/matrix_tres_amigos.gif)
+<!-- ![Matrix](photo/matrix_tres_amigos.gif) -->
+
+<p align="right">
+<img src="photo/matrix_tres_amigos.gif" width="100" height="100" border="10"/>
+</p>
