@@ -1,3 +1,5 @@
+![QLimax Logo](public/qlimax2.svg)
+
 # QLimax
 
 Welcome to QLimax Blog Platform, a TypeScript-based blog platform utilizing React, GraphQL with Apollo Client, MongoDB, and deployed on Vercel.
@@ -65,6 +67,8 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 ## Developers
 
-- **Tristan Ellenberg:** https://github.com/RauliYoung
-- **Joonas Jouttijärvi:** https://github.com/joonasjouttijarvi
-- **Niko Mäenpää:** https://github.com/Mashadeve
+- **Tristan Ellenberg:** [GitHub](https://github.com/RauliYoung)
+- **Joonas Jouttijärvi:** [GitHub](https://github.com/joonasjouttijarvi)
+- **Niko Mäenpää:** [GitHub](https://github.com/Mashadeve)
+
+![Matrix](photo/matrix.gif)
