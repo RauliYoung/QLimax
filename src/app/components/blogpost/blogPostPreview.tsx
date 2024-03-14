@@ -28,7 +28,7 @@ const truncateText = (text: string, maxLength: number) => {
   const truncatedAtSpaceOrDot =
     lastIndex > 0 ? truncated.substring(0, lastIndex) : truncated;
 
-  return truncatedAtSpaceOrDot;
+  return truncatedAtSpaceOrDot + '.....';
 };
 
 const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({post, index}) => {
@@ -83,12 +83,12 @@ const BlogPostPreview: React.FC<BlogPostPreviewProps> = ({post, index}) => {
               as="h3"
               fontSize="24px"
               textDecoration="underline"
-              mb="10px"
+              mb="5px"
             >
               Preview
             </Heading>
             <Text as="p" fontSize="15px">
-              {truncateText(strippedPreview, 220)}
+              {truncateText(strippedPreview, 150)}
             </Text>
           </CardBody>
         </Card>
