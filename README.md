@@ -28,7 +28,7 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 3. **Set Up Environment Variables:**
 
-> You need to rename ***.env.example***  file in the root of the project to .env and add 2 environment variables with
+> You need to rename **_.env.example_** file in the root of the project to .env and add 2 environment variables with
 
 ```
 DATABASE_URI
@@ -97,6 +97,14 @@ Welcome to our platform! Here's a quick guide to the features we offer to enhanc
 - **Day/Night Mode**: Switch between light and dark mode based on your preference or environmental conditions.
 
 Enjoy exploring these features and more as you use our platform!
+
+### Ai Spellchecker
+
+While editing blog post hover on text to enable AI spellchecker.
+
+Supported languages:
+
+- English
 
 ## Developers
 
