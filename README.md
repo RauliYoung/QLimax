@@ -28,7 +28,7 @@ QLimax is designed to provide a streamlined experience for both bloggers and rea
 
 3. **Set Up Environment Variables:**
 
-> You need to rename ***.env.example***  file in the root of the project to .env and add 2 environment variables with
+> You need to rename **_.env.example_** file in the root of the project to .env and add 2 environment variables with
 
 ```
 DATABASE_URI
@@ -65,6 +65,7 @@ Welcome to our platform! Here's a quick guide to the features we offer to enhanc
 ### User Authentication
 
 - **Secure Sign Up & Login**: Sign up for new accounts securely, log in to access your data, and log out when done.
+- Due to limitations of the Mailer , Check your spam folder for the confirmation email.
 - **Unique User Identity**: Ensures each user has a unique identity and access to their personal data.
 
 ### Blogging

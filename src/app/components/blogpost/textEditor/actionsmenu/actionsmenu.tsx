@@ -66,8 +66,6 @@ export const ActionsMenu = () => {
       tags: tags,
       isPublished: false,
     });
-    console.log('draft saved');
-    console.log('draft', saveAsDraft);
     showDraftToast();
   };
 
@@ -87,6 +85,7 @@ export const ActionsMenu = () => {
           },
         },
       });
+      handleSaveAsDraft;
       showSaveToast();
     } catch (error) {
       console.log(error);

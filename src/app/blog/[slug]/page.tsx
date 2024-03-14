@@ -121,7 +121,7 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
           ))}
         </Stack>
         <Divider />
-        <Box style={user ? {} : {}}>
+        <Box maxW="full" style={user ? {} : {}}>
           <Text color="black">
             {user ? parse(content) : parse(getTrimmedContent(content))}
           </Text>

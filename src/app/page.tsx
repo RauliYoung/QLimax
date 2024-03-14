@@ -7,7 +7,7 @@ import {FETCH_POSTS} from './lib/constants';
 import {useQuery} from '@apollo/client';
 
 export default function Home() {
-  const {loading, error, data} = useQuery(FETCH_POSTS);
+  const {loading, data} = useQuery(FETCH_POSTS);
 
   const results: Post[] = data?.posts;
 
