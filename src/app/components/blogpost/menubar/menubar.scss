@@ -9,4 +9,8 @@
   font-weight: 700;
 }
 
-
+@media screen and (max-width: 768px) {
+  .menubar {
+    padding: 0;
+  }
+}

@@ -1,7 +1,7 @@
 'use client';
 import {useState, useRef, useEffect} from 'react';
 import ReactQuill from 'react-quill';
-import {useColorMode} from '@chakra-ui/react';
+import {useColorMode, Flex} from '@chakra-ui/react';
 import 'react-quill/dist/quill.bubble.css';
 import './editor.scss';
 import EditorToolbar, {modules, formats} from './editorToolbar';
@@ -108,7 +108,7 @@ const Editor: React.FC = () => {
   }, [quillRef]);
 
   return (
-    <div className="editorContainer">
+    <Flex className="editorContainer" direction={{base: 'column', lg: 'row'}}>
       <EditorToolbar />
       <ActionsMenu />
       <ReactQuill
@@ -121,7 +121,7 @@ const Editor: React.FC = () => {
         placeholder="Write something amazing..."
         onChange={handleProcedureContentChange}
       />
-    </div>
+    </Flex>
   );
 };
 

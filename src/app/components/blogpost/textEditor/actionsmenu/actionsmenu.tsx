@@ -6,6 +6,7 @@ import {
   MenuItem,
   IconButton,
   useDisclosure,
+  Flex,
 } from '@chakra-ui/react';
 import PlusIcon from '../../../ui/icons/plusicon';
 import {BsSave, BsTag} from 'react-icons/bs';
@@ -122,42 +123,46 @@ export const ActionsMenu = () => {
 
   return (
     <>
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<PlusIcon />}
-          size="lg"
-          variant="outline"
-          rounded="full"
-          margin="1rem"
+      <Flex position={{base: 'sticky', lg: 'unset'}} zIndex={1000}>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<PlusIcon />}
+            size="lg"
+            variant="outline"
+            rounded="full"
+            margin="1rem"
+          />
+          <MenuList>
+            <MenuItem onClick={handleDeletedraft} icon={<AddIcon />}>
+              New
+            </MenuItem>
+            <MenuItem onClick={handleSaveAsDraft} icon={<ExternalLinkIcon />}>
+              Save as draft
+            </MenuItem>
+            <MenuItem icon={<BsSave />} onClick={handleSave}>
+              Save
+            </MenuItem>
+            <MenuItem icon={<BsTag />} onClick={tagModal.onOpen}>
+              Add Tag
+            </MenuItem>
+            <MenuItem icon={<EditIcon />} onClick={publishModal.onOpen}>
+              Publish
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        <PublishModal
+          isOpen={publishModal.isOpen}
+          onClose={publishModal.onClose}
+          onPublish={handlePublish}
         />
-        <MenuList>
-          <MenuItem  onClick={handleDeletedraft}icon={<AddIcon />}>New</MenuItem>
-          <MenuItem onClick={handleSaveAsDraft} icon={<ExternalLinkIcon />}>
-            Save as draft
-          </MenuItem>
-          <MenuItem icon={<BsSave />} onClick={handleSave}>
-            Save
-          </MenuItem>
-          <MenuItem icon={<BsTag />} onClick={tagModal.onOpen}>
-            Add Tag
-          </MenuItem>
-          <MenuItem icon={<EditIcon />} onClick={publishModal.onOpen}>
-            Publish
-          </MenuItem>
-        </MenuList>
-      </Menu>
-      <PublishModal
-        isOpen={publishModal.isOpen}
-        onClose={publishModal.onClose}
-        onPublish={handlePublish}
-      />
-      <TagModal isOpen={tagModal.isOpen} onClose={tagModal.onClose} />
-      <ConfirmReloadModal
-        isOpen={confirmModal.isOpen}
-        onClose={confirmModal.onClose}
-      />
+        <TagModal isOpen={tagModal.isOpen} onClose={tagModal.onClose} />
+        <ConfirmReloadModal
+          isOpen={confirmModal.isOpen}
+          onClose={confirmModal.onClose}
+        />
+      </Flex>
     </>
   );
 };
