@@ -11,25 +11,23 @@
 
 .editor {
   width: 100%;
-  padding-top: 5%;
-  padding-bottom: 5%;
-
-  .ql-editor {
-    height: 100%;
-    min-height: 50vh;
+  
+  .ql-editor {  
+    height: 60vh;
     border-radius: 5px;
-    padding: 5%;
+    padding: 2%;
     font-size: 1rem;
     width: 100%;
+    overflow: auto;
   }
 }
 
 .editor.light .ql-editor {
-  background-color: #fff;
+  background-color: rgba(241, 125, 177, 0.9) ;
 }
 
 .editor.dark .ql-editor {
-  background-color: #333;
+  background-color: rgba(241, 125, 177, 0.9) ;
 }
 
 .ql-editor.ql-blank::before {
