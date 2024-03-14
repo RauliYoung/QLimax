@@ -17,7 +17,7 @@ import {BsInfo} from 'react-icons/bs';
 const Menubar = () => {
   return (
     <>
-      <Flex className="popoverContainer" align="center" mr={4}>
+      <Flex className="popoverContainer" align="center" mr={4} zIndex={1001}>
         <Popover placement="auto" closeOnBlur={true}>
           <PopoverTrigger>
             <IconButton
