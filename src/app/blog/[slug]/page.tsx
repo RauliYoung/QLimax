@@ -105,7 +105,20 @@ export default function BlogPostPage({params}: {params: {slug: string}}) {
       borderRadius="md"
       boxShadow="md"
       maxW="container.lg"
+      position="relative"
     >
+      {user ? (
+        ''
+      ) : (
+        <Flex
+          h="100%"
+          w="100%"
+          maxW="100%"
+          position="absolute"
+          backdropFilter={'blur(4px)'}
+          left="0"
+        ></Flex>
+      )}
       <VStack spacing={4} align="start">
         <Heading color="black">{title}</Heading>
         <Flex align="center">
