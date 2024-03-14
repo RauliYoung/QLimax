@@ -31,7 +31,6 @@ export function Drawer() {
     onClose: onModalClose,
   } = Chakra.useDisclosure();
 
-
   const handleLogout = () => {
     localStorage.removeItem('QLimaxUser');
     setUser(null);
@@ -64,7 +63,7 @@ export function Drawer() {
               <Chakra.MenuButton as={Chakra.Button} leftIcon={<BsBookFill />}>
                 Blogs
               </Chakra.MenuButton>
-              <Chakra.MenuList>
+              <Chakra.MenuList className="drawer-menu">
                 <Chakra.MenuItem
                   as={Chakra.Button}
                   onClick={() => {
@@ -94,7 +93,7 @@ export function Drawer() {
               >
                 Profile
               </Chakra.MenuButton>
-              <Chakra.MenuList>
+              <Chakra.MenuList className="drawer-menu">
                 <Chakra.MenuItem
                   icon={<ChakraUi.SettingsIcon />}
                   onClick={() => {
@@ -115,7 +114,6 @@ export function Drawer() {
             <Chakra.Button
               leftIcon={<BsFillBookmarkFill />}
               className="drawer-button"
-              variant="outline"
               onClick={() => {
                 router.push('/bookmarks');
                 onDrawerClose();

@@ -9,7 +9,7 @@ import UserModel from '@/app/models/userModel';
 import PostModel from '@/app/models/postModel';
 import {makeExecutableSchema} from 'graphql-tools';
 import jwt from 'jsonwebtoken';
-
+import {ApolloServerPluginLandingPageDisabled} from '@apollo/server/plugin/disabled';
 mongoConnect();
 
 const schema = makeExecutableSchema({
@@ -19,6 +19,7 @@ const schema = makeExecutableSchema({
 
 const server = new ApolloServer({
   schema,
+  plugins: [ApolloServerPluginLandingPageDisabled()],
 });
 
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
@@ -39,7 +40,7 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
     return {
       req,
       res,
-      user, 
+      user,
       dataSources: {
         users: new Users({modelOrCollection: UserModel as any}),
         posts: new Posts({modelOrCollection: PostModel as any}),
