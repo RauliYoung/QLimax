@@ -18,7 +18,7 @@ const Menubar = () => {
   return (
     <>
       <Flex className="popoverContainer" align="center" mr={4}>
-        <Popover placement="left" closeOnBlur={true}>
+        <Popover placement="auto" closeOnBlur={true}>
           <PopoverTrigger>
             <IconButton
               aria-label="Info"
@@ -33,9 +33,9 @@ const Menubar = () => {
             <PopoverHeader>Blog editor</PopoverHeader>
             <PopoverBody>
               The text editor is a WYSIWYG editor, which means that the text you
-              write here will look the same when it is published. The editor
-              has a spell checker and a toolbar with formatting options so you can write
-              with confidence.
+              write here will look the same when it is published. The editor has
+              a spell checker and a toolbar with formatting options so you can
+              write with confidence.
             </PopoverBody>
           </PopoverContent>
         </Popover>
