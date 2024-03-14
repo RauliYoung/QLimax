@@ -99,6 +99,14 @@ Welcome to our platform! Here's a quick guide to the features we offer to enhanc
 
 Enjoy exploring these features and more as you use our platform!
 
+### Ai Spellchecker
+
+While editing blog post hover on text to enable AI spellchecker.
+
+Supported languages:
+
+- English
+
 ## Developers
 
 <p align="center">

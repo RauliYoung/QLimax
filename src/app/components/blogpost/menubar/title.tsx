@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, {useEffect} from 'react';
 import {
   Editable,
@@ -18,7 +18,7 @@ const EditableControls: React.FC = () => {
     useEditableControls();
 
   return isEditing ? (
-    <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={2}>
+    <ButtonGroup justifyContent="end" size="sm" w="full" spacing={2} mt={1}>
       <IconButton
         icon={<CheckIcon />}
         {...getSubmitButtonProps()}
