@@ -22,7 +22,7 @@ const resolvers = {
         throw new Error('Failed to fetch user');
       }
     },
-     
+
     posts: async (
       _: any,
       __: any,
@@ -106,6 +106,9 @@ const resolvers = {
 
     deleteComment: async (_: any, {id}: any, context: any) => {
       try {
+        if (!context.user) {
+          throw new Error('Unauthorized');
+        }
         return await context.dataSources.posts.deleteComment({id});
       } catch (error) {
         throw new Error('Failed to delete comment');
