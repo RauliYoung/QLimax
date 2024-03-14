@@ -65,6 +65,7 @@ Welcome to our platform! Here's a quick guide to the features we offer to enhanc
 ### User Authentication
 
 - **Secure Sign Up & Login**: Sign up for new accounts securely, log in to access your data, and log out when done.
+- Due to limitations of the Mailer , Check your spam folder for the confirmation email.
 - **Unique User Identity**: Ensures each user has a unique identity and access to their personal data.
 
 ### Blogging
